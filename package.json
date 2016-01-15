@@ -1,7 +1,13 @@
 {
   "name": "croft",
   "version": "1.0.0",
-  "licence": "GPL-2.0 AND MIT",
+  "author": "Brett Mason",
+  "license": "GPL-2.0 AND MIT",
+  "homepage": "https://github.com/brettsmason/croft",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brettsmason/croft.git"
+  },
   "pot": {
     "bugReport": "Brett Mason <brett@croftwp.com>",
     "lastTranslator": "Brett Mason <brett@croftwp.com>",
