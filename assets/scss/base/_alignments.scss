@@ -1,0 +1,16 @@
+.alignleft {
+	float: left;
+	margin: 0 $global-margin $global-margin 0;
+}
+.alignright {
+	float: right;
+	margin: 0 0 $global-margin $global-margin;
+}
+.aligncenter {
+	display: block;
+	margin: 0 auto $global-margin;
+}
+
+.alignnone {
+	margin-bottom: $global-margin;
+}

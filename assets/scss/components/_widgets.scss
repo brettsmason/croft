@@ -1,0 +1,60 @@
+.widget {
+	margin: 0 0 $global-margin;
+
+	.widget-title {
+		@include breakpoint(medium) {
+			font-size: header-size(medium, h4);
+		}
+		font-size: header-size(small, h4);
+	}
+
+	select {
+		max-width: 100%;
+	}
+}
+
+// Search widget
+.search-form {
+	height: ($input-font-size + ($form-spacing * $global-lineheight) - rem-calc(1));
+
+	label {
+		@include grid-col(8, 0);
+		height: 100%;
+	}
+
+	.search-field {
+		height: 100%;
+		margin: 0;
+	}
+
+	.search-submit {
+		@include grid-col(4, 0);
+		height: 100%;
+		margin: 0;
+	}
+}
+
+// Navigation Widget
+.widget.widget_nav_menu {
+	.menu {
+		li {
+			display: block;
+
+			a {
+				display: inline;
+				padding: 0;
+			}
+		}
+	}
+}
+
+// Calendar widget
+.widget_calendar {
+	table {
+		width: 100%;
+	}
+
+	#next {
+		text-align: right;
+	}
+}

@@ -1,0 +1,30 @@
+#menu-primary {
+	margin-bottom: $global-margin;
+	background: $black;
+
+	ul {
+		a {
+			color: $white;
+
+			&:hover {
+				color: scale-color($white, $lightness: -14%);
+			}
+		}
+	}
+
+	ul ul {
+		a {
+			color: $anchor-color;
+
+			&:hover {
+				color: $anchor-color-hover;
+			}
+		}
+	}
+}
+
+.no-js #primary-menu {
+	@include breakpoint(small only) {
+		display: none;
+	}
+}

@@ -1,0 +1,10 @@
+{
+  "name": "croft",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "hybrid-core": "https://github.com/justintadlock/hybrid-core.git",
+    "foundation-sites": "^6.1.0",
+    "motion-ui": "~1.1.1"
+  }
+}

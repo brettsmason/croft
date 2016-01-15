@@ -1,0 +1,7 @@
+input[type="submit"] {
+	@include button;
+}
+
+.required {
+	color: $alert-color;
+}

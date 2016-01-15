@@ -1,0 +1,50 @@
+#sidebar-subsidiary {
+	padding: rem-calc(24 0);
+	background: $black;
+
+	.widget-title {
+		color: $white;
+		font-size: header-size(medium, h4);
+	}
+
+	p {
+		color: $white;
+	}
+
+	.widget {
+		@include grid-col;
+
+		ul {
+			margin: 0;
+			list-style: none;
+		}
+	}
+
+	&.two .widget {
+		@include grid-col-size(6);
+	}
+
+	&.three .widget {
+		@include breakpoint(medium) {
+			@include grid-col-size(4);
+		}
+	}
+
+	&.four .widget {
+		@include breakpoint(medium) {
+			@include grid-col-size(3);
+		}
+	}
+
+	&.five .widget {
+		@include breakpoint(medium) {
+			@include grid-col-size(2.4);
+		}
+	}
+
+	&.six .widget {
+		@include breakpoint(medium) {
+			@include grid-col-size(2);
+		}
+	}
+}

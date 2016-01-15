@@ -1,0 +1,10 @@
+.breadcrumbs {
+	@include grid-col;
+	margin-top: $global-margin;
+
+	.trail-items {
+		@include breadcrumbs-container;
+		padding: $global-padding / 2;
+		background: $light-gray;
+	}
+}

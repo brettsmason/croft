@@ -1,0 +1,42 @@
+.pagination {
+	@include clearfix;
+	margin: $global-margin 0;
+
+	ul {
+		@include pagination-container;
+		text-align: center;
+	}
+
+	.current {
+		@include pagination-item-current;
+		display: inline-block;
+	}
+
+	.prev::before {
+		margin-right: 5px;
+		content: "\2190";
+	}
+
+	.next::after {
+		margin-left: 5px;
+		content: "\2192";
+	}
+}
+
+.loop-nav {
+	@include clearfix;
+	margin: $double-margin 0;
+
+	a {
+		display: block;
+	}
+
+	.prev {
+		float: left;
+	}
+
+	.next {
+		float: right;
+		text-align: right;
+	}
+}

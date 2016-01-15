@@ -1,0 +1,12 @@
+@import "style";
+@import "foundation";
+
+body#tinymce {
+	max-width: $grid-row-width;
+	padding: 1rem !important;
+}
+
+body#tinymce .row {
+	margin-right: - ( map-get($grid-column-responsive-gutter, "medium") / 2 );
+	margin-left: - ( map-get($grid-column-responsive-gutter, "medium") / 2 );
+}

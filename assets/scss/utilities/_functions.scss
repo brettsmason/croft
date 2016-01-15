@@ -1,0 +1,9 @@
+///
+/// Retrieves a value from the Foundation 6 header size map
+/// @param    $breakpoint   Breakpoint size from the Sass map: small | medium
+/// @param    $size         Header size: h1 | h2 | h3 | h4 | h5 | h6
+/// @return   Pixel value
+///
+@function header-size($breakpoint, $size) {
+	@return rem-calc(map-get(map-get($header-sizes, $breakpoint), $size) * 1px);
+}

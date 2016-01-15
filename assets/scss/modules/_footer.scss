@@ -1,0 +1,19 @@
+.site-footer {
+	@include clearfix;
+	padding: rem-calc(48 0);
+	background: $black;
+
+	.site-info {
+		@include grid-col;
+		color: $white;
+		text-align: center;
+	}
+
+	.credit {
+		font-size: $small-font-size;
+	}
+
+	a {
+		color: $white;
+	}
+}

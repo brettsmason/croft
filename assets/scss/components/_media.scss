@@ -1,0 +1,42 @@
+audio,
+canvas {
+	display: inline-block;
+}
+
+figure,
+picture,
+img,
+video {
+	display: block;
+	width: auto;
+	max-width: 100%;
+	height: auto;
+	margin: 0;
+}
+
+/* Make sure embeds and iframes fit their containers. */
+embed,
+iframe,
+object,
+video {
+	max-width: 100%;
+	margin-bottom: $global-margin;
+	vertical-align: middle;
+
+	p > & {
+		margin-bottom: 0;
+	}
+}
+
+.mejs-container {
+	margin-bottom: $global-margin;
+}
+
+.page-content .wp-smiley,
+.entry-content .wp-smiley,
+.comment-content .wp-smiley {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 0;
+	border: none;
+}

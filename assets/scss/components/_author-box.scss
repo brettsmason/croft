@@ -1,0 +1,16 @@
+.author-box {
+	@include callout($primary-color);
+	@include media-object-container;
+
+	.author-avatar {
+		@include media-object-section;
+	}
+
+	.author-info {
+		@include media-object-section;
+	}
+
+	.author-box-title {
+		font-size: header-size(medium, h5);
+	}
+}

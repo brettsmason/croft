@@ -1,0 +1,69 @@
+.entry {
+	margin-bottom: rem-calc(48);
+
+	.singular-page & {
+		margin-bottom: 0;
+	}
+}
+
+.comments-link::before {
+	margin: 0 4px;
+	content: "–";
+}
+
+.entry-content,
+.entry-summary {
+	@include clearfix;
+}
+
+.entry-footer {
+	p {
+		margin-bottom: 0;
+	}
+}
+
+.edit-link {
+	margin-top: $global-margin;
+}
+
+.entry-terms {
+	display: block;
+}
+
+// Multiple page post link styles
+.page-links {
+	@include pagination-container;
+	margin-bottom: $global-margin;
+
+	span {
+		@include pagination-item-current;
+		display: inline-block;
+	}
+
+	a {
+		display: inline-block;
+	}
+}
+
+// Password form styling for single posts 
+.post-password-form {
+	margin-bottom: $global-margin;
+
+	.field-wrap {
+		height: ($input-font-size + ($form-spacing * $global-lineheight) - rem-calc(1));
+	}
+
+	label {
+		@include grid-col(9, 0);
+		height: 100%;
+	}
+
+	input[type="password"] {
+		height: 100%;
+	}
+
+	input[type="submit"] {
+		@include grid-col(3, 0);
+		height: 100%;
+	}
+}

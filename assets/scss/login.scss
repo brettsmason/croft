@@ -1,0 +1,45 @@
+// Import Foundation custom settings
+@import "utilities/settings";
+
+// Import Foundation
+@import "foundation";
+
+html {
+	box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+.login {
+	#wp-submit {
+		@include button(true);
+		height: auto;
+		margin: $global-margin 0 0 0;
+		box-shadow: none;
+	}
+
+	.message {
+		border-color: $primary-color;
+	}
+
+	#login_error {
+		border-color: $alert-color;
+	}
+
+	#nav {
+		text-align: center;
+
+		a {
+			@include button(false, $secondary-color, auto, auto);
+			margin: 0;
+			font-size: rem-calc(12);
+		}
+	}
+
+	#backtoblog {
+		text-align: center;
+	}
+}

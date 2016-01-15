@@ -1,0 +1,198 @@
+# Copyright (C) 2016 croft
+# This file is distributed under the same license as the croft package.
+msgid ""
+msgstr ""
+"Project-Id-Version: croft\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
+
+#: 404.php:29
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: 404.php:37
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr ""
+
+#: comment\comment.php:35, comment\ping.php:25
+msgid "%s ago"
+msgstr ""
+
+#: comment\comment.php:37, comment\ping.php:27
+msgid "Permalink"
+msgstr ""
+
+#: comment\comment.php:47, comment\ping.php:37, content\singular\page.php:61, template-parts\entry-byline.php:53
+msgid "Edit %s"
+msgstr ""
+
+#: comment\comment.php:73
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: comments.php:93
+msgid "Comments are closed."
+msgstr ""
+
+#: content\content-none.php:37
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: content\content-none.php:45
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr ""
+
+#: content\content-none.php:57
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr ""
+
+#: content\singular\content.php:43
+msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: content\singular\content.php:53, content\singular\page.php:39
+msgid "Pages:"
+msgstr ""
+
+#: footer.php:41
+msgid "Copyright &#169; %1$s %2$s"
+msgstr ""
+
+#: footer.php:55
+msgid "Powered by %1$s and %2$s"
+msgstr ""
+
+#: header.php:33
+msgid "Skip to content"
+msgstr ""
+
+#: inc\customizer.php:33
+msgid "Display Tagline?"
+msgstr ""
+
+#: inc\site-logo.php:33, inc\site-logo.php:59
+msgid "Logo"
+msgstr ""
+
+#: inc\theme-setup.php:41
+msgctxt "nav menu location"
+msgid "Primary"
+msgstr ""
+
+#: inc\theme-setup.php:43
+msgctxt "nav menu location"
+msgid "Secondary"
+msgstr ""
+
+#: inc\theme-setup.php:45
+msgctxt "nav menu location"
+msgid "social"
+msgstr ""
+
+#: inc\theme-setup.php:63
+msgid "1 Column"
+msgstr ""
+
+#: inc\theme-setup.php:65
+msgid "Content / Sidebar"
+msgstr ""
+
+#: inc\theme-setup.php:67
+msgid "Sidebar / Content"
+msgstr ""
+
+#: inc\theme-setup.php:91
+msgctxt "sidebar"
+msgid "Primary"
+msgstr ""
+
+#: inc\theme-setup.php:93
+msgid "The main sidebar area."
+msgstr ""
+
+#: inc\theme-setup.php:107
+msgctxt "sidebar"
+msgid "Subsidiary"
+msgstr ""
+
+#: inc\theme-setup.php:109
+msgid "The footer widget area."
+msgstr ""
+
+#: inc\utility.php:59
+msgid "Continue reading %s"
+msgstr ""
+
+#: inc\utility.php:89
+msgid "This content is password protected. To view it please enter your password below:"
+msgstr ""
+
+#: inc\utility.php:95
+msgid "Submit"
+msgstr ""
+
+#: menu\primary.php:29
+msgid "Menu"
+msgstr ""
+
+#: search.php:33
+msgid "Search Results for: %s"
+msgstr ""
+
+#: template-parts\author-box.php:35
+msgid "About "
+msgstr ""
+
+#: template-parts\entry-byline.php:29
+msgid "by %s"
+msgstr ""
+
+#: template-parts\entry-byline.php:37
+msgid "Leave a comment"
+msgstr ""
+
+#: template-parts\entry-byline.php:37
+msgid "1 Comment"
+msgstr ""
+
+#: template-parts\entry-byline.php:37
+msgid "% Comments"
+msgstr ""
+
+#: template-parts\entry-footer.php:21
+msgid "Filed Under: %s"
+msgstr ""
+
+#: template-parts\entry-footer.php:23
+msgid "Tagged With: %s"
+msgstr ""
+
+#: template-parts\loop-nav.php:33
+msgid "Previous: %link"
+msgstr ""
+
+#: template-parts\loop-nav.php:35
+msgid "Next: %link"
+msgstr ""
+
+#: template-parts\loop-nav.php:49
+msgctxt "posts navigation"
+msgid "Previous"
+msgstr ""
+
+#: template-parts\loop-nav.php:51
+msgctxt "posts navigation"
+msgid "Next"
+msgstr ""
+
+#: template-parts\loop-nav.php:53
+msgid "Page"
+msgstr ""

@@ -1,0 +1,16 @@
+.wp-caption {
+	position: relative;
+	max-width: 100%;
+
+	img[class*="wp-image-"] {
+		display: block;
+		margin: 0 auto;
+	}
+
+	.wp-caption-text {
+		padding: rem-calc(10 5);
+		font-size: $small-font-size;
+		font-style: italic;
+		line-height: 1.3;
+	}
+}

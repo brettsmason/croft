@@ -1,0 +1,30 @@
+.site-header {
+	@include clearfix;
+	padding: $global-padding 0;
+}
+
+.site-branding {
+	@include grid-col;
+
+	@include breakpoint(medium) {
+		@include grid-col-size(6);
+	}
+}
+
+.site-title {
+	margin-bottom: 0;
+	font-size: rem-calc(28);
+	font-weight: bold;
+}
+
+.site-description {
+	margin-bottom: 0;
+}
+
+.menu-social {
+	@include grid-col;
+
+	@include breakpoint(medium) {
+		@include grid-col-size(6);
+	}
+}

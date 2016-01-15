@@ -1,0 +1,25 @@
+.site-content {
+	@include clearfix;
+	@include grid-row;
+}
+
+.row {
+	@include grid-row;
+}
+
+.content-area {
+	@include grid-col;
+
+	.layout-2c-l & {
+		@include breakpoint(medium) {
+			@include grid-col-size(8);
+		}
+	}
+
+	.layout-2c-r & {
+		@include breakpoint(medium) {
+			@include grid-col-size(8);
+			@include grid-col-pos(4);
+		}
+	}
+}

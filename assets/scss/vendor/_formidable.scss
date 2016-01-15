@@ -1,0 +1,60 @@
+.frm-show-form {
+	@include grid-row;
+	@include clearfix;
+	margin: 0 -$global-margin;
+
+	input,
+	textarea {
+		margin-bottom: 0;
+	}
+}
+
+.frm_description {
+	font-size: rem-calc(12);
+}
+
+.frm_error {
+	color: $alert-color;
+	font-size: rem-calc(12);
+}
+
+.frm_form_field {
+	margin-bottom: $form-spacing;
+}
+
+.frm_form_field.frm_left_half,
+.frm_form_field.frm_right_half,
+.frm_form_field.frm_first_half,
+.frm_form_field.frm_last_half,
+.frm_form_field.frm_half,
+.frm_submit.frm_half {
+	@include grid-col(6);
+}
+
+.frm_full,
+.frm_none_container,
+.frm_submit {
+	@include grid-col;
+}
+
+.frm_required {
+	color: $alert-color;
+}
+
+.frm_ajax_loading {
+	visibility: hidden;
+	width: auto;
+}
+
+.frm_error_style {
+	@include callout-base;
+	@include callout-style($alert-color);
+	margin: 0 $global-margin $global-margin;
+}
+
+.frm_blank_field {
+	input,
+	textarea {
+		border-color: $alert-color;
+	}
+}

@@ -1,0 +1,12 @@
+body {
+	word-wrap: break-word;
+}
+
+pre {
+	margin-bottom: $global-margin;
+	padding: $global-padding;
+	border: 1px solid $medium-gray;
+	background: $light-gray;
+	font-family: $code-font-family;
+	font-weight: $code-font-weight;
+}

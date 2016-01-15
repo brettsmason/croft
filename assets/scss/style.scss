@@ -1,0 +1,119 @@
+/*
+Theme Name: Croft
+Theme URI: http://croftwp.com
+Author: Brett Mason
+Author URI: http://croftwp.com
+Description: Croft is an advanced starter theme built with search-engine optimization (SEO) in mind by utilizing the most current HTML5 conventions and <a href="http://schema.org">Schema.org</a> microdata.
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: croft
+Tags: light, one-column, two-columns, left-sidebar, right-sidebar, accessibility-ready, translation-ready, featured-images, threaded-comments, responsive-layout, editor-style, microformats, post-formats
+
+Croft is built using <a href="http://themehybrid.com">Hybrid Core</a> and <a href="http://foundation.zurb.com">Foundation for Sites</a> and is licensed under the GPL.
+*/
+
+// Import Foundation custom settings
+@import "utilities/settings";
+
+// Import Foundation and Motion UI
+@import "foundation";
+// @import "motion-ui";
+
+// Import mixins and functions
+@import "utilities/mixins";
+@import "utilities/functions";
+@import "utilities/variables";
+
+/*--------------------------------------------------------------
+Reset
+--------------------------------------------------------------*/
+@include foundation-global-styles;
+
+/*--------------------------------------------------------------
+Base Styles
+--------------------------------------------------------------*/
+@include foundation-typography-base;
+@import "base/fonts";
+@import "base/typography";
+@import "base/accessibility";
+@import "base/alignments";
+
+/*--------------------------------------------------------------
+Components
+--------------------------------------------------------------*/
+@import "components/forms";
+@import "components/breadcrumbs";
+@import "components/loop-nav";
+@import "components/captions";
+@import "components/comments";
+@import "components/galleries";
+@import "components/media";
+@import "components/widgets";
+@import "components/menu-toggle";
+@import "components/author-box";
+
+/*--------------------------------------------------------------
+Foundation Components
+--------------------------------------------------------------*/
+// @include foundation-grid;
+// @include foundation-flex-grid;
+// @include foundation-visibility-classes;
+// @include foundation-float-classes;
+@include foundation-button;
+@include foundation-forms;
+// @include foundation-accordion;
+@include foundation-accordion-menu;
+// @include foundation-badge;
+@include foundation-button-group;
+@include foundation-callout;
+// @include foundation-close-button;
+// @include foundation-drilldown-menu;
+// @include foundation-dropdown;
+@include foundation-dropdown-menu;
+@include foundation-flex-video;
+// @include foundation-label;
+// @include foundation-media-object;
+@include foundation-menu;
+// @include foundation-off-canvas;
+// @include foundation-orbit;
+// @include foundation-progress-bar;
+// @include foundation-slider;
+// @include foundation-sticky;
+// @include foundation-reveal;
+// @include foundation-switch;
+@include foundation-table;
+// @include foundation-tabs;
+// @include foundation-thumbnail;
+// @include foundation-title-bar;
+// @include foundation-tooltip;
+// @include foundation-top-bar;
+
+/*--------------------------------------------------------------
+Motion UI
+--------------------------------------------------------------*/
+// @include motion-ui-transitions;
+// @include motion-ui-animations;
+
+/*--------------------------------------------------------------
+Modules
+--------------------------------------------------------------*/
+@import "modules/header";
+@import "modules/menu-primary";
+@import "modules/main";
+@import "modules/entry";
+@import "modules/sidebar-primary";
+@import "modules/sidebar-subsidiary";
+@import "modules/footer";
+@import "modules/menu-social";
+
+/*--------------------------------------------------------------
+Specific Pages
+--------------------------------------------------------------*/
+// @import "pages/**";
+
+/*--------------------------------------------------------------
+Vendor
+--------------------------------------------------------------*/
+// @import "vendor/formidable";
+// @import "vendor/woocommerce";
