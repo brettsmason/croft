@@ -1318,11 +1318,9 @@ input[type="submit"]:hover, input[type="submit"]:focus {
 
 .gallery-caption {
 	width: 100%;
-	padding: 0.625rem 0.3125rem;
+	padding: 0.625rem 0;
 	color: #8a8a8a;
 	font-size: 80%;
-	white-space: nowrap;
-	text-overflow: ellipsis;
 }
 
 audio,
@@ -2888,7 +2886,7 @@ Modules
 }
 
 #sidebar-subsidiary {
-	padding: 1.5rem 0;
+	padding: 1.5rem 0 0;
 	background: #0a0a0a;
 }
 
@@ -2953,7 +2951,7 @@ Modules
 }
 
 .site-footer {
-	padding: 3rem 0;
+	padding: 2.25rem 0;
 	background: #0a0a0a;
 }
 
