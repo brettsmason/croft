@@ -46,9 +46,7 @@
 
 .gallery-caption {
 	width: 100%;
-	padding: rem-calc(10 5);
+	padding: rem-calc(10 0);
 	color: $dark-gray;
 	font-size: $small-font-size;
-	white-space: nowrap;
-	text-overflow: ellipsis;
 }
