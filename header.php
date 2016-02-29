@@ -13,7 +13,7 @@
 </head>
 
 <body <?php hybrid_attr( 'body' ); ?>>
-<div <?php hybrid_attr( 'site-container' ); ?>>
+<div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'croft' ); ?></a>
 
 	<header <?php hybrid_attr( 'header' ); ?>>
@@ -35,4 +35,4 @@
 
 	<?php hybrid_get_menu( 'primary' ); // Loads the menu/primary.php template. ?>
 
-	<div <?php hybrid_attr( 'site-content' ); ?>>
+	<div id="content" class="site-content">

@@ -76,36 +76,6 @@ function croft_seo_site_description( $desc ) {
 add_filter( 'hybrid_site_description', 'croft_seo_site_description' );
 
 /**
- * Page site container element attributes.
- */
-function croft_attr_site_container( $attr ) {
-	$attr['id']    = 'page';
-	$attr['class'] = 'site';
-	return $attr;
-}
-add_filter( 'hybrid_attr_site-container', 'croft_attr_site_container' );
-
-/**
- * Page site content element attributes.
- */
-function croft_attr_site_content( $attr ) {
-	$attr['id']    = 'content';
-	$attr['class'] = 'site-content';
-	return $attr;
-}
-add_filter( 'hybrid_attr_site-content', 'croft_attr_site_content' );
-
-/**
- * Page content area element attributes.
- */
-function croft_attr_content_area( $attr ) {
-	$attr['id']    = 'primary';
-	$attr['class'] = 'content-area';
-	return $attr;
-}
-add_filter( 'hybrid_attr_content-area', 'croft_attr_content_area' );
-
-/**
  * Element row element attributes.
  */
 function croft_attr_row( $attr, $context ) {

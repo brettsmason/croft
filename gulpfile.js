@@ -140,6 +140,7 @@ gulp.task('sass:login', function() {
 // Combine JavaScript into one file and minify
 gulp.task('javascript', function() {
   return gulp.src(PATHS.javascript)
+    .pipe($.babel())
     .pipe($.concat('main.js'))
     .pipe(gulp.dest('assets/js'))
     .pipe($.rename({suffix: '.min'}))
@@ -160,9 +161,9 @@ gulp.task('translate', function() {
     .pipe(gulp.dest('./languages'));
 });
 
-// Build the "dist" folder by running all of the above tasks
+// Build the theme assets
 gulp.task('build', function(done) {
-  sequence('clean', ['bower', 'copy:hc', 'sass', 'javascript'], done);
+  sequence('bower', ['copy:hc', 'sass', 'javascript'], done);
 });
 
 // Replaces all theme specific names with new ones

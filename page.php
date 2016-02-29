@@ -12,7 +12,7 @@
 
 get_header(); ?>
 
-	<div <?php hybrid_attr( 'content-area' ); ?>>
+	<div id="primary" class="content-area">
 		<main <?php hybrid_attr( 'content' ); ?>>
 
 			<?php
