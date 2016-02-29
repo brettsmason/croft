@@ -168,7 +168,7 @@ gulp.task('build', function(done) {
 
 // Replaces all theme specific names with new ones
 gulp.task('renametheme', function() {
-  return gulp.src(['**/*'])
+  return gulp.src(['**/*', '!bower_components/**', '!node_modules/**'])
     .pipe($.replace(THEME.current.name, THEME.new.name))
     .pipe($.replace(THEME.current.slug, THEME.new.slug))
     .pipe($.replace(THEME.current.prefix, THEME.new.prefix))
