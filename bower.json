@@ -5,6 +5,6 @@
   "devDependencies": {
     "hybrid-core": "https://github.com/justintadlock/hybrid-core.git",
     "foundation-sites": "^6.2.0",
-    "motion-ui": "^1.1.1"
+    "motion-ui": "^1.2.0"
   }
 }
