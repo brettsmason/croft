@@ -22,9 +22,3 @@
 		}
 	}
 }
-
-.no-js #primary-menu {
-	@include breakpoint(small only) {
-		display: none;
-	}
-}
