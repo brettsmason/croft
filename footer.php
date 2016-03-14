@@ -13,7 +13,7 @@
 	<?php hybrid_get_sidebar( 'subsidiary' ); // Loads the sidebar/subsidiary.php template. ?>
 
 	<footer <?php hybrid_attr( 'footer' ); ?>>
-		<div <?php hybrid_attr( 'row', 'footer' ); ?>>
+		<div class="row">
 			<div class="site-info">
 				<div class="copyright">
 					<?php printf(

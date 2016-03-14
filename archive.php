@@ -31,5 +31,5 @@
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-<?php hybrid_get_sidebar( 'primary' ); ?>
+<?php hybrid_get_sidebar( 'primary' ); // Loads the sidebar/primary.php template. ?>
 <?php get_footer(); ?>
