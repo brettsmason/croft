@@ -7,6 +7,7 @@ function croft_register_image_sizes() {
 
 	// Sets the 'post-thumbnail' size.
 	// set_post_thumbnail_size( 150, 150, true );
+
 	// add_image_size( 'fdn_small', 320 );
 	// add_image_size( 'fdn_medium', 640 );
 	// add_image_size( 'fdn_large', 1024 );
@@ -29,9 +30,9 @@ add_action( 'init', 'croft_register_menus', 5 );
  */
 function croft_register_layouts() {
 
-	hybrid_register_layout( '1c',   array( 'label' => esc_html__( '1 Column', 'croft' ),          'image' => '%s/assets/img/layouts/1c.png' ) );
-	hybrid_register_layout( '2c-l', array( 'label' => esc_html__( 'Content / Sidebar', 'croft' ), 'image' => '%s/assets/img/layouts/2c-l.png' ) );
-	hybrid_register_layout( '2c-r', array( 'label' => esc_html__( 'Sidebar / Content', 'croft' ), 'image' => '%s/assets/img/layouts/2c-r.png' ) );
+	hybrid_register_layout( '1c',   array( 'label' => esc_html__( '1 Column', 'croft' ),          'image' => '%s/assets/img/layouts/1c.svg' ) );
+	hybrid_register_layout( '2c-l', array( 'label' => esc_html__( 'Content / Sidebar', 'croft' ), 'image' => '%s/assets/img/layouts/2c-l.svg' ) );
+	hybrid_register_layout( '2c-r', array( 'label' => esc_html__( 'Sidebar / Content', 'croft' ), 'image' => '%s/assets/img/layouts/2c-r.svg' ) );
 }
 add_action( 'hybrid_register_layouts', 'croft_register_layouts' );
 

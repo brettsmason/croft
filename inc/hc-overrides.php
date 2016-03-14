@@ -74,15 +74,3 @@ function croft_seo_site_description( $desc ) {
 	return str_replace( array( '<h2', '</h2' ), array( '<p', '</p' ), $desc );
 }
 add_filter( 'hybrid_site_description', 'croft_seo_site_description' );
-
-/**
- * Element row element attributes.
- */
-function croft_attr_row( $attr, $context ) {
-	if ( empty( $context ) ) {
-		return $attr;
-	}
-	$attr['class'] = "row row-{$context}";
-	return $attr;
-}
-add_filter( 'hybrid_attr_row', 'croft_attr_row', 10, 2 );
