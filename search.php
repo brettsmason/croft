@@ -23,7 +23,7 @@
 
 			<?php endwhile; ?>
 
-			<?php get_template_part( 'template-parts/loop-nav' ); ?>
+			<?php get_template_part( 'components/loop-nav' ); ?>
 
 		<?php else : ?>
 
