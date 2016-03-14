@@ -1,12 +1,3 @@
-<?php
-/**
- * Template part for displaying breadcrumbs.
- *
- * @link https://codex.wordpress.org/Template_Hierarchy
- */
-
-?>
-
 <?php if ( current_theme_supports( 'breadcrumb_trail' ) ) : // Check for breadcrumb support. ?>
 
 	<?php breadcrumb_trail(
