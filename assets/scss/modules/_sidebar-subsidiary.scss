@@ -4,7 +4,7 @@
 
 	.widget-title {
 		color: $white;
-		font-size: header-size(medium, h4);
+		font-size: map-deep-get($header-sizes, medium, h4);
 	}
 
 	p {

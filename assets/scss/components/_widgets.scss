@@ -2,10 +2,11 @@
 	margin: 0 0 $global-margin;
 
 	.widget-title {
+		font-size: map-deep-get($header-sizes, small, h4);
+
 		@include breakpoint(medium) {
-			font-size: header-size(medium, h4);
+			font-size: map-deep-get($header-sizes, medium, h4);
 		}
-		font-size: header-size(small, h4);
 	}
 
 	select {
