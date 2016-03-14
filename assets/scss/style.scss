@@ -13,14 +13,14 @@ Tags: light, one-column, two-columns, left-sidebar, right-sidebar, accessibility
 Croft is built using <a href="http://themehybrid.com">Hybrid Core</a> and <a href="http://foundation.zurb.com">Foundation for Sites</a> and is licensed under the GPL.
 */
 
-// Import Foundation custom settings
+// Foundation custom settings
 @import "utilities/settings";
 
-// Import Foundation and Motion UI
+// Foundation and Motion UI
 @import "foundation";
-// @import "motion-ui";
+@import "motion-ui";
 
-// Import mixins and functions
+// mixins and functions
 @import "utilities/mixins";
 @import "utilities/functions";
 @import "utilities/variables";
@@ -51,49 +51,48 @@ Components
 @import "components/media";
 @import "components/widgets";
 @import "components/menu-toggle";
-@import "components/author-box";
 
 /*--------------------------------------------------------------
 Foundation Components
 --------------------------------------------------------------*/
-// @include foundation-grid;
+@include foundation-grid;
 // @include foundation-flex-grid;
-// @include foundation-visibility-classes;
-// @include foundation-float-classes;
+@include foundation-visibility-classes;
+@include foundation-float-classes;
 @include foundation-button;
 @include foundation-forms;
-// @include foundation-accordion;
+@include foundation-accordion;
 @include foundation-accordion-menu;
-// @include foundation-badge;
+@include foundation-badge;
 @include foundation-button-group;
 @include foundation-callout;
-// @include foundation-close-button;
-// @include foundation-drilldown-menu;
-// @include foundation-dropdown;
+@include foundation-close-button;
+@include foundation-drilldown-menu;
+@include foundation-dropdown;
 @include foundation-dropdown-menu;
 @include foundation-flex-video;
-// @include foundation-label;
-// @include foundation-media-object;
+@include foundation-label;
+@include foundation-media-object;
 @include foundation-menu;
-// @include foundation-off-canvas;
-// @include foundation-orbit;
-// @include foundation-progress-bar;
-// @include foundation-slider;
-// @include foundation-sticky;
-// @include foundation-reveal;
-// @include foundation-switch;
+@include foundation-off-canvas;
+@include foundation-orbit;
+@include foundation-progress-bar;
+@include foundation-slider;
+@include foundation-sticky;
+@include foundation-reveal;
+@include foundation-switch;
 @include foundation-table;
-// @include foundation-tabs;
-// @include foundation-thumbnail;
-// @include foundation-title-bar;
-// @include foundation-tooltip;
-// @include foundation-top-bar;
+@include foundation-tabs;
+@include foundation-thumbnail;
+@include foundation-title-bar;
+@include foundation-tooltip;
+@include foundation-top-bar;
 
 /*--------------------------------------------------------------
 Motion UI
 --------------------------------------------------------------*/
-// @include motion-ui-transitions;
-// @include motion-ui-animations;
+@include motion-ui-transitions;
+@include motion-ui-animations;
 
 /*--------------------------------------------------------------
 Modules
@@ -115,5 +114,3 @@ Specific Pages
 /*--------------------------------------------------------------
 Vendor
 --------------------------------------------------------------*/
-// @import "vendor/formidable";
-// @import "vendor/woocommerce";
