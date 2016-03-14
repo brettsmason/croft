@@ -33,7 +33,7 @@ Reset
 /*--------------------------------------------------------------
 Base Styles
 --------------------------------------------------------------*/
-@include foundation-typography-base;
+@include foundation-typography;
 @import "base/fonts";
 @import "base/typography";
 @import "base/accessibility";
