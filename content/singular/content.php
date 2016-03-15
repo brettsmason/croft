@@ -12,7 +12,7 @@
 <article <?php hybrid_attr( 'post' ); ?>>
 	<header class="entry-header">
 		<h1 <?php hybrid_attr( 'entry-title' ); ?>><?php the_title(); ?></h1>
-		<?php get_template_part( 'template-parts/entry', 'byline' ); ?>
+		<?php get_template_part( 'components/entry', 'byline' ); ?>
 	</header><!-- .entry-header -->
 
 	<div <?php hybrid_attr( 'entry-content' ); ?>>
@@ -30,5 +30,5 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<?php get_template_part( 'template-parts/entry', 'footer' ); ?>
+	<?php get_template_part( 'components/entry', 'footer' ); ?>
 </article><!-- #post-## -->

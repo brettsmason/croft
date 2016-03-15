@@ -12,7 +12,7 @@
 <article <?php hybrid_attr( 'post' ); ?>>
 	<header class="entry-header">
 		<?php the_title( '<h2 ' . hybrid_get_attr( 'entry-title' ) . '><a href="' . get_permalink() . '" rel="bookmark" itemprop="url">', '</a></h2>' ); ?>
-		<?php get_template_part( 'template-parts/entry', 'byline' ); ?>
+		<?php get_template_part( 'components/entry', 'byline' ); ?>
 	</header><!-- .entry-header -->
 
 	<div <?php hybrid_attr( 'entry-summary' ); ?>>
@@ -20,5 +20,5 @@
 		<?php the_excerpt(); ?>
 	</div><!-- .entry-summary -->
 
-	<?php get_template_part( 'template-parts/entry', 'footer' ); ?>
+	<?php get_template_part( 'components/entry', 'footer' ); ?>
 </article><!-- #post-## -->
