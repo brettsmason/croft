@@ -71,7 +71,7 @@ gulp.task('clean', function(done) {
 });
 
 // Copy Hybrid Core from the bower directory
-gulp.task('copy:hc', function() {
+gulp.task('copy', function() {
   gulp.src(PATHS.hc)
     .pipe(gulp.dest('inc/hybrid-core'));
 });
@@ -138,7 +138,7 @@ gulp.task('translate', function() {
 
 // Build the theme assets
 gulp.task('build', function(done) {
-  sequence(['copy:hc', 'sass', 'javascript'], done);
+  sequence(['copy', 'sass', 'javascript'], done);
 });
 
 // Replaces all theme specific names with new ones

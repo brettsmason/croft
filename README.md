@@ -29,14 +29,14 @@ The default Gulp task. Runs the `build` task and watches files for changes.
 #### gulp clean
 Cleans and removes the contents of the `dist` directory.
 
-#### gulp copy:hc
+#### gulp copy
 Copies Hybrid Core files from `bower_components` to `inc/hybrid-core`.
 
 #### gulp Sass
 Compiles and minifies the `style.scss` stylesheet.
 
 #### gulp sass:editor
-Compiles the `editor-style.scss` stylesheet.
+Compiles the `editor-style.scss` stylesheet into the `/assets/css/` directory.
 Used to style the WordPress visual editor.
 
 #### gulp javascript
