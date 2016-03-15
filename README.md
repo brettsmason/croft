@@ -17,7 +17,7 @@ However theme assets should compile just fine using other tools.
 
 ### Install node.js.
 - Using the command line, navigate to your theme directory
-- Run `npm start` to install Gulp plugins and Bower packages
+- Run `npm install` to install Gulp plugins and Bower packages and copy Hybrid Core to `/inc/hybrid-core/`.
 - Run `gulp` to confirm everything is working
 
 ### What Gulp tasks are included?
