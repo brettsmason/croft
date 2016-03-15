@@ -70,13 +70,8 @@ gulp.task('clean', function(done) {
   rimraf('dist', done);
 });
 
-// Installs bower components
-gulp.task('bower', function() {
-  return $.bower();
-});
-
 // Copy Hybrid Core from the bower directory
-gulp.task('copy:hc', ['bower'], function() {
+gulp.task('copy:hc', function() {
   gulp.src(PATHS.hc)
     .pipe(gulp.dest('inc/hybrid-core'));
 });
@@ -84,7 +79,7 @@ gulp.task('copy:hc', ['bower'], function() {
 // Compile main stylesheet into CSS
 gulp.task('sass', function() {
   return gulp.src('assets/scss/style.scss')
-    // .pipe($.sourcemaps.init())
+    .pipe($.sourcemaps.init())
     .pipe($.sass({
       includePaths: PATHS.sass,
       outputStyle: 'expanded',
@@ -97,15 +92,14 @@ gulp.task('sass', function() {
     }))
     .pipe(gulp.dest('./'))
     .pipe($.rename({suffix: '.min'}))
-    .pipe($.minifyCss())
-    // .pipe($.sourcemaps.write())
+    .pipe($.cleanCss())
+    .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('./'))
 });
 
 // Compile editor stylesheet into CSS
 gulp.task('sass:editor', function() {
   return gulp.src('assets/scss/editor-style.scss')
-    // .pipe($.sourcemaps.init())
     .pipe($.sass({
       includePaths: PATHS.sass,
     })
@@ -114,30 +108,11 @@ gulp.task('sass:editor', function() {
       browsers: COMPATIBILITY
     }))
     .pipe($.rename({suffix: '.min'}))
-    .pipe($.minifyCss())
-    // .pipe($.sourcemaps.write())
+    .pipe($.cleanCss())
     .pipe(gulp.dest('assets/css'))
 });
 
-// Compile login stylesheet into CSS
-gulp.task('sass:login', function() {
-  return gulp.src('assets/scss/login.scss')
-    // .pipe($.sourcemaps.init())
-    .pipe($.sass({
-      includePaths: PATHS.sass,
-    })
-    .on('error', $.sass.logError))
-    .pipe($.autoprefixer({
-      browsers: COMPATIBILITY
-    }))
-    .pipe(gulp.dest('assets/css'))
-    .pipe($.rename({suffix: '.min'}))
-    .pipe($.minifyCss())
-    // .pipe($.sourcemaps.write())
-    .pipe(gulp.dest('assets/css'))
-});
-
-// Combine JavaScript into one file and minify
+// Combine JavaScript into one file and create minified version
 gulp.task('javascript', function() {
   return gulp.src(PATHS.javascript)
     .pipe($.babel())
@@ -163,7 +138,7 @@ gulp.task('translate', function() {
 
 // Build the theme assets
 gulp.task('build', function(done) {
-  sequence('bower', ['copy:hc', 'sass', 'javascript'], done);
+  sequence(['copy:hc', 'sass', 'javascript'], done);
 });
 
 // Replaces all theme specific names with new ones

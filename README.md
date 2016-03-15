@@ -17,17 +17,17 @@ However theme assets should compile just fine using other tools.
 
 ### Install node.js.
 - Using the command line, navigate to your theme directory
-- Run `npm install` to install Gulp plugins
+- Run `npm start` to install Gulp plugins and Bower packages
 - Run `gulp` to confirm everything is working
 
 ### What Gulp tasks are included?
 Croft comes with a few useful Gulp tasks out of the box:
 
-#### gulp clean
-Cleans and removed the contents of the `dist` directory.
+#### gulp
+The default Gulp task. Runs the `build` task and watches files for changes.
 
-#### gulp bower
-Installs Bower components.
+#### gulp clean
+Cleans and removes the contents of the `dist` directory.
 
 #### gulp copy:hc
 Copies Hybrid Core files from `bower_components` to `inc/hybrid-core`.
@@ -39,9 +39,6 @@ Compiles and minifies the `style.scss` stylesheet.
 Compiles the `editor-style.scss` stylesheet.
 Used to style the WordPress visual editor.
 
-#### gulp sass:login
-Compiles the `login.scss` stylesheet. This can be used to style the WordPress login screen.
-
 #### gulp javascript
 Concats and minifies the main JS file.
 
@@ -49,7 +46,7 @@ Concats and minifies the main JS file.
 A simple task for creating a pot file for your theme so it's ready for translation.
 
 #### gulp build
-Runs the clean, bower, copy:hc, sass and javascript tasks.
+Runs the clean, copy:hc, sass and javascript tasks.
 
 #### gulp renametheme
 This will rename all references to the theme text domain, function names and any other theme specific names.
@@ -60,12 +57,6 @@ Copies all final theme files to the `dist` folder.
 
 #### gulp zip
 Creates a zip file of the `dist` directory ready to distribute the theme.
-
-### How do I use classes instead of mixins?
-- Uncomment `layout.php` near the top of `functions.php`.
-- Open `layout.php` (`/inc/layout.php`) and change the classes.
-- Remove any of the Sass mixins from the Sass partials (`assets/scss/modules`) that are no longer needed.
-- In the main `style.scss` file (`assets/scss`) make sure you uncomment any components you want to use.
 
 ## Copyright and License
 The following resources are included or used in part within the theme package.
