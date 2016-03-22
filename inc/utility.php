@@ -12,6 +12,10 @@ class Foundation_Menu_Walker extends Walker_Nav_Menu {
 
 /**
  * Change .sticky class for sticky posts.
+ *
+ * @param array $classes
+ *
+ * @return array
  */
 function croft_sticky_class( $classes ) {
 	if ( ( $key = array_search( 'sticky', $classes ) ) !== false ) {
@@ -54,6 +58,10 @@ add_filter( 'the_password_form', 'croft_entry_password_form' );
 
 /**
  * Additional Widgets Classes
+ *
+ * @param $params
+ *
+ * @return mixed
  */
 function croft_widget_classes( $params ) {
 
@@ -106,6 +114,11 @@ add_filter( 'dynamic_sidebar_params', 'croft_widget_classes' );
 
 /**
  * Adds widget number count as a class to the subsidiary widget area container.
+ * 
+ * @param $attr
+ * @param $context
+ *
+ * @return mixed
  */
 function croft_sidebar_subsidiary_class( $attr, $context ) {
 	if ( 'subsidiary' === $context ) {

@@ -5,6 +5,10 @@
 
 /**
  * Sets the header ID.
+ *
+ * @param array $attr
+ *
+ * @return array
  */
 function croft_attr_header_replacement( $attr ) {
 
@@ -16,6 +20,10 @@ add_filter( 'hybrid_attr_header', 'croft_attr_header_replacement' );
 
 /**
  * Sets the main container ID/class.
+ *
+ * @param $attr
+ *
+ * @return array
  */
 function croft_attr_content_replacement( $attr ) {
 
@@ -28,6 +36,10 @@ add_filter( 'hybrid_attr_content', 'croft_attr_content_replacement' );
 
 /**
  * Sets the footer ID.
+ *
+ * @param $attr
+ *
+ * @return array
  */
 function croft_attr_footer_replacement( $attr ) {
 
@@ -39,6 +51,10 @@ add_filter( 'hybrid_attr_footer', 'croft_attr_footer_replacement' );
 
 /**
  * Search the template paths and replace them with singular and archive versions.
+ *
+ * @param string $templates
+ *
+ * @return string
  */
 function croft_content_template_hierarchy( $templates ) {
 	if ( is_singular() || is_attachment() ) {
@@ -58,6 +74,10 @@ remove_action( 'wp_head',  'hybrid_meta_template', 1 );
 /**
  * Returns the linked site title wrapped in a '<p>' tag unless on the home page
  * or the main blog page where no other H1 exists.
+ *
+ * @param string $title
+ *
+ * @return string
  */
 function croft_seo_site_title( $title ) {
 	if ( is_front_page() || is_home() ) {
@@ -69,6 +89,10 @@ add_filter( 'hybrid_site_title', 'croft_seo_site_title' );
 
 /**
  * Returns the site description wrapped in a `<p>` tag.
+ *
+ * @param string $desc
+ *
+ * @return string
  */
 function croft_seo_site_description( $desc ) {
 	return str_replace( array( '<h2', '</h2' ), array( '<p', '</p' ), $desc );

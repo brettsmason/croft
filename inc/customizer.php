@@ -3,7 +3,10 @@
  * Croft Theme Customizer.
  */
 
-function croft_customize_register( $wp_customize ) {
+/**
+ * @param WP_Customize_Manager $wp_customize
+ */
+function croft_customize_register( WP_Customize_Manager $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 
@@ -24,7 +27,11 @@ add_action( 'customize_register', 'croft_customize_register' );
 
 
 /**
- * Santizes the values of multiple checkbox field.
+ * Sanitizes the values of multiple checkbox field.
+ *
+ * @param $values
+ *
+ * @return array
  */
 function croft_sanitize_checkbox_multiple( $values ) {
     $multi_values = !is_array( $values ) ? explode( ',', $values ) : $values;
@@ -33,6 +40,10 @@ function croft_sanitize_checkbox_multiple( $values ) {
 
 /**
  * Single checkbox sanitization.
+ *
+ * @param mixed $input
+ *
+ * @return mixed
  */
 function croft_sanitize_checkbox( $input ) {
 	if ( $input == 1 ) {
