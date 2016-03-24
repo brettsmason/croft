@@ -1,8 +1,10 @@
 <?php
 /**
  * Register Customizer logo control
+ *
+ * @param WP_Customize_Manager $wp_customize
  */
-function croft_logo_customize_register( $wp_customize ) {
+function croft_logo_customize_register( WP_Customize_Manager $wp_customize ) {
 	$wp_customize->add_setting( 'logo', array(
 			'type'              => 'theme_mod',
 			'transport'         => 'refresh',
@@ -40,6 +42,11 @@ add_action( 'customize_register', 'croft_logo_customize_register' );
  * Return the logo attributes if set.
  * $size: supply a WordPress image size name.
  * $return: 0: image URL  1: image width  2: image height.
+ * 
+ * @param string $size
+ * @param string $attr
+ *
+ * @return bool
  */
 function croft_get_site_logo( $size = 'full', $attr = '0' ) {
 	if( current_theme_supports( 'croft-logo' ) && get_theme_mod( 'logo' ) ) {

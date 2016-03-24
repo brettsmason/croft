@@ -2,6 +2,7 @@
 thumbs.db
 /.idea/*
 /bower_components/*
+/inc/hybrid-core
 /assets/css/*
 /node_modules/*
 /dist/*
