@@ -138,7 +138,7 @@ gulp.task('translate', function() {
 
 // Build the theme assets
 gulp.task('build', function(done) {
-  sequence(['copy', 'sass', 'javascript'], done);
+  sequence(['copy', 'sass', 'sass:editor', 'javascript'], done);
 });
 
 // Replaces all theme specific names with new ones
