@@ -12,9 +12,7 @@ $croft_dir = trailingslashit( get_template_directory() );
 require_once( $croft_dir . 'inc/hybrid-core/hybrid.php' );
 require_once( $croft_dir . 'inc/hc-overrides.php' );
 require_once( $croft_dir . 'inc/theme-setup.php' );
-// require_once( $croft_dir . 'inc/layout.php' );
 require_once( $croft_dir . 'inc/utility.php' );
-require_once( $croft_dir . 'inc/site-logo.php' );
 require_once( $croft_dir . 'inc/customizer.php' );
 
 // Defines custom Hybrid Core directory.
@@ -51,7 +49,15 @@ function croft_theme_setup() {
 	);
 
 	// Site logo.
-	add_theme_support( 'croft-logo' );
+	add_theme_support( 'custom-logo', array(
+		'height'      => 300,
+		'width'       => 200,
+		'flex-height' => true,
+		'flex-width'  => true,
+	) );
+
+	// Indicate widget sidebars can use selective refresh in the Customizer.
+	add_theme_support( 'customize-selective-refresh-widgets' );
 
 	// Handle content width for embeds and images.
 	hybrid_set_content_width( 1200 );

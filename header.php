@@ -10,18 +10,11 @@
 
 	<header <?php hybrid_attr( 'header' ); ?>>
 		<div class="row">
-			<div <?php hybrid_attr( 'branding' ); ?>>
-				<?php if ( croft_get_site_logo() ) : // If the site logo is set. ?>
-					<?php croft_site_logo(); ?>
-				<?php else: ?>
-					<?php hybrid_site_title(); ?>
-				<?php endif; ?>
-				<?php if ( get_theme_mod( 'display_tagline', 0 ) ) : // If the tagline is enabled. ?>
-					<?php hybrid_site_description(); ?>
-				<?php endif; ?>
-			</div><!-- .site-branding -->
+
+			<?php get_template_part( 'components/site-branding' ); // Loads the components/site-branding.php template. ?>
 
 			<?php hybrid_get_menu( 'social' ); // Loads the menu/social.php template. ?>
+
 		</div><!-- .row -->
 	</header><!-- #masthead -->
 

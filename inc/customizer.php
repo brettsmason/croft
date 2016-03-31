@@ -10,6 +10,20 @@ function croft_customize_register( WP_Customize_Manager $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 
+	$wp_customize->selective_refresh->add_partial( 'blogname', array(
+		'selector' => '.site-title a',
+		'render_callback' => function() {
+			bloginfo( 'name' );
+		},
+	) );
+
+	$wp_customize->selective_refresh->add_partial( 'blogdescription', array(
+		'selector' => '.site-description',
+		'render_callback' => function() {
+			bloginfo( 'description' );
+		},
+	) );
+
 	$wp_customize->add_setting( 'display_tagline', array(
 		'default'           => '',
 		'transport'         => 'refresh',
