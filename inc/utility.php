@@ -142,3 +142,19 @@ function croft_sidebar_subsidiary_class( $attr, $context ) {
 	return $attr;
 }
 add_filter( 'hybrid_attr_sidebar', 'croft_sidebar_subsidiary_class', 10, 2 );
+
+function croft_custom_logo_args() {
+	$custom_logo_id = get_theme_mod( 'custom_logo' );
+
+	$html = sprintf( '<a href="%1$s" class="custom-logo-link" rel="home" itemprop="url">%2$s</a>',
+		esc_url( home_url( '/' ) ),
+		wp_get_attachment_image( $custom_logo_id, 'full', false, array(
+			'class'    => 'custom-logo',
+			'itemprop' => 'logo',
+			'alt' => esc_attr( get_bloginfo( 'name' ) ),
+		) )
+	);
+
+	return $html;
+}
+add_filter( 'get_custom_logo', 'croft_custom_logo_args' );

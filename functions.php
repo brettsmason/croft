@@ -50,8 +50,8 @@ function croft_theme_setup() {
 
 	// Site logo.
 	add_theme_support( 'custom-logo', array(
-		'height'      => 300,
-		'width'       => 200,
+		'height'      => 200,
+		'width'       => 300,
 		'flex-height' => true,
 		'flex-width'  => true,
 	) );
