@@ -143,6 +143,9 @@ function croft_sidebar_subsidiary_class( $attr, $context ) {
 }
 add_filter( 'hybrid_attr_sidebar', 'croft_sidebar_subsidiary_class', 10, 2 );
 
+/**
+ * Filters the custom logo output to include the site name as the alt tag.
+ */
 function croft_custom_logo_args() {
 	$custom_logo_id = get_theme_mod( 'custom_logo' );
 
