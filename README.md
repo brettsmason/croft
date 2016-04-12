@@ -6,6 +6,8 @@ Croft combines ZURB's Foundation, the most advanced responsive front-end framewo
 
 Croft isn't mean't to be used as is, it's mean't to used to create your next masterpeice!
 
+Croft requires a minimum of WordPress 4.5.
+
 ## What comes with Croft?
 Croft comes with all of the features you love from Foundation for Sites, along with minimal styling to cover all WordPress core components. The theme comes setup to be used with Foundations Sass mixins (default and my preferred method) or optionally with classes.
 
