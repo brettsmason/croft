@@ -5,7 +5,11 @@ var rimraf   = require('rimraf');
 var sequence = require('run-sequence');
 
 // Browsers to target when prefixing CSS.
-var COMPATIBILITY = ['last 2 versions', 'ie >= 9'];
+var COMPATIBILITY = [
+  'last 2 versions',
+  'ie >= 9',
+  'Android >= 2.3'
+];
 
 var THEME = {
   current: {
@@ -188,5 +192,5 @@ gulp.task('zip', function () {
 // Build the theme, run the server, and watch for file changes
 gulp.task('default', ['build'], function() {
   gulp.watch(['assets/scss/**/*.scss'], ['sass', 'sass:editor']);
-  gulp.watch(['assets/js/**/*.js'], ['javascript']);
+  gulp.watch(['assets/js/theme/**/*.js', 'assets/js/vendor/**/*.js'], ['javascript']);
 });

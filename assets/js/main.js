@@ -1,54 +1,285 @@
-'use strict';var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol?"symbol":typeof obj;};;(function(root,factory){if(typeof define==='function'&&define.amd){define([],function(){return factory();});}else if((typeof exports==='undefined'?'undefined':_typeof(exports))==='object'){module.exports=factory();}else {root.whatInput=factory();}})(undefined,function(){'use strict'; /*
+'use strict';
+
+window.whatInput = function () {
+
+  'use strict';
+
+  /*
     ---------------
     variables
     ---------------
-  */ // array of actively pressed keys
-var activeKeys=[]; // cache document.body
-var body=document.body; // boolean: true if touch buffer timer is running
-var buffer=false; // the last used input type
-var currentInput=null; // array of form elements that take keyboard input
-var formInputs=['input','select','textarea']; // user-set flag to allow typing in form fields to be recorded
-var formTyping=body.hasAttribute('data-whatinput-formtyping'); // mapping of events to input types
-var inputMap={'keydown':'keyboard','mousedown':'mouse','mouseenter':'mouse','touchstart':'touch','pointerdown':'pointer','MSPointerDown':'pointer'}; // array of all used input types
-var inputTypes=[]; // mapping of key codes to common name
-var keyMap={9:'tab',13:'enter',16:'shift',27:'esc',32:'space',37:'left',38:'up',39:'right',40:'down'}; // map of IE 10 pointer events
-var pointerMap={2:'touch',3:'touch', // treat pen like touch
-4:'mouse'}; // touch buffer timer
-var timer; /*
+  */
+
+  // array of actively pressed keys
+
+  var activeKeys = [];
+
+  // cache document.body
+  var body;
+
+  // boolean: true if touch buffer timer is running
+  var buffer = false;
+
+  // the last used input type
+  var currentInput = null;
+
+  // `input` types that don't accept text
+  var nonTypingInputs = ['button', 'checkbox', 'file', 'image', 'radio', 'reset', 'submit'];
+
+  // detect version of mouse wheel event to use
+  // via https://developer.mozilla.org/en-US/docs/Web/Events/wheel
+  var mouseWheel = detectWheel();
+
+  // list of modifier keys commonly used with the mouse and
+  // can be safely ignored to prevent false keyboard detection
+  var ignoreMap = [16, // shift
+  17, // control
+  18, // alt
+  91, // Windows key / left Apple cmd
+  93 // Windows menu / right Apple cmd
+  ];
+
+  // mapping of events to input types
+  var inputMap = {
+    'keydown': 'keyboard',
+    'keyup': 'keyboard',
+    'mousedown': 'mouse',
+    'mousemove': 'mouse',
+    'MSPointerDown': 'pointer',
+    'MSPointerMove': 'pointer',
+    'pointerdown': 'pointer',
+    'pointermove': 'pointer',
+    'touchstart': 'touch'
+  };
+
+  // add correct mouse wheel event mapping to `inputMap`
+  inputMap[detectWheel()] = 'mouse';
+
+  // array of all used input types
+  var inputTypes = [];
+
+  // mapping of key codes to a common name
+  var keyMap = {
+    9: 'tab',
+    13: 'enter',
+    16: 'shift',
+    27: 'esc',
+    32: 'space',
+    37: 'left',
+    38: 'up',
+    39: 'right',
+    40: 'down'
+  };
+
+  // map of IE 10 pointer events
+  var pointerMap = {
+    2: 'touch',
+    3: 'touch', // treat pen like touch
+    4: 'mouse'
+  };
+
+  // touch buffer timer
+  var timer;
+
+  /*
     ---------------
     functions
     ---------------
-  */function bufferInput(event){clearTimeout(timer);setInput(event);buffer=true;timer=setTimeout(function(){buffer=false;},1000);}function immediateInput(event){if(!buffer)setInput(event);}function setInput(event){var eventKey=key(event);var eventTarget=target(event);var value=inputMap[event.type];if(value==='pointer')value=pointerType(event);if(currentInput!==value){if( // only if the user flag isn't set
-!formTyping&& // only if currentInput has a value
-currentInput&& // only if the input is `keyboard`
-value==='keyboard'&& // not if the key is `TAB`
-keyMap[eventKey]!=='tab'&& // only if the target is one of the elements in `formInputs`
-formInputs.indexOf(eventTarget.nodeName.toLowerCase())>=0){ // ignore keyboard typing on form elements
-}else {currentInput=value;body.setAttribute('data-whatinput',currentInput);if(inputTypes.indexOf(currentInput)===-1)inputTypes.push(currentInput);}}if(value==='keyboard')logKeys(eventKey);}function key(event){return event.keyCode?event.keyCode:event.which;}function target(event){return event.target||event.srcElement;}function pointerType(event){return typeof event.pointerType==='number'?pointerMap[event.pointerType]:event.pointerType;} // keyboard logging
-function logKeys(eventKey){if(activeKeys.indexOf(keyMap[eventKey])===-1&&keyMap[eventKey])activeKeys.push(keyMap[eventKey]);}function unLogKeys(event){var eventKey=key(event);var arrayPos=activeKeys.indexOf(keyMap[eventKey]);if(arrayPos!==-1)activeKeys.splice(arrayPos,1);}function bindEvents(){ // pointer/mouse
-var mouseEvent='mousedown';if(window.PointerEvent){mouseEvent='pointerdown';}else if(window.MSPointerEvent){mouseEvent='MSPointerDown';}body.addEventListener(mouseEvent,immediateInput);body.addEventListener('mouseenter',immediateInput); // touch
-if('ontouchstart' in window){body.addEventListener('touchstart',bufferInput);} // keyboard
-body.addEventListener('keydown',immediateInput);document.addEventListener('keyup',unLogKeys);} /*
+  */
+
+  // allows events that are also triggered to be filtered out for `touchstart`
+  function eventBuffer() {
+    clearTimer();
+    setInput(event);
+
+    buffer = true;
+    timer = window.setTimeout(function () {
+      buffer = false;
+    }, 650);
+  }
+
+  function bufferedEvent(event) {
+    if (!buffer) setInput(event);
+  }
+
+  function unBufferedEvent(event) {
+    clearTimer();
+    setInput(event);
+  }
+
+  function clearTimer() {
+    window.clearTimeout(timer);
+  }
+
+  function setInput(event) {
+    var eventKey = key(event);
+    var value = inputMap[event.type];
+    if (value === 'pointer') value = pointerType(event);
+
+    // don't do anything if the value matches the input type already set
+    if (currentInput !== value) {
+      var eventTarget = target(event);
+      var eventTargetNode = eventTarget.nodeName.toLowerCase();
+      var eventTargetType = eventTargetNode === 'input' ? eventTarget.getAttribute('type') : null;
+
+      if ( // only if the user flag to allow typing in form fields isn't set
+      !body.hasAttribute('data-whatinput-formtyping') &&
+
+      // only if currentInput has a value
+      currentInput &&
+
+      // only if the input is `keyboard`
+      value === 'keyboard' &&
+
+      // not if the key is `TAB`
+      keyMap[eventKey] !== 'tab' && (
+
+      // only if the target is a form input that accepts text
+      eventTargetNode === 'textarea' || eventTargetNode === 'select' || eventTargetNode === 'input' && nonTypingInputs.indexOf(eventTargetType) < 0) ||
+      // ignore modifier keys
+      ignoreMap.indexOf(eventKey) > -1) {
+        // ignore keyboard typing
+      } else {
+          switchInput(value);
+        }
+    }
+
+    if (value === 'keyboard') logKeys(eventKey);
+  }
+
+  function switchInput(string) {
+    currentInput = string;
+    body.setAttribute('data-whatinput', currentInput);
+
+    if (inputTypes.indexOf(currentInput) === -1) inputTypes.push(currentInput);
+  }
+
+  function key(event) {
+    return event.keyCode ? event.keyCode : event.which;
+  }
+
+  function target(event) {
+    return event.target || event.srcElement;
+  }
+
+  function pointerType(event) {
+    if (typeof event.pointerType === 'number') {
+      return pointerMap[event.pointerType];
+    } else {
+      return event.pointerType === 'pen' ? 'touch' : event.pointerType; // treat pen like touch
+    }
+  }
+
+  // keyboard logging
+  function logKeys(eventKey) {
+    if (activeKeys.indexOf(keyMap[eventKey]) === -1 && keyMap[eventKey]) activeKeys.push(keyMap[eventKey]);
+  }
+
+  function unLogKeys(event) {
+    var eventKey = key(event);
+    var arrayPos = activeKeys.indexOf(keyMap[eventKey]);
+
+    if (arrayPos !== -1) activeKeys.splice(arrayPos, 1);
+  }
+
+  function bindEvents() {
+    body = document.body;
+
+    // pointer events (mouse, pen, touch)
+    if (window.PointerEvent) {
+      body.addEventListener('pointerdown', bufferedEvent);
+      body.addEventListener('pointermove', bufferedEvent);
+    } else if (window.MSPointerEvent) {
+      body.addEventListener('MSPointerDown', bufferedEvent);
+      body.addEventListener('MSPointerMove', bufferedEvent);
+    } else {
+
+      // mouse events
+      body.addEventListener('mousedown', bufferedEvent);
+      body.addEventListener('mousemove', bufferedEvent);
+
+      // touch events
+      if ('ontouchstart' in window) {
+        body.addEventListener('touchstart', eventBuffer);
+      }
+    }
+
+    // mouse wheel
+    body.addEventListener(mouseWheel, bufferedEvent);
+
+    // keyboard events
+    body.addEventListener('keydown', unBufferedEvent);
+    body.addEventListener('keyup', unBufferedEvent);
+    document.addEventListener('keyup', unLogKeys);
+  }
+
+  /*
+    ---------------
+    utilities
+    ---------------
+  */
+
+  // detect version of mouse wheel event to use
+  // via https://developer.mozilla.org/en-US/docs/Web/Events/wheel
+  function detectWheel() {
+    return mouseWheel = 'onwheel' in document.createElement('div') ? 'wheel' : // Modern browsers support "wheel"
+
+    document.onmousewheel !== undefined ? 'mousewheel' : // Webkit and IE support at least "mousewheel"
+    'DOMMouseScroll'; // let's assume that remaining browsers are older Firefox
+  }
+
+  /*
     ---------------
     init
-
-    don't start script unless browser cuts the mustard,
+      don't start script unless browser cuts the mustard,
     also passes if polyfills are used
     ---------------
-  */if('addEventListener' in window&&Array.prototype.indexOf){bindEvents();} /*
+  */
+
+  if ('addEventListener' in window && Array.prototype.indexOf) {
+
+    // if the dom is already ready already (script was placed at bottom of <body>)
+    if (document.body) {
+      bindEvents();
+
+      // otherwise wait for the dom to load (script was placed in the <head>)
+    } else {
+        document.addEventListener('DOMContentLoaded', bindEvents);
+      }
+  }
+
+  /*
     ---------------
     api
     ---------------
-  */return { // returns string: the current input type
-ask:function ask(){return currentInput;}, // returns array: currently pressed keys
-keys:function keys(){return activeKeys;}, // returns array: all the detected input types
-types:function types(){return inputTypes;}, // accepts string: manually set the input type
-set:setInput};});
+  */
+
+  return {
+
+    // returns string: the current input type
+    ask: function () {
+      return currentInput;
+    },
+
+    // returns array: currently pressed keys
+    keys: function () {
+      return activeKeys;
+    },
+
+    // returns array: all the detected input types
+    types: function () {
+      return inputTypes;
+    },
+
+    // accepts string: manually set the input type
+    set: switchInput
+  };
+}();
 !function ($) {
 
   "use strict";
 
-  var FOUNDATION_VERSION = '6.2.0';
+  var FOUNDATION_VERSION = '6.2.1';
 
   // Global Foundation object
   // This is attached to the window, or used as a module for AMD/Browserify
@@ -606,6 +837,18 @@ set:setInput};});
           top: $eleDims.windowDims.offset.top
         };
         break;
+      case 'left bottom':
+        return {
+          left: $anchorDims.offset.left - ($eleDims.width + hOffset),
+          top: $anchorDims.offset.top + $anchorDims.height
+        };
+        break;
+      case 'right bottom':
+        return {
+          left: $anchorDims.offset.left + $anchorDims.width + hOffset - $eleDims.width,
+          top: $anchorDims.offset.top + $anchorDims.height
+        };
+        break;
       default:
         return {
           left: Foundation.rtl() ? $anchorDims.offset.left - $eleDims.width + $anchorDims.width : $anchorDims.offset.left,
@@ -821,7 +1064,7 @@ set:setInput};});
     _getCurrentSize: function () {
       var matched;
 
-      for (var i in this.queries) {
+      for (var i = 0; i < this.queries.length; i++) {
         var query = this.queries[i];
 
         if (window.matchMedia(query.value).matches) {
@@ -1204,119 +1447,119 @@ set:setInput};});
 //**************************************************
 (function ($) {
 
-	$.spotSwipe = {
-		version: '1.0.0',
-		enabled: 'ontouchstart' in document.documentElement,
-		preventDefault: false,
-		moveThreshold: 75,
-		timeThreshold: 200
-	};
+		$.spotSwipe = {
+				version: '1.0.0',
+				enabled: 'ontouchstart' in document.documentElement,
+				preventDefault: false,
+				moveThreshold: 75,
+				timeThreshold: 200
+		};
 
-	var startPosX,
-	    startPosY,
-	    startTime,
-	    elapsedTime,
-	    isMoving = false;
+		var startPosX,
+		    startPosY,
+		    startTime,
+		    elapsedTime,
+		    isMoving = false;
 
-	function onTouchEnd() {
-		//  alert(this);
-		this.removeEventListener('touchmove', onTouchMove);
-		this.removeEventListener('touchend', onTouchEnd);
-		isMoving = false;
-	}
-
-	function onTouchMove(e) {
-		if ($.spotSwipe.preventDefault) {
-			e.preventDefault();
+		function onTouchEnd() {
+				//  alert(this);
+				this.removeEventListener('touchmove', onTouchMove);
+				this.removeEventListener('touchend', onTouchEnd);
+				isMoving = false;
 		}
-		if (isMoving) {
-			var x = e.touches[0].pageX;
-			var y = e.touches[0].pageY;
-			var dx = startPosX - x;
-			var dy = startPosY - y;
-			var dir;
-			elapsedTime = new Date().getTime() - startTime;
-			if (Math.abs(dx) >= $.spotSwipe.moveThreshold && elapsedTime <= $.spotSwipe.timeThreshold) {
-				dir = dx > 0 ? 'left' : 'right';
-			}
-			// else if(Math.abs(dy) >= $.spotSwipe.moveThreshold && elapsedTime <= $.spotSwipe.timeThreshold) {
-			//   dir = dy > 0 ? 'down' : 'up';
-			// }
-			if (dir) {
-				e.preventDefault();
-				onTouchEnd.call(this);
-				$(this).trigger('swipe', dir).trigger('swipe' + dir);
-			}
+
+		function onTouchMove(e) {
+				if ($.spotSwipe.preventDefault) {
+						e.preventDefault();
+				}
+				if (isMoving) {
+						var x = e.touches[0].pageX;
+						var y = e.touches[0].pageY;
+						var dx = startPosX - x;
+						var dy = startPosY - y;
+						var dir;
+						elapsedTime = new Date().getTime() - startTime;
+						if (Math.abs(dx) >= $.spotSwipe.moveThreshold && elapsedTime <= $.spotSwipe.timeThreshold) {
+								dir = dx > 0 ? 'left' : 'right';
+						}
+						// else if(Math.abs(dy) >= $.spotSwipe.moveThreshold && elapsedTime <= $.spotSwipe.timeThreshold) {
+						//   dir = dy > 0 ? 'down' : 'up';
+						// }
+						if (dir) {
+								e.preventDefault();
+								onTouchEnd.call(this);
+								$(this).trigger('swipe', dir).trigger('swipe' + dir);
+						}
+				}
 		}
-	}
 
-	function onTouchStart(e) {
-		if (e.touches.length == 1) {
-			startPosX = e.touches[0].pageX;
-			startPosY = e.touches[0].pageY;
-			isMoving = true;
-			startTime = new Date().getTime();
-			this.addEventListener('touchmove', onTouchMove, false);
-			this.addEventListener('touchend', onTouchEnd, false);
+		function onTouchStart(e) {
+				if (e.touches.length == 1) {
+						startPosX = e.touches[0].pageX;
+						startPosY = e.touches[0].pageY;
+						isMoving = true;
+						startTime = new Date().getTime();
+						this.addEventListener('touchmove', onTouchMove, false);
+						this.addEventListener('touchend', onTouchEnd, false);
+				}
 		}
-	}
 
-	function init() {
-		this.addEventListener && this.addEventListener('touchstart', onTouchStart, false);
-	}
+		function init() {
+				this.addEventListener && this.addEventListener('touchstart', onTouchStart, false);
+		}
 
-	function teardown() {
-		this.removeEventListener('touchstart', onTouchStart);
-	}
+		function teardown() {
+				this.removeEventListener('touchstart', onTouchStart);
+		}
 
-	$.event.special.swipe = { setup: init };
+		$.event.special.swipe = { setup: init };
 
-	$.each(['left', 'up', 'down', 'right'], function () {
-		$.event.special['swipe' + this] = { setup: function () {
-				$(this).on('swipe', $.noop);
-			} };
-	});
+		$.each(['left', 'up', 'down', 'right'], function () {
+				$.event.special['swipe' + this] = { setup: function () {
+								$(this).on('swipe', $.noop);
+						} };
+		});
 })(jQuery);
 /****************************************************
  * Method for adding psuedo drag events to elements *
  ***************************************************/
 !function ($) {
-	$.fn.addTouch = function () {
-		this.each(function (i, el) {
-			$(el).bind('touchstart touchmove touchend touchcancel', function () {
-				//we pass the original event object because the jQuery event
-				//object is normalized to w3c specs and does not provide the TouchList
-				handleTouch(event);
-			});
-		});
-
-		var handleTouch = function (event) {
-			var touches = event.changedTouches,
-			    first = touches[0],
-			    eventTypes = {
-				touchstart: 'mousedown',
-				touchmove: 'mousemove',
-				touchend: 'mouseup'
-			},
-			    type = eventTypes[event.type],
-			    simulatedEvent;
-
-			if ('MouseEvent' in window && typeof window.MouseEvent === 'function') {
-				simulatedEvent = window.MouseEvent(type, {
-					'bubbles': true,
-					'cancelable': true,
-					'screenX': first.screenX,
-					'screenY': first.screenY,
-					'clientX': first.clientX,
-					'clientY': first.clientY
+		$.fn.addTouch = function () {
+				this.each(function (i, el) {
+						$(el).bind('touchstart touchmove touchend touchcancel', function () {
+								//we pass the original event object because the jQuery event
+								//object is normalized to w3c specs and does not provide the TouchList
+								handleTouch(event);
+						});
 				});
-			} else {
-				simulatedEvent = document.createEvent('MouseEvent');
-				simulatedEvent.initMouseEvent(type, true, true, window, 1, first.screenX, first.screenY, first.clientX, first.clientY, false, false, false, false, 0 /*left*/, null);
-			}
-			first.target.dispatchEvent(simulatedEvent);
+
+				var handleTouch = function (event) {
+						var touches = event.changedTouches,
+						    first = touches[0],
+						    eventTypes = {
+								touchstart: 'mousedown',
+								touchmove: 'mousemove',
+								touchend: 'mouseup'
+						},
+						    type = eventTypes[event.type],
+						    simulatedEvent;
+
+						if ('MouseEvent' in window && typeof window.MouseEvent === 'function') {
+								simulatedEvent = window.MouseEvent(type, {
+										'bubbles': true,
+										'cancelable': true,
+										'screenX': first.screenX,
+										'screenY': first.screenY,
+										'clientX': first.clientX,
+										'clientY': first.clientY
+								});
+						} else {
+								simulatedEvent = document.createEvent('MouseEvent');
+								simulatedEvent.initMouseEvent(type, true, true, window, 1, first.screenX, first.screenY, first.clientX, first.clientY, false, false, false, false, 0 /*left*/, null);
+						}
+						first.target.dispatchEvent(simulatedEvent);
+				};
 		};
-	};
 }(jQuery);
 
 //**********************************
@@ -1658,7 +1901,7 @@ set:setInput};});
   }
 
   function resizeListener(debounce) {
-    var timer = undefined,
+    var timer = void 0,
         $nodes = $('[data-resize]');
     if ($nodes.length) {
       $(window).off('resize.zf.trigger').on('resize.zf.trigger', function (e) {
@@ -1682,7 +1925,7 @@ set:setInput};});
   }
 
   function scrollListener(debounce) {
-    var timer = undefined,
+    var timer = void 0,
         $nodes = $('[data-scroll]');
     if ($nodes.length) {
       $(window).off('scroll.zf.trigger').on('scroll.zf.trigger', function (e) {
@@ -1896,11 +2139,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var isGood = true;
 
         switch ($el[0].type) {
-          case 'checkbox':
-          case 'radio':
-            isGood = $el[0].checked;
-            break;
-
           case 'select':
           case 'select-one':
           case 'select-multiple':
@@ -1961,6 +2199,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       /**
+       * Get the set of labels associated with a set of radio els in this order
+       * 2. The <label> with the attribute `[for="someInputId"]`
+       * 3. The `.closest()` <label>
+       *
+       * @param {Object} $el - jQuery object to check for required attribute
+       * @returns {Boolean} Boolean value depends on whether or not attribute is checked or empty
+       */
+
+    }, {
+      key: 'findRadioLabels',
+      value: function findRadioLabels($els) {
+        var _this3 = this;
+
+        var labels = $els.map(function (i, el) {
+          var id = el.id;
+          var $label = _this3.$element.find('label[for="' + id + '"]');
+
+          if (!$label.length) {
+            $label = $(el).closest('label');
+          }
+          return $label[0];
+        });
+
+        return $(labels);
+      }
+
+      /**
        * Adds the CSS error class as specified by the Abide settings to the label, input, and the form
        * @param {Object} $el - jQuery object to add the class to
        */
@@ -1983,6 +2248,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       /**
+       * Remove CSS error classes etc from an entire radio button group
+       * @param {String} groupName - A string that specifies the name of a radio button group
+       *
+       */
+
+    }, {
+      key: 'removeRadioErrorClasses',
+      value: function removeRadioErrorClasses(groupName) {
+        var $els = this.$element.find(':radio[name="' + groupName + '"]');
+        var $labels = this.findRadioLabels($els);
+        var $formErrors = this.findFormError($els);
+
+        if ($labels.length) {
+          $labels.removeClass(this.options.labelErrorClass);
+        }
+
+        if ($formErrors.length) {
+          $formErrors.removeClass(this.options.formErrorClass);
+        }
+
+        $els.removeClass(this.options.inputErrorClass).removeAttr('data-invalid');
+      }
+
+      /**
        * Removes CSS error class as specified by the Abide settings from the label, input, and the form
        * @param {Object} $el - jQuery object to remove the class from
        */
@@ -1990,6 +2279,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'removeErrorClasses',
       value: function removeErrorClasses($el) {
+        // radios need to clear all of the els
+        if ($el[0].type == 'radio') {
+          return this.removeRadioErrorClasses($el.attr('name'));
+        }
+
         var $label = this.findLabel($el);
         var $formError = this.findFormError($el);
 
@@ -2106,16 +2400,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'validateText',
       value: function validateText($el, pattern) {
-        // pattern = pattern ? pattern : $el.attr('pattern') ? $el.attr('pattern') : $el.attr('type');
+        // A pattern can be passed to this function, or it will be infered from the input's "pattern" attribute, or it's "type" attribute
         pattern = pattern || $el.attr('pattern') || $el.attr('type');
         var inputText = $el.val();
+        var valid = false;
 
-        // if text, check if the pattern exists, if so, test it, if no text or no pattern, return true.
-        return inputText.length ? this.options.patterns.hasOwnProperty(pattern) ? this.options.patterns[pattern].test(inputText) : pattern && pattern !== $el.attr('type') ? new RegExp(pattern).test(inputText) : true : true;
+        if (inputText.length) {
+          // If the pattern attribute on the element is in Abide's list of patterns, then test that regexp
+          if (this.options.patterns.hasOwnProperty(pattern)) {
+            valid = this.options.patterns[pattern].test(inputText);
+          }
+          // If the pattern name isn't also the type attribute of the field, then test it as a regexp
+          else if (pattern !== $el.attr('type')) {
+              valid = new RegExp(pattern).test(inputText);
+            } else {
+              valid = true;
+            }
+        }
+        // An empty field is valid if it's not required
+        else if (!$el.prop('required')) {
+            valid = true;
+          }
+
+        return valid;
       }
 
       /**
-       * Determines whether or a not a radio input is valid based on whether or not it is required and selected
+       * Determines whether or a not a radio input is valid based on whether or not it is required and selected. Although the function targets a single `<input>`, it validates by checking the `required` and `checked` properties of all radio buttons in its group.
        * @param {String} groupName - A string that specifies the name of a radio button group
        * @returns {Boolean} Boolean value depends on whether or not at least one radio input has been selected (if it's required)
        */
@@ -2123,18 +2434,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'validateRadio',
       value: function validateRadio(groupName) {
-        var $group = this.$element.find(':radio[name="' + groupName + '"]'),
-            counter = [],
-            _this = this;
+        // If at least one radio in the group has the `required` attribute, the group is considered required
+        // Per W3C spec, all radio buttons in a group should have `required`, but we're being nice
+        var $group = this.$element.find(':radio[name="' + groupName + '"]');
+        var valid = false;
 
-        $group.each(function () {
-          var rdio = $(this),
-              clear = _this.requiredCheck(rdio);
-          counter.push(clear);
-          if (clear) _this.removeErrorClasses(rdio);
+        // .attr() returns undefined if no elements in $group have the attribute "required"
+        if ($group.attr('required') === undefined) {
+          valid = true;
+        }
+
+        // For the group to be valid, at least one radio needs to be checked
+        $group.each(function (i, e) {
+          if ($(e).prop('checked')) {
+            valid = true;
+          }
         });
 
-        return counter.indexOf(false) === -1;
+        return valid;
       }
 
       /**
@@ -2148,12 +2465,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'matchValidation',
       value: function matchValidation($el, validators, required) {
-        var _this3 = this;
+        var _this4 = this;
 
         required = required ? true : false;
 
         var clear = validators.split(' ').map(function (v) {
-          return _this3.options.validators[v]($el, required, $el.parent());
+          return _this4.options.validators[v]($el, required, $el.parent());
         });
         return clear.indexOf(false) === -1;
       }
@@ -2353,14 +2670,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_init',
       value: function _init() {
         this.$element.attr('role', 'tablist');
-        this.$tabs = this.$element.children('li');
-        if (this.$tabs.length === 0) {
-          this.$tabs = this.$element.children('[data-accordion-item]');
-        }
-        this.$tabs.each(function (idx, el) {
+        this.$tabs = this.$element.children('li, [data-accordion-item]');
 
+        this.$tabs.each(function (idx, el) {
           var $el = $(el),
-              $content = $el.find('[data-tab-content]'),
+              $content = $el.children('[data-tab-content]'),
               id = $content[0].id || Foundation.GetYoDigits(6, 'accordion'),
               linkId = el.id || id + '-label';
 
@@ -2371,6 +2685,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             'aria-expanded': false,
             'aria-selected': false
           });
+
           $content.attr({ 'role': 'tabpanel', 'aria-labelledby': linkId, 'aria-hidden': true, 'id': id });
         });
         var $initActive = this.$element.find('.is-active').children('[data-tab-content]');
@@ -2410,10 +2725,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   _this.toggle($tabContent);
                 },
                 next: function () {
-                  $elem.next().find('a').focus().trigger('click.zf.accordion');
+                  var $a = $elem.next().find('a').focus();
+                  if (!_this.options.multiExpand) {
+                    $a.trigger('click.zf.accordion');
+                  }
                 },
                 previous: function () {
-                  $elem.prev().find('a').focus().trigger('click.zf.accordion');
+                  var $a = $elem.prev().find('a').focus();
+                  if (!_this.options.multiExpand) {
+                    $a.trigger('click.zf.accordion');
+                  }
                 },
                 handled: function () {
                   e.preventDefault();
@@ -2456,9 +2777,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'down',
       value: function down($target, firstTime) {
-        var _this = this;
+        var _this2 = this;
+
         if (!this.options.multiExpand && !firstTime) {
-          var $currentActive = this.$element.find('.is-active').children('[data-tab-content]');
+          var $currentActive = this.$element.children('.is-active').children('[data-tab-content]');
           if ($currentActive.length) {
             this.up($currentActive);
           }
@@ -2466,19 +2788,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         $target.attr('aria-hidden', false).parent('[data-tab-content]').addBack().parent().addClass('is-active');
 
-        // Foundation.Move(_this.options.slideSpeed, $target, function(){
-        $target.slideDown(_this.options.slideSpeed, function () {
+        $target.slideDown(this.options.slideSpeed, function () {
           /**
            * Fires when the tab is done opening.
            * @event Accordion#down
            */
-          _this.$element.trigger('down.zf.accordion', [$target]);
+          _this2.$element.trigger('down.zf.accordion', [$target]);
         });
-        // });
 
-        // if(!firstTime){
-        //   Foundation._reflow(this.$element.attr('data-accordion'));
-        // }
         $('#' + $target.attr('aria-labelledby')).attr({
           'aria-expanded': true,
           'aria-selected': true
@@ -2687,23 +3004,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           $elements.each(function (i) {
             if ($(this).is($element)) {
-              $prevElement = $elements.eq(Math.max(0, i - 1));
-              $nextElement = $elements.eq(Math.min(i + 1, $elements.length - 1));
+              $prevElement = $elements.eq(Math.max(0, i - 1)).find('a').first();
+              $nextElement = $elements.eq(Math.min(i + 1, $elements.length - 1)).find('a').first();
 
               if ($(this).children('[data-submenu]:visible').length) {
                 // has open sub menu
-                $nextElement = $element.find('li:first-child');
+                $nextElement = $element.find('li:first-child').find('a').first();
               }
               if ($(this).is(':first-child')) {
                 // is first element of sub menu
-                $prevElement = $element.parents('li').first();
+                $prevElement = $element.parents('li').first().find('a').first();
               } else if ($prevElement.children('[data-submenu]:visible').length) {
                 // if previous element has open sub menu
-                $prevElement = $prevElement.find('li:last-child');
+                $prevElement = $prevElement.find('li:last-child').find('a').first();
               }
               if ($(this).is(':last-child')) {
                 // is last element of sub menu
-                $nextElement = $element.parents('li').first().next('li');
+                $nextElement = $element.parents('li').first().next('li').find('a').first();
               }
 
               return;
@@ -2713,7 +3030,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             open: function () {
               if ($target.is(':hidden')) {
                 _this.down($target);
-                $target.find('li').first().focus();
+                $target.find('li').first().find('a').first().focus();
               }
             },
             close: function () {
@@ -2723,14 +3040,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               } else if ($element.parent('[data-submenu]').length) {
                 // close currently open sub
                 _this.up($element.parent('[data-submenu]'));
-                $element.parents('li').first().focus();
+                $element.parents('li').first().find('a').first().focus();
               }
             },
             up: function () {
-              $prevElement.focus();
+              $prevElement.attr('tabindex', -1).focus();
+              e.preventDefault();
             },
             down: function () {
-              $nextElement.focus();
+              $nextElement.attr('tabindex', -1).focus();
+              e.preventDefault();
             },
             toggle: function () {
               if ($element.children('[data-submenu]').length) {
@@ -2741,7 +3060,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               _this.hideAll();
             },
             handled: function () {
-              e.preventDefault();
               e.stopImmediatePropagation();
             }
           });
@@ -2924,9 +3242,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     _createClass(Drilldown, [{
       key: '_init',
       value: function _init() {
-        this.$submenuAnchors = this.$element.find('li.is-drilldown-submenu-parent');
-        this.$submenus = this.$submenuAnchors.children('[data-submenu]');
-        this.$menuItems = this.$element.find('li').not('.js-drilldown-back').attr('role', 'menuitem');
+        this.$submenuAnchors = this.$element.find('li.is-drilldown-submenu-parent').children('a');
+        this.$submenus = this.$submenuAnchors.parent('li').children('[data-submenu]');
+        this.$menuItems = this.$element.find('li').not('.js-drilldown-back').attr('role', 'menuitem').find('a');
 
         this._prepareMenu();
 
@@ -2997,7 +3315,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           // if(e.target !== e.currentTarget.firstElementChild){
           //   return false;
           // }
-          _this._show($elem);
+          _this._show($elem.parent('li'));
 
           if (_this.options.closeOnClick) {
             var $body = $('body').not(_this.$wrapper);
@@ -3019,9 +3337,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_keyboardEvents',
       value: function _keyboardEvents() {
         var _this = this;
-        this.$menuItems.add(this.$element.find('.js-drilldown-back')).on('keydown.zf.drilldown', function (e) {
+
+        this.$menuItems.add(this.$element.find('.js-drilldown-back > a')).on('keydown.zf.drilldown', function (e) {
+
           var $element = $(this),
-              $elements = $element.parent('ul').children('li'),
+              $elements = $element.parent('li').parent('ul').children('li').children('a'),
               $prevElement,
               $nextElement;
 
@@ -3032,28 +3352,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               return;
             }
           });
+
           Foundation.Keyboard.handleKey(e, 'Drilldown', {
             next: function () {
               if ($element.is(_this.$submenuAnchors)) {
-                _this._show($element);
-                $element.on(Foundation.transitionend($element), function () {
-                  $element.find('ul li').filter(_this.$menuItems).first().focus();
+                _this._show($element.parent('li'));
+                $element.parent('li').one(Foundation.transitionend($element), function () {
+                  $element.parent('li').find('ul li a').filter(_this.$menuItems).first().focus();
                 });
+                e.preventDefault();
               }
             },
             previous: function () {
-              _this._hide($element.parent('ul'));
-              $element.parent('ul').on(Foundation.transitionend($element), function () {
+              _this._hide($element.parent('li').parent('ul'));
+              $element.parent('li').parent('ul').one(Foundation.transitionend($element), function () {
                 setTimeout(function () {
-                  $element.parent('ul').parent('li').focus();
+                  $element.parent('li').parent('ul').parent('li').children('a').first().focus();
                 }, 1);
               });
+              e.preventDefault();
             },
             up: function () {
               $prevElement.focus();
+              e.preventDefault();
             },
             down: function () {
               $nextElement.focus();
+              e.preventDefault();
             },
             close: function () {
               _this._back();
@@ -3062,19 +3387,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             open: function () {
               if (!$element.is(_this.$menuItems)) {
                 // not menu item means back button
-                _this._hide($element.parent('ul'));
-                setTimeout(function () {
-                  $element.parent('ul').parent('li').focus();
-                }, 1);
+                _this._hide($element.parent('li').parent('ul'));
+                $element.parent('li').parent('ul').one(Foundation.transitionend($element), function () {
+                  setTimeout(function () {
+                    $element.parent('li').parent('ul').parent('li').children('a').first().focus();
+                  }, 1);
+                });
+                e.preventDefault();
               } else if ($element.is(_this.$submenuAnchors)) {
-                _this._show($element);
-                setTimeout(function () {
-                  $element.find('ul li').filter(_this.$menuItems).first().focus();
-                }, 1);
+                _this._show($element.parent('li'));
+                $element.parent('li').one(Foundation.transitionend($element), function () {
+                  $element.parent('li').find('ul li a').filter(_this.$menuItems).first().focus();
+                });
+                e.preventDefault();
               }
             },
             handled: function () {
-              e.preventDefault();
               e.stopImmediatePropagation();
             }
           });
@@ -3142,7 +3470,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        * Opens a submenu.
        * @function
        * @fires Drilldown#open
-       * @param {jQuery} $elem - the current element with a submenu to open.
+       * @param {jQuery} $elem - the current element with a submenu to open, i.e. the `li` tag.
        */
 
     }, {
@@ -3160,7 +3488,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        * Hides a submenu
        * @function
        * @fires Drilldown#hide
-       * @param {jQuery} $elem - the current sub-menu to hide.
+       * @param {jQuery} $elem - the current sub-menu to hide, i.e. the `ul` tag.
        */
       value: function _hide($elem) {
         var _this = this;
@@ -3230,7 +3558,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @option
      * @example '<\li><\a>Back<\/a><\/li>'
      */
-    backButton: '<li class="js-drilldown-back"><a>Back</a></li>',
+    backButton: '<li class="js-drilldown-back"><a tabindex="0">Back</a></li>',
     /**
      * Markup used to wrap drilldown menu. Use a class name for independent styling; the JS applied class: `is-drilldown` is required. Remove the backslash (`\`) if copy and pasting.
      * @option
@@ -3340,8 +3668,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'getPositionClass',
       value: function getPositionClass() {
-        var position = this.$element[0].className.match(/\b(top|left|right)\b/g);
-        position = position ? position[0] : '';
+        var verticalPosition = this.$element[0].className.match(/(top|left|right|bottom)/g);
+        verticalPosition = verticalPosition ? verticalPosition[0] : '';
+        var horizontalPosition = /float-(.+)\s/.exec(this.$anchor[0].className);
+        horizontalPosition = horizontalPosition ? horizontalPosition[1] : '';
+        var position = horizontalPosition ? horizontalPosition + ' ' + verticalPosition : verticalPosition;
         return position;
       }
 
@@ -3417,7 +3748,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.$element.offset(Foundation.Box.GetOffsets(this.$element, this.$anchor, position, this.options.vOffset, this.options.hOffset));
 
-        while (!Foundation.Box.ImNotTouchingYou(this.$element) && this.counter) {
+        while (!Foundation.Box.ImNotTouchingYou(this.$element, false, true) && this.counter) {
           this._reposition(position);
           this._setPosition();
         }
@@ -3762,7 +4093,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.$tabs = this.$element.children('[role="menuitem"]');
         this.$tabs.find('ul.is-dropdown-submenu').addClass(this.options.verticalClass);
 
-        if (this.$element.hasClass(this.options.rightClass) || this.options.alignment === 'right' || Foundation.rtl()) {
+        if (this.$element.hasClass(this.options.rightClass) || this.options.alignment === 'right' || Foundation.rtl() || this.$element.parents('.top-bar-right').is('*')) {
           this.options.alignment = 'right';
           subs.addClass('opens-left');
         } else {
@@ -4332,7 +4663,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'getHeightsByRow',
       value: function getHeightsByRow(cb) {
-        var lastElTopOffset = this.$watched.first().offset().top,
+        var lastElTopOffset = this.$watched.length ? this.$watched.first().offset().top : 0,
             groups = [],
             group = 0;
         //group by Row
@@ -4640,7 +4971,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }).trigger(trigger);
         }
         // Replacing background images
-        else if (path.match(/\.(gif|jpg|jpeg|tiff|png)([?#].*)?/i)) {
+        else if (path.match(/\.(gif|jpg|jpeg|png|svg|tiff)([?#].*)?/i)) {
             this.$element.css({ 'background-image': 'url(' + path + ')' }).trigger(trigger);
           }
           // Replacing HTML
@@ -5620,7 +5951,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             var $controls = this.$element.find('.' + this.options.nextClass + ', .' + this.options.prevClass);
             $controls.attr('tabindex', 0)
             //also need to handle enter/return and spacebar key presses
-            .on('click.zf.orbit touchend.zf.orbit', function () {
+            .on('click.zf.orbit touchend.zf.orbit', function (e) {
+              e.preventDefault();
               _this.changeSlide($(this).hasClass(_this.options.nextClass));
             });
           }
@@ -5922,25 +6254,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     _createClass(ResponsiveMenu, [{
       key: '_init',
       value: function _init() {
-        var rulesTree = {};
+        // The first time an Interchange plugin is initialized, this.rules is converted from a string of "classes" to an object of rules
+        if (typeof this.rules === 'string') {
+          var rulesTree = {};
 
-        // Parse rules from "classes" in data attribute
-        var rules = this.rules.split(' ');
+          // Parse rules from "classes" pulled from data attribute
+          var rules = this.rules.split(' ');
 
-        // Iterate through every rule found
-        for (var i = 0; i < rules.length; i++) {
-          var rule = rules[i].split('-');
-          var ruleSize = rule.length > 1 ? rule[0] : 'small';
-          var rulePlugin = rule.length > 1 ? rule[1] : rule[0];
+          // Iterate through every rule found
+          for (var i = 0; i < rules.length; i++) {
+            var rule = rules[i].split('-');
+            var ruleSize = rule.length > 1 ? rule[0] : 'small';
+            var rulePlugin = rule.length > 1 ? rule[1] : rule[0];
 
-          if (MenuPlugins[rulePlugin] !== null) {
-            rulesTree[ruleSize] = MenuPlugins[rulePlugin];
+            if (MenuPlugins[rulePlugin] !== null) {
+              rulesTree[ruleSize] = MenuPlugins[rulePlugin];
+            }
           }
+
+          this.rules = rulesTree;
         }
 
-        this.rules = rulesTree;
-
-        if (!$.isEmptyObject(rulesTree)) {
+        if (!$.isEmptyObject(this.rules)) {
           this._checkMediaQueries();
         }
       }
@@ -6301,17 +6636,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var outerWidth = $(window).width();
         var height = this.$element.outerHeight();
         var outerHeight = $(window).height();
-        var left = parseInt((outerWidth - width) / 2, 10);
-        var top;
-        if (height > outerHeight) {
-          top = parseInt(Math.min(100, outerHeight / 10), 10);
+        var left, top;
+        if (this.options.hOffset === 'auto') {
+          left = parseInt((outerWidth - width) / 2, 10);
         } else {
-          top = parseInt((outerHeight - height) / 4, 10);
+          left = parseInt(this.options.hOffset, 10);
+        }
+        if (this.options.vOffset === 'auto') {
+          if (height > outerHeight) {
+            top = parseInt(Math.min(100, outerHeight / 10), 10);
+          } else {
+            top = parseInt((outerHeight - height) / 4, 10);
+          }
+        } else {
+          top = parseInt(this.options.vOffset, 10);
         }
         this.$element.css({ top: top + 'px' });
-        // only worry about left if we don't have an overlay, otherwise we're perfectly in the middle
-        if (!this.$overlay) {
+        // only worry about left if we don't have an overlay or we havea  horizontal offset,
+        // otherwise we're perfectly in the middle
+        if (!this.$overlay || this.options.hOffset !== 'auto') {
           this.$element.css({ left: left + 'px' });
+          this.$element.css({ margin: '0px' });
         }
       }
 
@@ -6425,7 +6770,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             Foundation.Motion.animateIn(this.$overlay, 'fade-in');
           }
           Foundation.Motion.animateIn(this.$element, this.options.animationIn, function () {
-            this.focusableElements = Foundation.Keyboard.findFocusable(this.$element);
+            _this2.focusableElements = Foundation.Keyboard.findFocusable(_this2.$element);
           });
         }
         // jQuery method of reveal
@@ -6492,10 +6837,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 }
               }
             });
-            if (_this.focusableElements.length === 0) {
-              // no focusable elements inside the modal at all, prevent tabbing in general
-              e.preventDefault();
-            }
           });
         }
 
@@ -6510,11 +6851,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 _this.focusableElements.eq(0).focus();
                 e.preventDefault();
               }
+              if (_this.focusableElements.length === 0) {
+                // no focusable elements inside the modal at all, prevent tabbing in general
+                e.preventDefault();
+              }
             },
             tab_backward: function () {
               if (_this.$element.find(':focus').is(_this.focusableElements.eq(0)) || _this.$element.is(':focus')) {
                 // left modal upwards, setting focus to last element
                 _this.focusableElements.eq(-1).focus();
+                e.preventDefault();
+              }
+              if (_this.focusableElements.length === 0) {
+                // no focusable elements inside the modal at all, prevent tabbing in general
                 e.preventDefault();
               }
             },
@@ -6648,6 +6997,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
       value: function destroy() {
         if (this.options.overlay) {
+          this.$element.appendTo($('body')); // move $element outside of $overlay to prevent error unregisterPlugin()
           this.$overlay.hide().off().remove();
         }
         this.$element.hide().off();
@@ -6707,15 +7057,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /**
      * Distance, in pixels, the modal should push down from the top of the screen.
      * @option
-     * @example 100
+     * @example auto
      */
-    vOffset: 100,
+    vOffset: 'auto',
     /**
      * Distance, in pixels, the modal should push in from the side of the screen.
      * @option
-     * @example 0
+     * @example auto
      */
-    hOffset: 0,
+    hOffset: 'auto',
     /**
      * Allows the modal to be fullscreen, completely blocking out the rest of the view. JS checks for this as well.
      * @option
@@ -6872,6 +7222,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        * @param {Number} location - floating point between the start and end values of the slider bar.
        * @param {Function} cb - callback function to fire on completion.
        * @fires Slider#moved
+       * @fires Slider#changed
        */
 
     }, {
@@ -6914,7 +7265,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             elemDim = this.$element[0].getBoundingClientRect()[hOrW],
 
         //percentage of bar min/max value based on click or drag point
-        pctOfBar = percent(location, this.options.end).toFixed(2),
+        pctOfBar = percent(location - this.options.start, this.options.end - this.options.start).toFixed(2),
 
         //number of actual pixels to shift the handle, based on the percentage obtained above
         pxToMove = (elemDim - handleDim) * pctOfBar,
@@ -6982,6 +7333,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             _this.$fill.css(css);
           }
         });
+
+        /**
+         * Fires when the value has not been change for a given time.
+         * @event Slider#changed
+         */
+        clearTimeout(_this.timeout);
+        _this.timeout = setTimeout(function () {
+          _this.$element.trigger('changed.zf.slider', [$hndl]);
+        }, _this.options.changedDelay);
       }
 
       /**
@@ -7059,7 +7419,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           //if the cursor position is less than or greater than the elements bounding coordinates, set coordinates within those bounds
           barXY = barOffset > 0 ? -halfOfHandle : barOffset - halfOfHandle < -barDim ? barDim : Math.abs(barOffset),
               offsetPct = percent(barXY, barDim);
-          value = (this.options.end - this.options.start) * offsetPct;
+          value = (this.options.end - this.options.start) * offsetPct + this.options.start;
 
           // turn everything around for RTL, yay math!
           if (Foundation.rtl() && !this.options.vertical) {
@@ -7332,7 +7692,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @option
      * @example false
      */
-    invertVertical: false
+    invertVertical: false,
+    /**
+     * Milliseconds before the `changed.zf-slider` event is triggered after value change. 
+     * @option
+     * @example 500
+     */
+    changedDelay: 500
   };
 
   function percent(frac, num) {
@@ -8326,13 +8692,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         if (this.$element.is(':hidden')) {
           Foundation.Motion.animateIn(this.$element, this.animationIn, function () {
-            this.trigger('on.zf.toggler');
             _this._updateARIA(true);
+            this.trigger('on.zf.toggler');
           });
         } else {
           Foundation.Motion.animateOut(this.$element, this.animationOut, function () {
-            this.trigger('off.zf.toggler');
             _this._updateARIA(false);
+            this.trigger('off.zf.toggler');
           });
         }
       }
@@ -8830,16 +9196,67 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   // Window exports
   Foundation.plugin(Tooltip, 'Tooltip');
 }(jQuery);
-'use strict'; /**
+'use strict';
+
+/**
  * skip-link-focus-fix.js
  *
  * Helps with accessibility for keyboard only users.
  *
  * Learn more: https://git.io/vWdr2
- */(function(){var is_webkit=navigator.userAgent.toLowerCase().indexOf('webkit')>-1,is_opera=navigator.userAgent.toLowerCase().indexOf('opera')>-1,is_ie=navigator.userAgent.toLowerCase().indexOf('msie')>-1;if((is_webkit||is_opera||is_ie)&&document.getElementById&&window.addEventListener){window.addEventListener('hashchange',function(){var id=location.hash.substring(1),element;if(!/^[A-z0-9_-]+$/.test(id)){return;}element=document.getElementById(id);if(element){if(!/^(?:a|select|input|button|textarea)$/i.test(element.tagName)){element.tabIndex=-1;}element.focus();}},false);}})();
-'use strict';jQuery(document).foundation();(function($){ // Add aria-label attributes to pagination.
-var pagination=$('.pagination .page-numbers');$.each(pagination,function(){$(this).attr('aria-label',this.text);}); // Wrap each video iframe in a flex-video div
-var allVideos=$('iframe[src*="youtube.com"], iframe[src*="vimeo.com"]');$.each(allVideos,function(){var aspectRatio=this.width/this.height;var containerClass="flex-video"; // Add .vimeo to Vimeo videos
-if(this.src.indexOf('vimeo')!=-1)containerClass+=' vimeo'; // Add .widescreen to widescreen ratio videos
-if(aspectRatio>=1.7)containerClass+=' widescreen'; // Wrap iframe with div container
-$(this).wrap('<div class="'+containerClass+'" />');});})(jQuery);
+ */
+(function () {
+	var is_webkit = navigator.userAgent.toLowerCase().indexOf('webkit') > -1,
+	    is_opera = navigator.userAgent.toLowerCase().indexOf('opera') > -1,
+	    is_ie = navigator.userAgent.toLowerCase().indexOf('msie') > -1;
+
+	if ((is_webkit || is_opera || is_ie) && document.getElementById && window.addEventListener) {
+		window.addEventListener('hashchange', function () {
+			var id = location.hash.substring(1),
+			    element;
+
+			if (!/^[A-z0-9_-]+$/.test(id)) {
+				return;
+			}
+
+			element = document.getElementById(id);
+
+			if (element) {
+				if (!/^(?:a|select|input|button|textarea)$/i.test(element.tagName)) {
+					element.tabIndex = -1;
+				}
+
+				element.focus();
+			}
+		}, false);
+	}
+})();
+'use strict';
+
+jQuery(document).foundation();
+
+(function ($) {
+
+	// Add aria-label attributes to pagination.
+	var pagination = $('.pagination .page-numbers');
+	$.each(pagination, function () {
+		$(this).attr('aria-label', this.text);
+	});
+
+	// Wrap each video iframe in a flex-video div
+	var allVideos = $('iframe[src*="youtube.com"], iframe[src*="vimeo.com"]');
+	$.each(allVideos, function () {
+
+		var aspectRatio = this.width / this.height;
+		var containerClass = "flex-video";
+
+		// Add .vimeo to Vimeo videos
+		if (this.src.indexOf('vimeo') != -1) containerClass += ' vimeo';
+
+		// Add .widescreen to widescreen ratio videos
+		if (aspectRatio >= 1.7) containerClass += ' widescreen';
+
+		// Wrap iframe with div container
+		$(this).wrap('<div class="' + containerClass + '" />');
+	});
+})(jQuery);
