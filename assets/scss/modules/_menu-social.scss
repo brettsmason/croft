@@ -2,8 +2,12 @@
 .menu-social-container {
 	ul {
 		margin: 0;
-		text-align: right;
+		text-align: center;
 		list-style: none;
+
+		@include breakpoint(medium) {
+			text-align: right;
+		}
 	}
 
 	ul li {

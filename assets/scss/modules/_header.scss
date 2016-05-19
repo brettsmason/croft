@@ -5,9 +5,11 @@
 
 .site-branding {
 	@include grid-col;
+	text-align: center;
 
 	@include breakpoint(medium) {
 		@include grid-col-size(6);
+		text-align: left;
 	}
 }
 

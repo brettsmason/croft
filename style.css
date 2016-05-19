@@ -1601,33 +1601,6 @@ video {
 	text-align: right;
 }
 
-#menu-primary {
-	margin-bottom: 1rem;
-	background: #0a0a0a;
-}
-
-#menu-primary ul a {
-	color: #fefefe;
-}
-
-#menu-primary ul a:hover {
-	color: #dadada;
-}
-
-#menu-primary ul ul a {
-	color: #2199e8;
-}
-
-#menu-primary ul ul a:hover {
-	color: #1585cf;
-}
-
-@media screen and (max-width: 39.9375em) {
-	.no-js #primary-menu {
-		display: none;
-	}
-}
-
 @media screen and (min-width: 40em) {
 	.menu-toggle {
 		display: none;
@@ -5957,6 +5930,7 @@ Modules
 	float: left;
 	padding-left: 0.625rem;
 	padding-right: 0.625rem;
+	text-align: center;
 }
 
 @media screen and (min-width: 40em) {
@@ -5973,6 +5947,7 @@ Modules
 @media screen and (min-width: 40em) {
 	.site-branding {
 		width: 50%;
+		text-align: left;
 	}
 }
 
@@ -6370,8 +6345,15 @@ Modules
 #menu-social ul,
 .menu-social-container ul {
 	margin: 0;
-	text-align: right;
+	text-align: center;
 	list-style: none;
+}
+
+@media screen and (min-width: 40em) {
+	#menu-social ul,
+	.menu-social-container ul {
+		text-align: right;
+	}
 }
 
 #menu-social ul li,
