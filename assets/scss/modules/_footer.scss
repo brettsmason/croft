@@ -1,19 +1,20 @@
 .site-footer {
 	@include clearfix;
-	padding: rem-calc(36 0);
-	background: $black;
+	padding: rem-calc(48 0);
+	border-top: 1px solid $light-gray;
+	margin-top: rem-calc(48);
+
+	// remove top margin if subsidiary sidebar is active
+	.sidebar + & {
+		margin-top: 0;
+	}
 
 	.site-info {
 		@include grid-col;
-		color: $white;
 		text-align: center;
 	}
 
 	.credit {
 		font-size: $small-font-size;
-	}
-
-	a {
-		color: $white;
 	}
 }

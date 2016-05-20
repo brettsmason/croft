@@ -1,6 +1,6 @@
 .pagination {
 	@include clearfix;
-	margin: $global-margin 0;
+	margin: rem-calc(48 0 0);
 
 	ul {
 		@include pagination-container;
@@ -25,7 +25,7 @@
 
 .loop-nav {
 	@include clearfix;
-	margin: $global-margin * 2 0;
+	margin: rem-calc(48 0);
 
 	a {
 		display: block;

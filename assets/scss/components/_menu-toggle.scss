@@ -4,15 +4,24 @@
 	}
 
 	button {
-		@include button(expand, $black, $black);
-		margin-bottom: 0;
+		text-align: center;
+		width: 100%;
+		border-top: 1px solid $light-gray;
+		border-bottom: 1px solid $light-gray;
+		padding: rem-calc(16);
+		font-weight: bold;
 
-		&:hover {
-			color: scale-color($white, $lightness: -14%);
+		&:hover,
+		&:focus {
+			color: $primary-color;
+
+			span {
+				@include hamburger($primary-color, $height: 15px, $width: 18px, $weight: 3px);
+			}
 		}
 	}
 
 	span {
-		@include hamburger($white, scale-color($white, $lightness: -14%));
+		@include hamburger($black, $height: 15px, $width: 18px, $weight: 3px);
 	}
 }

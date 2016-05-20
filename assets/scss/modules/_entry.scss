@@ -1,7 +1,7 @@
 .entry {
 	margin-bottom: rem-calc(48);
 
-	.singular-page & {
+	&:last-of-type {
 		margin-bottom: 0;
 	}
 }

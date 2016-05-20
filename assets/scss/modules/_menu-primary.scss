@@ -1,23 +1,31 @@
 #menu-primary {
-	margin-bottom: $global-margin;
-	background: $black;
+	margin-bottom: rem-calc(48);
+
+	@include breakpoint(medium) {
+		border-top: 1px solid $light-gray;
+		border-bottom: 1px solid $light-gray;
+	}
 
 	ul {
 		a {
-			color: $white;
+			@include breakpoint(medium) {
+				padding-top: rem-calc(24);
+				padding-bottom: rem-calc(24);
+			}
 
 			&:hover {
-				color: scale-color($white, $lightness: -14%);
 			}
 		}
 	}
 
-	ul ul {
+	.submenu {
 		a {
-			color: $anchor-color;
+			@include breakpoint(medium) {
+				padding-top: nth($menu-item-padding, 1);
+				padding-bottom: nth($menu-item-padding, 1);
+			}
 
 			&:hover {
-				color: $anchor-color-hover;
 			}
 		}
 	}

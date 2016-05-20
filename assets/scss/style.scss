@@ -16,6 +16,9 @@ Croft is built using <a href="http://themehybrid.com">Hybrid Core</a> and <a hre
 // Foundation custom settings
 @import "settings";
 
+// Custom variables
+@import "variables";
+
 // Foundation and Motion UI
 @import "foundation";
 @import "motion-ui";
@@ -99,6 +102,7 @@ Modules
 @import "modules/sidebar-primary";
 @import "modules/sidebar-subsidiary";
 @import "modules/footer";
+@import "modules/menu-subsidiary";
 @import "modules/menu-social";
 
 /*--------------------------------------------------------------

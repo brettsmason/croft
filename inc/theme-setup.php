@@ -82,7 +82,7 @@ add_action( 'wp_enqueue_scripts', 'croft_enqueue_scripts', 5 );
  */
 function croft_enqueue_styles() {
 
-	// wp_enqueue_style( 'theme-fonts', '//fonts.googleapis.com/css?family=Roboto' ); // Enqueue custom Google Fonts
+	wp_enqueue_style( 'theme-fonts', '//fonts.googleapis.com/css?family=Montserrat|Istok+Web' );
 
 	// Load parent theme stylesheet if child theme is active.
 	if ( is_child_theme() )

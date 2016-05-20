@@ -1,6 +1,6 @@
 .site-header {
 	@include clearfix;
-	padding: $global-padding 0;
+	padding: rem-calc(48 0);
 }
 
 .site-branding {
@@ -17,6 +17,10 @@
 	margin-bottom: 0;
 	font-size: rem-calc(28);
 	font-weight: bold;
+
+	a {
+		color: $black;
+	}
 }
 
 .site-description {

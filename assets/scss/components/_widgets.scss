@@ -1,16 +1,26 @@
 .widget {
 	margin: 0 0 $global-margin;
 
-	.widget-title {
-		font-size: map-deep-get($header-sizes, small, h4);
+	// Remove bottom margin from last widget in a sidebar.
+	&:last-of-type {
+		margin-bottom: 0;
+	}
 
-		@include breakpoint(medium) {
-			font-size: map-deep-get($header-sizes, medium, h4);
-		}
+	// Remove bottom margin from last item within a widget.
+	& > :last-child {
+		margin-bottom: 0;
 	}
 
 	select {
 		max-width: 100%;
+	}
+}
+
+.widget-title {
+	font-size: rem-calc(map-deep-get($header-sizes, small, h4));
+
+	@include breakpoint(medium) {
+		font-size: rem-calc(map-deep-get($header-sizes, medium, h4));
 	}
 }
 
@@ -19,7 +29,7 @@
 	height: ($input-font-size + ($form-spacing * $global-lineheight) - rem-calc(1));
 
 	label {
-		@include grid-col(8, 0);
+		@include grid-col(7.5, 0);
 		height: 100%;
 	}
 
@@ -29,7 +39,7 @@
 	}
 
 	.search-submit {
-		@include grid-col(4, 0);
+		@include grid-col(4.5, 0);
 		height: 100%;
 		margin: 0;
 	}
