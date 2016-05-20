@@ -6,17 +6,19 @@
 			<button data-toggle><span></span> <?php esc_html_e( 'Menu', 'croft' );?></button>
 		</div><!-- .menu-toggle -->
 
-		<?php wp_nav_menu(
-			array(
-				'theme_location' => 'primary',
-				'container'      => '',
-				'menu_id'        => 'primary-menu',
-				'menu_class'     => 'primary menu vertical medium-horizontal',
-				'fallback_cb'    => '',
-				'items_wrap'     => '<div class="row"><ul id="%s" class="%s" data-responsive-menu="accordion medium-dropdown">%s</ul></div>',
-				'walker'         => new Foundation_Menu_Walker()
-			)
-		); ?>
+		<div class="row">
+			<?php wp_nav_menu(
+				array(
+					'theme_location' => 'primary',
+					'container'      => '',
+					'menu_id'        => 'primary-menu',
+					'menu_class'     => 'menu-items menu vertical medium-horizontal',
+					'fallback_cb'    => '',
+					'items_wrap'     => '<ul id="%s" class="%s" data-responsive-menu="accordion medium-dropdown">%s</ul>',
+					'walker'         => new Foundation_Menu_Walker()
+				)
+			); ?>
+		</div><!-- .row -->
 
 	</nav><!-- #menu-primary -->
 
