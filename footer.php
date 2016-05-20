@@ -14,6 +14,9 @@
 
 	<footer <?php hybrid_attr( 'footer' ); ?>>
 		<div class="row">
+
+			<?php hybrid_get_menu( 'subsidiary' ); // Loads the menu/subsidiary.php template. ?>
+
 			<div class="site-info">
 				<div class="copyright">
 					<?php printf(
