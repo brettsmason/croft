@@ -20,7 +20,6 @@ add_action( 'init', 'croft_register_image_sizes', 5 );
  */
 function croft_register_menus() {
 	register_nav_menu( 'primary',    esc_html_x( 'Primary',    'nav menu location', 'croft' ) );
-	register_nav_menu( 'secondary',  esc_html_x( 'Secondary',  'nav menu location', 'croft' ) );
 	register_nav_menu( 'subsidiary', esc_html_x( 'Subsidiary', 'nav menu location', 'croft' ) );
 	register_nav_menu( 'social',     esc_html_x( 'social',     'nav menu location', 'croft' ) );
 }
