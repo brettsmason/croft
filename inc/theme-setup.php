@@ -90,7 +90,7 @@ function croft_enqueue_styles() {
 	// Load active theme stylesheet.
 	wp_enqueue_style( 'hybrid-style' );
 }
-add_action( 'wp_enqueue_scripts', 'croft_enqueue_styles',  5 );
+add_action( 'wp_enqueue_scripts', 'croft_enqueue_styles', 5 );
 
 /**
  * Editor stylesheets
