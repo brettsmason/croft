@@ -17,10 +17,10 @@
 }
 
 .widget-title {
-	font-size: rem-calc(map-deep-get($header-sizes, small, h4));
+	font-size: rem-calc(map-deep-get($header-styles, small, h3, font-size));
 
 	@include breakpoint(medium) {
-		font-size: rem-calc(map-deep-get($header-sizes, medium, h4));
+		font-size: rem-calc(map-deep-get($header-styles, medium, h3, font-size));
 	}
 }
 
@@ -46,7 +46,7 @@
 }
 
 // Navigation Widget
-.widget.widget_nav_menu {
+.widget_nav_menu {
 	.menu {
 		li {
 			display: block;
