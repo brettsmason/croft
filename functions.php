@@ -122,11 +122,13 @@ final class Croft_Theme {
 		require_once( $this->dir_path . 'inc/hybrid-core/hybrid.php' );
 
 		// Load theme includes.
+		require_once( $this->dir_path . 'inc/class-menu-walker.php' );
 		require_once( $this->dir_path . 'inc/customizer.php' );
 		require_once( $this->dir_path . 'inc/hc-overrides.php' );
 		require_once( $this->dir_path . 'inc/functions-cleanup.php' );
 		require_once( $this->dir_path . 'inc/functions-filters.php' );
 		require_once( $this->dir_path . 'inc/functions-icons.php' );
+		require_once( $this->dir_path . 'inc/functions-template-tags.php' );
 
 		// Load WooCommerce file if plugin is active.
 		if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) )

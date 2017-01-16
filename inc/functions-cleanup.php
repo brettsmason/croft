@@ -20,7 +20,7 @@ function croft_head_cleanup() {
 	remove_action( 'wp_head', 'hybrid_meta_generator', 1 );
 	remove_action( 'wp_head', 'hybrid_link_pingback',  3 );
 }
-add_action( 'init', 'legion_head_cleanup' );
+add_action( 'init', 'croft_head_cleanup' );
 
 /**
 * Remove the WordPress version from RSS feeds
