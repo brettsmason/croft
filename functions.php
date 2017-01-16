@@ -122,8 +122,8 @@ final class Croft_Theme {
 		require_once( $this->dir_path . 'inc/hybrid-core/hybrid.php' );
 
 		// Load theme includes.
+		require_once( $this->dir_path . 'inc/class-customizer.php' );
 		require_once( $this->dir_path . 'inc/class-menu-walker.php' );
-		require_once( $this->dir_path . 'inc/customizer.php' );
 		require_once( $this->dir_path . 'inc/hc-overrides.php' );
 		require_once( $this->dir_path . 'inc/functions-cleanup.php' );
 		require_once( $this->dir_path . 'inc/functions-filters.php' );
