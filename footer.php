@@ -19,18 +19,11 @@
 
 			<div class="site-info">
 				<div class="copyright">
-					<?php printf(
-						// Translators: 1 is current year, 2 is site name/link.
-						esc_html__( 'Copyright &#169; %1$s %2$s', 'croft' ),
-						date_i18n( 'Y' ), hybrid_get_site_link()
-					); ?>
+					<?php croft_theme_copyright(); ?>
 				</div><!-- .copyright -->
+
 				<div class="credit">
-					<?php printf(
-						// Translators: 1 is WordPress name/link, and 2 is theme name/link.
-						esc_html__( 'Powered by %1$s and %2$s', 'croft' ),
-						hybrid_get_wp_link(), hybrid_get_theme_link()
-					); ?>
+					<?php croft_theme_credit(); ?>
 				</div><!-- .credit -->
 			</div><!-- .site-info -->
 		</div><!-- .row -->

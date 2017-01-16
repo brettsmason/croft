@@ -37,6 +37,32 @@ function croft_get_edit_post_link( $id = null ) {
 }
 
 /**
+ * Outputs the theme copyright text.
+ *
+ * @return void
+ */
+function croft_theme_copyright() {
+	echo croft_get_theme_copyright();
+}
+
+/**
+ * Returns the theme copyright text.
+ *
+ * @return string
+ */
+function croft_get_theme_copyright() {
+	$copyright = sprintf(
+		// Translators: 1 is current year, 2 is site name.
+		esc_html__( 'Copyright &#169; %1$s %2$s', 'croft' ),
+		date_i18n( 'Y' ),
+		get_bloginfo( 'name' )
+	);
+
+	return apply_filters( 'croft_theme_copyright', $copyright );
+}
+
+
+/**
  * Outputs the theme credit text.
  *
  * @return void
@@ -51,7 +77,7 @@ function croft_theme_credit() {
  * @return string
  */
 function croft_get_theme_credit() {
-	$credit = sprintf( esc_html__( 'Theme: %1$s by %2$s', 'croft' ), hybrid_get_theme_link(), '<a href="http://github.com/brettsmason/">Brett Mason</a>' );
+	$credit = sprintf( esc_html__( 'Theme: %1$s by %2$s', 'croft' ), hybrid_get_theme_link(), '<a href="https://github.com/brettsmason/">Brett Mason</a>' );
 
 	return apply_filters( 'croft_theme_credit', $credit );
 }
