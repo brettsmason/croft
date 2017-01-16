@@ -125,6 +125,7 @@ final class Croft_Theme {
 		require_once( $this->dir_path . 'inc/customizer.php' );
 		require_once( $this->dir_path . 'inc/hc-overrides.php' );
 		require_once( $this->dir_path . 'inc/utility.php' );
+		require_once( $this->dir_path . 'inc/functions-icons.php' );
 
 		// Load WooCommerce file if plugin is active.
 		if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) )
