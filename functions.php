@@ -306,14 +306,6 @@ final class Croft_Theme {
 	public function register_layouts() {
 
 		hybrid_register_layout(
-			'full-width',
-			array(
-				'label' => esc_html__( 'Full Width', 'croft' ),
-				'image' => $this->dir_uri . 'assets/img/layouts/full-width.svg'
-			)
-		);
-
-		hybrid_register_layout(
 			'1c',
 			array(
 				'label' => esc_html__( '1 Column', 'croft' ),
