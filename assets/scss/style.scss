@@ -29,7 +29,6 @@ Reset
 Base Styles
 --------------------------------------------------------------*/
 @include foundation-typography;
-@import "base/fonts";
 @import "base/typography";
 @import "base/accessibility";
 @import "base/alignments";
@@ -46,6 +45,7 @@ Components
 @import "components/media";
 @import "components/widgets";
 @import "components/menu-toggle";
+@import "components/icons";
 
 /*--------------------------------------------------------------
 Foundation Components

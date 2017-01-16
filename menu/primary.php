@@ -3,7 +3,7 @@
 	<nav <?php hybrid_attr( 'menu', 'primary' ); ?>>
 
 		<div class="menu-toggle" data-responsive-toggle="primary-menu" data-hide-for="medium">
-			<button data-toggle><span></span> <?php esc_html_e( 'Menu', 'croft' );?></button>
+			<button data-toggle><?php croft_do_svg( 'menu-toggle', array( 'inline' => true ) ); ?> <?php esc_html_e( 'Menu', 'croft' );?></button>
 		</div><!-- .menu-toggle -->
 
 		<div class="row">
