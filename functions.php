@@ -342,7 +342,7 @@ final class Croft_Theme {
 		$suffix = hybrid_get_min_suffix();
 
 		// Register scripts.
-		wp_enqueue_script( 'theme-js', $this->asset_uri . "assets/js/theme{$suffix}.js", array( 'jquery' ), null, true );
+		wp_enqueue_script( 'theme-js', $this->asset_uri . "assets/js/main{$suffix}.js", array( 'jquery' ), null, true );
 
 		// Register fonts.
 		// wp_enqueue_style( 'croft-fonts', '//fonts.googleapis.com/css?family=Montserrat|Istok+Web' );
