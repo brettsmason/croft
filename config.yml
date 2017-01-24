@@ -1,5 +1,5 @@
 # Your project's server will run on localhost:xxxx at this port
-PORT: 8000
+URL: "theme-development.dev"
 
 # Autoprefixer will make sure your CSS works with these browsers
 BROWSERS:
@@ -9,8 +9,13 @@ BROWSERS:
 
 # Gulp will reference these paths when it copies files
 PATHS:
+  # Paths to PHP files
+  php:
+    - "./*.php"
+    - "./**/*.php"
+
   # Paths to images
-  icons: "assets/img/svg-icons/"
+  icons: "assets/img/svg-icons/*.svg"
 
   # Paths to Sass libraries, which can then be loaded with @import
   sass:
@@ -66,11 +71,11 @@ POT:
 THEME:
   ## The current strings in the theme
   CURRENT:
-    name: "Croft",
-    slug: "croft",
+    name: "Croft"
+    slug: "croft"
     prefix: "croft_"
   ## The strings to rename in the theme
   NEW:
-    name: "Croft",
-    slug: "croft",
-    prefix: "croft_"
+    name: "Naked"
+    slug: "named"
+    prefix: "named_"

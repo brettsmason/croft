@@ -1,6 +1,13 @@
 var $        = require('gulp-load-plugins')();
 var gulp     = require('gulp');
 var yaml     = require('js-yaml');
+var del  = require('del');
+var browserSync  = require('browser-sync');
+var reload       = browserSync.reload;
+var fs       = require('fs');
+
+// Load settings from config.yml
+const { URL, BROWSERS, PATHS, POT, THEME } = loadConfig();
 
 // Load our config.yml file
 function loadConfig() {
@@ -14,13 +21,13 @@ function loadConfig() {
 function handleErrors() {
   var args = Array.prototype.slice.call(arguments);
 
-  notify.onError({
+  $.notify.onError({
     'title': 'Task Failed [<%= error.message %>',
     'message': 'See console.',
     'sound': 'Sosumi' // See: https://github.com/mikaelbr/node-notifier#all-notification-options-with-their-defaults
   }).apply(this, args);
 
-  gutil.beep(); // Beep 'sosumi' again
+  $.util.beep(); // Beep 'sosumi' again
 
   // Prevent the 'watch' task from stopping
   this.emit('end');
@@ -30,8 +37,8 @@ function handleErrors() {
  * Delete style.css and style.min.css before we minify and optimize.
  */
 gulp.task('clean:styles', function() {
-  return del(['style.css', 'style.min.css']);
-} );
+  return del(['style.css', 'style.min.css', 'style.css.map', 'style.min.css.map']);
+});
 
 /**
  * Compile Sass.
@@ -39,20 +46,20 @@ gulp.task('clean:styles', function() {
  * https://www.npmjs.com/package/gulp-sass
  * https://www.npmjs.com/package/gulp-autoprefixer
  */
-gulp.task('sass', ['clean:styles'], function() {
+gulp.task('sass', function() {
   return gulp.src('assets/scss/style.scss')
 
   // Deal with errors.
-  .pipe(plumber({'errorHandler': handleErrors}))
+  .pipe($.plumber({'errorHandler': handleErrors}))
 
   // Wrap tasks in a sourcemap.
-  .pipe(sourcemaps.init())
+  .pipe($.sourcemaps.init())
 
   // Compile Sass using LibSass.
-  .pipe(sass({
+  .pipe($.sass({
     'includePaths': [
-      'bower_components/foundation-sites/scss',
-      'bower_components/motion-ui/src'
+      'node_modules/foundation-sites/scss',
+      'node_modules/motion-ui/src'
     ],
     'errLogToConsole': true,
     'outputStyle': 'expanded',
@@ -61,12 +68,12 @@ gulp.task('sass', ['clean:styles'], function() {
   }))
 
   // Parse with Autoprefixer.
-  .pipe(autoprefixer({
+  .pipe($.autoprefixer({
     'browsers': BROWSERS
   }))
 
   // Create sourcemap.
-  .pipe(sourcemaps.write('./'))
+  .pipe($.sourcemaps.write('./'))
 
   // Create style.css.
   .pipe(gulp.dest('./'));
@@ -77,13 +84,21 @@ gulp.task('sass', ['clean:styles'], function() {
  *
  * https://www.npmjs.com/package/gulp-cssnano
  */
-gulp.task('cssnano', ['sass'], function() {
+gulp.task('cssnano', function() {
   return gulp.src('style.css')
-  .pipe( plumber({'errorHandler': handleErrors}))
-  .pipe( cssnano({
+  .pipe($.plumber({'errorHandler': handleErrors}))
+  
+  // Wrap tasks in a sourcemap.
+  .pipe($.sourcemaps.init())
+
+  .pipe($.cssnano({
     'safe': true // Use safe optimizations
   }))
-  .pipe(rename('style.min.css'))
+  .pipe($.rename('style.min.css'))
+
+  // Create sourcemap.
+  .pipe($.sourcemaps.write('./'))
+
   .pipe(gulp.dest('./'));
 });
 
@@ -101,13 +116,13 @@ gulp.task('clean:icons', function() {
  * https://www.npmjs.com/package/gulp-svgstore
  * https://www.npmjs.com/package/gulp-cheerio
  */
-gulp.task('svg', ['clean:icons'], function() {
-  return gulp.src(paths.icons)
-  .pipe( plumber({'errorHandler': handleErrors}))
-  .pipe(svgmin())
-  .pipe(rename({'prefix': 'icon-'}))
-  .pipe(svgstore({'inlineSvg': true}))
-  .pipe(cheerio({
+gulp.task('svg', function() {
+  return gulp.src(PATHS.icons)
+  .pipe($.plumber({'errorHandler': handleErrors}))
+  .pipe($.svgmin())
+  .pipe($.rename({'prefix': 'icon-'}))
+  .pipe($.svgstore({'inlineSvg': true}))
+  .pipe($.cheerio({
     'run': function ($, file) {
       $('svg').attr('style', 'display:none');
       $('[fill]').removeAttr('fill');
@@ -119,14 +134,21 @@ gulp.task('svg', ['clean:icons'], function() {
 });
 
 /**
+ * Delete main.js and main.min.js before we concat and uglify.
+ */
+gulp.task('clean:scripts', function() {
+  return del(['assets/js/main.js', 'assets/js/*.min.js']);
+});
+
+/**
  * Concatenate javascript files into one.
  * https://www.npmjs.com/package/gulp-concat
  */
 gulp.task('concat', function() {
-  return gulp.src(paths.customScripts)
-  .pipe(plumber({'errorHandler': handleErrors}))
-  .pipe(babel({ignore: ['what-input.js']}))
-  .pipe(concat('main.js'))
+  return gulp.src(PATHS.javascript)
+  .pipe($.plumber({'errorHandler': handleErrors}))
+  .pipe($.babel({ignore: ['what-input.js']}))
+  .pipe($.concat('main.js'))
   .pipe(gulp.dest('assets/js'));
 });
 
@@ -134,10 +156,10 @@ gulp.task('concat', function() {
   * Minify compiled javascript after concatenated.
   * https://www.npmjs.com/package/gulp-uglify
   */
-gulp.task('uglify', ['concat'], function() {
-  return gulp.src(paths.scripts)
-  .pipe(rename({'suffix': '.min'}))
-  .pipe(uglify({
+gulp.task('uglify', function() {
+  return gulp.src('assets/js/*.js')
+  .pipe($.rename({'suffix': '.min'}))
+  .pipe($.uglify({
     'mangle': false
   }))
   .pipe(gulp.dest('assets/js'));
@@ -147,7 +169,7 @@ gulp.task('uglify', ['concat'], function() {
  * Delete the theme's .pot before we create a new one.
  */
 gulp.task('clean:pot', function() {
-  return del(['languages/legion.pot']);
+  return del(['./languages/' + POT.domain + '.pot']);
 });
 
 /**
@@ -155,19 +177,18 @@ gulp.task('clean:pot', function() {
  *
  * https://www.npmjs.com/package/gulp-wp-pot
  */
-gulp.task('wp-pot', ['clean:pot'], function() {
-  return gulp.src(paths.php)
-  .pipe(plumber({'errorHandler': handleErrors}))
-  .pipe(sort())
-  .pipe(wpPot({
-    'domain': 'croft',
-    'destFile': 'croft.pot',
-    'package': 'legion',
-    'bugReport': 'https://github.com/brettsmason/croft/issues',
-    'lastTranslator': 'Brett Mason <brettsmason@gmail.com>',
-    'team': 'Brett Mason <brettsmason@gmail.com>'
+gulp.task('wp-pot', function() {
+  return gulp.src(PATHS.php)
+  .pipe($.plumber({'errorHandler': handleErrors}))
+  .pipe($.sort())
+  .pipe($.wpPot({
+    'domain': POT.domain,
+    'package': POT.package,
+    'bugReport': POT.bugReport,
+    'lastTranslator': POT.lastTranslator,
+    'team': POT.team
   }))
-  .pipe(gulp.dest('languages/'));
+  .pipe(gulp.dest('./languages/' + POT.domain + '.pot'));
 });
 
 /**
@@ -181,26 +202,37 @@ gulp.task('watch', function() {
   browserSync({
     'open': false,
     'injectChanges': true,
-    'proxy': paths.server,
+    'proxy': URL,
     'watchOptions': {
       'debounceDelay': 1000
     }
   });
 
   // Run tasks when files change.
-  gulp.watch(paths.icons, ['icons']);
-  gulp.watch(paths.sass, ['styles']);
-  gulp.watch(paths.customScripts, ['scripts']);
-  gulp.watch(paths.vendorScripts, ['scripts']);
-  gulp.watch(paths.php, ['markup']);
+  gulp.watch(PATHS.icons, gulp.parallel('icons'));
+  gulp.watch('assets/scss/**/*.scss', gulp.parallel('styles'));
+  gulp.watch(PATHS.javascript, gulp.parallel('scripts'));
+  gulp.watch(PATHS.php, gulp.parallel('markup'));
+});
+
+/**
+ *  Rename all theme specific strings with new ones.
+ *  These are set in config.yml.
+ */
+gulp.task('rename', function() {
+  return gulp.src(['**/*', '!inc/hybrid-core/**', '!node_modules/**'])
+    .pipe($.replace(THEME.CURRENT.name, THEME.NEW.name))
+    .pipe($.replace(THEME.CURRENT.slug, THEME.NEW.slug))
+    .pipe($.replace(THEME.CURRENT.prefix, THEME.NEW.prefix))
+    .pipe(gulp.dest('./'));
 });
 
 /**
  * Create individual tasks.
  */
 gulp.task('markup', browserSync.reload);
-gulp.task('i18n', ['wp-pot']);
-gulp.task('icons', ['svg']);
-gulp.task('scripts', ['uglify']);
-gulp.task('styles', ['cssnano']);
-gulp.task('default', ['i18n', 'icons', 'styles', 'scripts']);
+gulp.task('i18n', gulp.series('clean:pot', 'wp-pot'));
+gulp.task('icons', gulp.series('clean:icons', 'svg'));
+gulp.task('scripts', gulp.series('clean:scripts', 'concat', 'uglify'));
+gulp.task('styles', gulp.series('clean:styles', 'sass', 'cssnano'));
+gulp.task('default', gulp.parallel('i18n', 'icons', 'styles', 'scripts'));
