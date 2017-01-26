@@ -1,7 +1,18 @@
 <?php
 /**
- * Clean up WordPress <head>.
+ * Clean up WordPress <head> and other more general things.
+ *
  * @package Croft
+ */
+
+# Cleanup unwanted things in the <head>.
+add_action( 'init', 'croft_head_cleanup' );
+
+# Remove the WordPress version from RSS feeds.
+add_filter( 'the_generator', '__return_false' );
+
+/**
+ * Cleanup WordPress <head> and a few other areas.
  */
 function croft_head_cleanup() {
 	remove_action( 'wp_head', 'feed_links_extra', 3 );
@@ -20,9 +31,3 @@ function croft_head_cleanup() {
 	remove_action( 'wp_head', 'hybrid_meta_generator', 1 );
 	remove_action( 'wp_head', 'hybrid_link_pingback',  3 );
 }
-add_action( 'init', 'croft_head_cleanup' );
-
-/**
-* Remove the WordPress version from RSS feeds
-*/
-add_filter( 'the_generator', '__return_false' );

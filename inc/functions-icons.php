@@ -5,6 +5,12 @@
  * @package Croft
  */
 
+# Output our SVG sprite in wp_footer.
+add_action( 'wp_footer', 'croft_include_svg_icons', 9999 );
+
+# Add social icons to the `social` menu location.
+add_filter( 'walker_nav_menu_start_el', 'croft_nav_menu_social_icons', 10, 4 );
+
 /**
  * Add SVG definitions to the footer.
  */
@@ -17,19 +23,19 @@ function croft_include_svg_icons() {
 	if ( file_exists( $svg_icons ) ) {
 		echo file_get_contents( $svg_icons );
 	}
-
 }
-add_action( 'wp_footer', 'croft_include_svg_icons', 9999 );
 
 /**
  * Return SVG markup.
  *
  * @param string $icon Required. Use the icon filename, e.g. "facebook-square".
  * @param  array  $args {
- *     Parameters needed to display an SVG.
+ *     Additional parameters used to customise the SVG.
  *
  *     @param string $title Optional. SVG title, e.g. "Facebook".
  *     @param string $desc Optional. SVG description, e.g. "Share this post on Facebook".
+ *     @param string $class Optional. Class to apply to the SVG. Defaults to `icon icon-{icon-name}`.
+ *     @param Boolean $inline Optional. Output the SVG inline or not. Defaults to false.
  * }
  * @return string SVG markup.
  */
@@ -168,7 +174,6 @@ function croft_nav_menu_social_icons( $item_output, $item, $depth, $args ) {
 
 	return $item_output;
 }
-add_filter( 'walker_nav_menu_start_el', 'croft_nav_menu_social_icons', 10, 4 );
 
 /**
  * Returns an array of supported social links (URL and icon name).

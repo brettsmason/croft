@@ -1,6 +1,7 @@
 <?php
 /**
  * Various template functions.
+ *
  * @package Croft
  */
 
@@ -20,7 +21,7 @@ function croft_edit_post_link() {
  */
 function croft_get_edit_post_link( $id = null ) {
 	
-	// If no ID is given, get the current posts ID.
+	// If no ID is given, get the current post ID.
 	$id = $id ? $id : get_the_ID();
 
 	$link = edit_post_link(
@@ -33,6 +34,7 @@ function croft_get_edit_post_link( $id = null ) {
 		'</span>',
 		$id
 	);
+
 	return $link;
 }
 
@@ -51,6 +53,7 @@ function croft_theme_copyright() {
  * @return string
  */
 function croft_get_theme_copyright() {
+
 	$copyright = sprintf(
 		// Translators: 1 is current year, 2 is site name.
 		esc_html__( 'Copyright &#169; %1$s %2$s', 'croft' ),
@@ -60,7 +63,6 @@ function croft_get_theme_copyright() {
 
 	return apply_filters( 'croft_theme_copyright', $copyright );
 }
-
 
 /**
  * Outputs the theme credit text.
@@ -77,6 +79,7 @@ function croft_theme_credit() {
  * @return string
  */
 function croft_get_theme_credit() {
+
 	$credit = sprintf( esc_html__( 'Theme: %1$s by %2$s', 'croft' ), hybrid_get_theme_link(), '<a href="https://github.com/brettsmason/">Brett Mason</a>' );
 
 	return apply_filters( 'croft_theme_credit', $credit );
