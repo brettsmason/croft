@@ -1,8 +1,12 @@
+/*--------------------------------------------------------------
+## Accessibility
+--------------------------------------------------------------*/
+
 .screen-reader-text {
 	@include element-invisible;
 
 	&:focus {
 		@include element-invisible-off;
-		z-index: 100000; /* Above WP toolbar. */
+		z-index: 100000;
 	}
 }

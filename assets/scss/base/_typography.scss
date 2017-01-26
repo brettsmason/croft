@@ -1,3 +1,9 @@
+/*--------------------------------------------------------------
+## Typography
+--------------------------------------------------------------*/
+
+@include foundation-typography-base;
+
 body {
 	word-wrap: break-word;
 }
@@ -10,3 +16,6 @@ pre {
 	font-family: $code-font-family;
 	font-weight: $code-font-weight;
 }
+
+@include foundation-typography-helpers;
+@include foundation-text-alignment;

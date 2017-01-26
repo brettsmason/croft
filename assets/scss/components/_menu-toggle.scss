@@ -1,27 +1,46 @@
+/*--------------------------------------------------------------
+## Menu Toggle
+--------------------------------------------------------------*/
+
 .menu-toggle {
-	@include breakpoint(medium) {
-		display: none;
+	font-weight: bold;
+
+	&:hover,
+	&:focus {
+		color: $primary-color;
 	}
 
-	button {
-		text-align: center;
-		width: 100%;
-		border-top: 1px solid $light-gray;
-		border-bottom: 1px solid $light-gray;
-		padding: rem-calc(16);
-		font-weight: bold;
+	.icon-menu-toggle {
+		width: 1.5em;
+		height: 1.5em;
+	}
 
-		&:hover,
-		&:focus {
-			color: $primary-color;
+	.bar {
+		transform: rotate(0) translateY(0) translateX(0);
+		opacity: 1;
+		transform-origin: 1em 1em;
+		transition: transform .2s ease-in-out,opacity .2s ease-in-out;
+	}
 
-			span {
-				@include hamburger($primary-color, $height: 15px, $width: 18px, $weight: 3px);
-			}
+	.line-1 {
+		transform-origin: 1em 2.5em;
+	}
+
+	.line-3 {
+		transform-origin: 1em 3.75em;
+	}
+
+	.is-off-canvas-open & {
+		.line-1 {
+			transform: rotate(45deg) translateY(0) translateX(0);
 		}
-	}
 
-	span {
-		@include hamburger($black, $height: 15px, $width: 18px, $weight: 3px);
+		.line-2 {
+			opacity: 0;
+		}
+
+		.line-3 {
+			transform: rotate(-45deg) translateY(0) translateX(0);
+		}
 	}
 }

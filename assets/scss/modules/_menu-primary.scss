@@ -1,32 +1,5 @@
-#menu-primary {
-	margin-bottom: rem-calc(48);
+/*--------------------------------------------------------------
+## Menu Primary
+--------------------------------------------------------------*/
 
-	@include breakpoint(medium) {
-		border-top: 1px solid $light-gray;
-		border-bottom: 1px solid $light-gray;
-	}
-
-	ul {
-		a {
-			@include breakpoint(medium) {
-				padding-top: rem-calc(24);
-				padding-bottom: rem-calc(24);
-			}
-
-			&:hover {
-			}
-		}
-	}
-
-	.submenu {
-		a {
-			@include breakpoint(medium) {
-				padding-top: nth($menu-item-padding, 1);
-				padding-bottom: nth($menu-item-padding, 1);
-			}
-
-			&:hover {
-			}
-		}
-	}
-}
+#menu-primary {}

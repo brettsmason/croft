@@ -26,19 +26,18 @@ Reset
 @include foundation-global-styles;
 
 /*--------------------------------------------------------------
-Base Styles
+# Base Styles
 --------------------------------------------------------------*/
-@include foundation-typography;
 @import "base/typography";
 @import "base/accessibility";
 @import "base/alignments";
 
 /*--------------------------------------------------------------
-Components
+# Components
 --------------------------------------------------------------*/
 @import "components/forms";
 @import "components/breadcrumbs";
-@import "components/loop-nav";
+@import "components/pagination";
 @import "components/captions";
 @import "components/comments";
 @import "components/galleries";
@@ -48,10 +47,10 @@ Components
 @import "components/icons";
 
 /*--------------------------------------------------------------
-Foundation Components
+# Foundation Components
 --------------------------------------------------------------*/
-@include foundation-grid;
-// @include foundation-flex-grid;
+// @include foundation-grid;
+@include foundation-flex-grid;
 @include foundation-visibility-classes;
 @include foundation-float-classes;
 @include foundation-button;
@@ -84,13 +83,13 @@ Foundation Components
 @include foundation-top-bar;
 
 /*--------------------------------------------------------------
-Motion UI
+# Motion UI
 --------------------------------------------------------------*/
 @include motion-ui-transitions;
 @include motion-ui-animations;
 
 /*--------------------------------------------------------------
-Modules
+# Modules
 --------------------------------------------------------------*/
 @import "modules/header";
 @import "modules/menu-primary";
@@ -103,10 +102,10 @@ Modules
 @import "modules/menu-social";
 
 /*--------------------------------------------------------------
-Specific Pages
+# Specific Pages
 --------------------------------------------------------------*/
 // @import "pages/**";
 
 /*--------------------------------------------------------------
-Vendor
+# Vendor
 --------------------------------------------------------------*/
