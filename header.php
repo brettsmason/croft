@@ -11,7 +11,7 @@
 	<header <?php hybrid_attr( 'header' ); ?>>
 		<div class="row">
 
-			<?php get_template_part( 'components/site-branding' ); // Loads the components/site-branding.php template. ?>
+			<?php get_template_part( 'template-parts/site-branding' ); // Loads the template-parts/site-branding.php template. ?>
 
 			<?php hybrid_get_menu( 'social' ); // Loads the menu/social.php template. ?>
 
