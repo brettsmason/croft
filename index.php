@@ -5,12 +5,7 @@
 
 		<?php if ( have_posts() ) : ?>
 
-			<?php if ( is_home() && ! is_front_page() ) : ?>
-				<header <?php hybrid_attr( 'archive-title' ); ?>>
-					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-				</header>
-
-			<?php endif; ?>
+			<?php get_template_part( 'template-parts/archive-header' ); ?>
 
 			<?php
 			/* Start the Loop */
@@ -27,11 +22,11 @@
 
 			<?php endwhile; ?>
 
-			<?php get_template_part( 'components/loop-nav' ); ?>
+			<?php get_template_part( 'template-parts/pagination' ); ?>
 
 		<?php else : ?>
 
-			<?php get_template_part( 'content/none' ); ?>
+			<?php get_template_part( 'content/content', 'none' ); ?>
 
 		<?php endif; ?>
 
