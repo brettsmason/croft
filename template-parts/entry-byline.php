@@ -19,6 +19,4 @@
 			<?php comments_popup_link( esc_html__( 'Leave a comment', 'croft' ), esc_html__( '1 Comment', 'croft' ), esc_html__( '% Comments', 'croft' ) ); ?>
 		</span>
 	<?php endif; ?>
-
-	<?php croft_edit_post_link(); ?>
 </p><!-- .entry-byline -->

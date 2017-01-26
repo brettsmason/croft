@@ -22,8 +22,4 @@
 			) );
 		?>
 	</div><!-- .entry-content -->
-
-	<footer class="entry-footer">
-		<?php croft_edit_post_link(); ?>
-	</footer><!-- .entry-footer -->
 </article><!-- #post-## -->

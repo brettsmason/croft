@@ -6,39 +6,6 @@
  */
 
 /**
- * Outputs the edit post link.
- *
- * @return void
- */
-function croft_edit_post_link() {
-	echo croft_get_edit_post_link();
-}
-
-/**
- * Returns a formatted edit post link.
- *
- * @return string
- */
-function croft_get_edit_post_link( $id = null ) {
-	
-	// If no ID is given, get the current post ID.
-	$id = $id ? $id : get_the_ID();
-
-	$link = edit_post_link(
-		sprintf(
-			/* translators: %s: Name of current post */
-			__( 'Edit %s', 'croft' ),
-			the_title( '<span class="screen-reader-text">"', '"</span>', false )
-		),
-		'<span class="edit-link">',
-		'</span>',
-		$id
-	);
-
-	return $link;
-}
-
-/**
  * Outputs the theme copyright text.
  *
  * @return void
