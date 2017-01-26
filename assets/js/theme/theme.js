@@ -1,3 +1,4 @@
+// Initialise Foundation.
 jQuery(document).foundation();
 
 ( function( $ ) {
