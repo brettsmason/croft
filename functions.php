@@ -265,6 +265,14 @@ final class Croft_Theme {
 
 		hybrid_register_sidebar(
 			array(
+				'id'          => 'off-canvas',
+				'name'        => esc_html_x( 'Off-Canvas', 'sidebar', 'croft' ),
+				'description' => esc_html__( 'The off-canvas sidebar. Displayed on smaller screens.', 'croft' )
+			)
+		);
+
+		hybrid_register_sidebar(
+			array(
 				'id'          => 'primary',
 				'name'        => esc_html_x( 'Primary', 'sidebar', 'croft' ),
 				'description' => esc_html__( 'The main sidebar area.', 'croft' )
