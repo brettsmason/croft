@@ -183,10 +183,7 @@ gulp.task('wp-pot', function() {
   .pipe($.sort())
   .pipe($.wpPot({
     'domain': POT.domain,
-    'package': POT.package,
-    'bugReport': POT.bugReport,
-    'lastTranslator': POT.lastTranslator,
-    'team': POT.team
+    'package': POT.package
   }))
   .pipe(gulp.dest('./languages/' + POT.domain + '.pot'));
 });

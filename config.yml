@@ -58,16 +58,13 @@ PATHS:
     - "assets/js/vendor/*.js"
     - "assets/js/theme/theme.js"
 
-# Used in the theme .pot file for translation 
+# Used in the theme .pot file for translation
 POT:
   domain: 'croft'
   package: 'croft'
-  bugReport: "https://github.com/brettsmason/croft/issues"
-  lastTranslator: "Brett Mason <brettsmason@gmail.com>"
-  team: "Brett Mason <brettsmason@gmail.com>"
 
 
-# Theme strings. Used in the `renametheme` gulp task.
+# Theme strings used in the `rename` gulp task
 THEME:
   ## The current strings in the theme
   CURRENT:
