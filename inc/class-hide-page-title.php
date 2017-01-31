@@ -45,7 +45,7 @@ class Croft_Hide_Page_Title {
 		?>
 
 		<p>
-			<label><input type="checkbox" name="hide_page_title" id="hide-page-title" value="1" <?php checked( get_post_meta( $post->ID, 'hide_page_title', true ), 1 ); ?>>Hide Page Title</label>
+			<label><input type="checkbox" name="hide_page_title" id="hide-page-title" value="1" <?php checked( get_post_meta( $post->ID, 'hide_page_title', true ), 1 ); ?>><?php esc_html__( 'Hide Page Title', 'croft' ); ?></label>
 		</p>
 
 	<?php }
