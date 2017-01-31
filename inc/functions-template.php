@@ -6,6 +6,19 @@
  */
 
 /**
+ * Check to see if the page title should be displayed.
+ *
+ * @return boolean
+ */
+function croft_show_page_title() {
+	if( get_post_meta( get_the_ID(), 'hide_page_title', true ) ) {
+		return false;
+	}
+
+	return true;
+}
+
+/**
  * Outputs the theme copyright text.
  *
  * @return void
