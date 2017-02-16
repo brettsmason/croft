@@ -2,101 +2,31 @@
 ## Menu Social
 --------------------------------------------------------------*/
 
-#menu-social,
-.menu-social-container {
+.menu-social {
 	ul {
 		margin: 0;
-		text-align: center;
 		list-style: none;
-
-		@include breakpoint(medium) {
-			text-align: right;
-		}
 	}
 
 	ul li {
 		display: inline-block;
-		position: relative;
+		margin: rem-calc(0 3 6);
 	}
 
-	li a::before {
-		display: inline-block;
-		padding: 0 5px;
-		font-family: "Genericons";
-		font-size: 24px;
-		-webkit-font-smoothing: antialiased;
-		vertical-align: top;
-		content: "\f408";
+	.icon {
+		width: rem-calc(28);
+		height: rem-calc(28);
 	}
 
-	li a[href*="wordpress.org"]::before,
-	li a[href*="wordpress.com"]::before {
-		color: #21759b;
-		content: "\f205";
+	a:hover .icon {
+		opacity: 0.8;
 	}
 
-	li a[href*="facebook.com"]::before {
-		color: #3b5998;
-		content: "\f203";
-	}
+	// Loop through each social icon
+	@each $social-color, $color in $social-colors {
 
-	li a[href*="twitter.com"]::before {
-		color: #3cf;
-		content: "\f202";
-	}
-
-	li a[href*="dribbble.com"]::before {
-		color: #ea4c89;
-		content: "\f201";
-	}
-
-	li a[href*="plus.google.com"]::before {
-		color: #dd4b39;
-		content: "\f206";
-	}
-
-	li a[href*="pinterest.com"]::before {
-		color: #c8232c;
-		content: "\f210";
-	}
-
-	li a[href*="github.com"]::before {
-		color: #171515;
-		content: "\f200";
-	}
-
-	li a[href*="tumblr.com"]::before {
-		color: #34526f;
-		content: "\f214";
-	}
-
-	li a[href*="youtube.com"]::before {
-		color: #c4302b;
-		content: "\f213";
-	}
-
-	li a[href*="flickr.com"]::before {
-		color: #ff0084;
-		content: "\f211";
-	}
-
-	li a[href*="vimeo.com"]::before {
-		color: #1ab7ea;
-		content: "\f212";
-	}
-
-	li a[href*="instagram.com"]::before {
-		color: #3f729b;
-		content: "\f215";
-	}
-
-	li a[href*="codepen.io"]::before {
-		color: #000;
-		content: "\f216";
-	}
-
-	li a[href*="linkedin.com"]::before {
-		color: #0e76a8;
-		content: "\f208";
+		a .icon-#{$social-color} {
+			color: $color;
+		}
 	}
 }

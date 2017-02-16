@@ -13,8 +13,9 @@ Tags: light, one-column, two-columns, left-sidebar, right-sidebar, accessibility
 Croft is built using <a href="http://themehybrid.com">Hybrid Core</a> and <a href="http://foundation.zurb.com">Foundation for Sites</a> and is licensed under the GPL.
 */
 
-// Foundation custom settings
-@import "settings";
+// Theme Variables
+@import "utility/settings";
+@import "utility/variables";
 
 // Foundation and Motion UI
 @import "foundation";
