@@ -73,6 +73,6 @@ THEME:
     prefix: "croft_"
   ## The strings to rename in the theme
   NEW:
-    name: "Naked"
-    slug: "named"
-    prefix: "named_"
+    name: "Croft"
+    slug: "croft"
+    prefix: "croft_"
