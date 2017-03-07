@@ -376,7 +376,7 @@ final class Croft_Theme {
 		$suffix = hybrid_get_min_suffix();
 
 		$editor_styles = array(
-			$this->asset_uri . "assets/css/editor-style{$suffix}.js"
+			$this->asset_uri . "assets/css/editor-style{$suffix}.css"
 		);
 
 		// Add the editor stylesheet.
