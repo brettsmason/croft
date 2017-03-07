@@ -1,0 +1,48 @@
+/*--------------------------------------------------------------
+## Base Layout
+--------------------------------------------------------------*/
+
+.wrap {
+	@include grid-row;
+
+	// Negative margins on nested .wraps
+	& .wrap {
+		@include grid-row($behavior: nest);
+	}
+}
+
+// Main Content area
+.content-area {
+	@include grid-col;
+
+	.layout-2c-l & {
+		@include breakpoint(medium) {
+			@include grid-col-size(8);
+		}
+	}
+
+	.layout-2c-r & {
+		@include breakpoint(medium) {
+			@include grid-col-size(8);
+			@include grid-col-pos(4);
+		}
+	}
+}
+
+// Primary Sidebar
+.sidebar-primary {
+	@include grid-col;
+
+	.layout-2c-l & {
+		@include breakpoint(medium) {
+			@include grid-col-size(4);
+		}
+	}
+
+	.layout-2c-r & {
+		@include breakpoint(medium) {
+			@include grid-col-size(4);
+			@include grid-col-pos(-8);
+		}
+	}
+}

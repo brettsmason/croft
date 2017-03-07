@@ -1,0 +1,27 @@
+/*--------------------------------------------------------------
+## Icons
+--------------------------------------------------------------*/
+
+// Base icon styles
+.icon {
+	display: inline-block;
+	fill: currentColor;
+	position: relative;
+	top: -0.0625rem;
+	vertical-align: middle;
+	width: 1rem;
+	height: 1rem;
+
+	&:hover {
+		opacity: 0.85;
+	}
+}
+
+// Loop through all social icons
+@each $social-color, $color in $social-colors {
+
+	// Set styles on those social icons!
+	.icon-#{$social-color} {
+		color: $color;
+	}
+}

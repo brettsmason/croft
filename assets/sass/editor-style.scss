@@ -1,0 +1,12 @@
+@import "style";
+@import "foundation";
+
+html {
+	height: auto;
+}
+
+body#tinymce {
+	max-width: $grid-row-width;
+	height: auto;
+	padding: 1rem;
+}

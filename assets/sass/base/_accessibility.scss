@@ -1,0 +1,14 @@
+/*--------------------------------------------------------------
+## Accessibility
+--------------------------------------------------------------*/
+
+.screen-reader-text {
+	@include element-invisible;
+
+	&:hover,
+	&:active,
+	&:focus {
+		@include element-invisible-off;
+		z-index: 100000;
+	}
+}

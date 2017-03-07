@@ -1,0 +1,50 @@
+/*--------------------------------------------------------------
+## Menu Toggle
+--------------------------------------------------------------*/
+
+.menu-toggle {
+	font-weight: bold;
+
+	@include breakpoint(medium) {
+		display: none;
+	}
+
+	&:hover,
+	&:focus {
+		color: $primary-color;
+	}
+
+	.icon-menu-toggle {
+		width: 1.5em;
+		height: 1.5em;
+	}
+
+	.bar {
+		transform: rotate(0) translateY(0) translateX(0);
+		opacity: 1;
+		transform-origin: 1em 1em;
+		transition: transform .2s ease-in-out, opacity .2s ease-in-out;
+	}
+
+	.line-1 {
+		transform-origin: 1em 2.5em;
+	}
+
+	.line-3 {
+		transform-origin: 1em 3.75em;
+	}
+
+	.is-off-canvas-open & {
+		.line-1 {
+			transform: rotate(45deg) translateY(0) translateX(0);
+		}
+
+		.line-2 {
+			opacity: 0;
+		}
+
+		.line-3 {
+			transform: rotate(-45deg) translateY(0) translateX(0);
+		}
+	}
+}

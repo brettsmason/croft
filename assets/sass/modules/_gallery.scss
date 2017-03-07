@@ -1,0 +1,56 @@
+/*--------------------------------------------------------------
+## Gallery
+--------------------------------------------------------------*/
+
+.gallery {
+	@include grid-row($behavior: nest);
+}
+
+.gallery-item {
+	@include grid-col;
+	position: relative;
+	margin-bottom: $global-margin;
+}
+
+.gallery-columns-2 {
+	@include grid-layout(2, ".gallery-item");
+}
+
+.gallery-columns-3 {
+	@include grid-layout(3, ".gallery-item");
+}
+
+.gallery-columns-4 {
+	@include grid-layout(4, ".gallery-item");
+}
+
+.gallery-columns-5 {
+	@include grid-layout(5, ".gallery-item");
+}
+
+.gallery-columns-6 {
+	@include grid-layout(6, ".gallery-item");
+}
+
+.gallery-columns-7 {
+	@include grid-layout(7, ".gallery-item");
+}
+
+.gallery-columns-8 {
+	@include grid-layout(8, ".gallery-item");
+}
+
+.gallery-columns-9 {
+	@include grid-layout(9, ".gallery-item");
+}
+
+.gallery-columns-10 {
+	@include grid-layout(10, ".gallery-item");
+}
+
+.gallery-caption {
+	width: 100%;
+	padding: rem-calc(10 0);
+	color: $dark-gray;
+	font-size: $small-font-size;
+}

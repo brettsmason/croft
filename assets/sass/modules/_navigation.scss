@@ -1,0 +1,47 @@
+/*--------------------------------------------------------------
+## Navigation
+--------------------------------------------------------------*/
+
+// Foundation base menu
+@include foundation-menu;
+
+// Foundation dropdown menu
+@include foundation-dropdown-menu;
+
+// Menu Primary
+.menu-primary {}
+
+// Archive Pagination
+.pagination {
+	@include clearfix;
+	margin: rem-calc(48 0 0);
+
+	ul {
+		@include pagination-container;
+		text-align: center;
+	}
+
+	.current {
+		@include pagination-item-current;
+		display: inline-block;
+	}
+}
+
+// Single post type navigation
+.loop-nav {
+	@include clearfix;
+	margin: rem-calc(48 0);
+
+	a {
+		display: block;
+	}
+
+	.prev {
+		float: $global-left;
+	}
+
+	.next {
+		float: $global-right;
+		text-align: $global-right;
+	}
+}

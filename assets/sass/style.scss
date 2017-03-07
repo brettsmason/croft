@@ -1,0 +1,29 @@
+/*
+Theme Name: Croft
+Theme URI: http://croftwp.com
+Author: Brett Mason
+Author URI: http://croftwp.com
+Description: Croft is an advanced starter theme built with search-engine optimization (SEO) in mind by utilizing the most current HTML5 conventions and <a href="http://schema.org">Schema.org</a> microdata.
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: croft
+Tags: light, one-column, two-columns, left-sidebar, right-sidebar, accessibility-ready, translation-ready, featured-images, threaded-comments, responsive-layout, editor-style, microformats, post-formats
+
+Croft is built using <a href="http://themehybrid.com">Hybrid Core</a> and <a href="http://foundation.zurb.com">Foundation for Sites</a> and is licensed under the GPL.
+*/
+
+// Theme Variables
+@import "utility/settings";
+@import "utility/variables";
+
+// Foundation and Motion UI
+@import "foundation";
+@import "motion-ui";
+
+// Styles
+@import "base/index";
+@import "structure/index";
+@import "modules/index";
+@import "vendor/index";
+@import "views/index";
