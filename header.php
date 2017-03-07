@@ -27,7 +27,7 @@
 					<?php hybrid_site_title(); ?>
 				<?php endif; ?>
 
-				<?php if ( get_theme_mod( 'display_tagline', 0 ) ) : // If the tagline is enabled. ?>
+				<?php if ( get_bloginfo( 'description', 'display' ) || is_customize_preview() ) : ?>
 					<?php hybrid_site_description(); ?>
 				<?php endif; ?>
 			</div><!-- .site-branding -->
@@ -37,4 +37,4 @@
 		</div><!-- .row -->
 	</header><!-- #masthead -->
 
-	<div id="content" class="site-content">
+	<div id="content" class="site-content wrap">
