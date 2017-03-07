@@ -37,4 +37,4 @@
 		</div><!-- .row -->
 	</header><!-- #masthead -->
 
-	<div id="content" class="site-content wrap">
+	<div id="content" class="site-content">

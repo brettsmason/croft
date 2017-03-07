@@ -1,7 +1,8 @@
 <?php get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main <?php hybrid_attr( 'content' ); ?>>
+	<div class="wrap">
+		<div id="primary" class="content-area">
+			<main <?php hybrid_attr( 'content' ); ?>>
 
 			<?php 
 			/* Start the Loop */
@@ -21,8 +22,9 @@
 
 			<?php endwhile; // End of the loop. ?>
 
-		</main><!-- #main -->
-	</div><!-- #primary -->
+			</main><!-- #main -->
+		</div><!-- #primary -->
+	</div><!-- .wrap -->
 
 <?php hybrid_get_sidebar( 'primary' ); // Loads the sidebar/primary.php template. ?>
 <?php get_footer(); ?>
