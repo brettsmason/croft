@@ -4,9 +4,9 @@
  */
 ?>
 
-<header <?php hybrid_attr( 'archive-header' ); ?>>
+<header class="page-header">
 
-	<h1 <?php hybrid_attr( 'archive-title' ); ?>>
+	<h1 class="page-title">
 		<?php
 		if ( is_home() && ! is_front_page() ) {
 			single_post_title();
@@ -22,10 +22,10 @@
 
 	<?php if ( ! is_paged() && $desc = get_the_archive_description() ) : // Check if we're on page/1. ?>
 
-		<div <?php hybrid_attr( 'archive-description' ); ?>>
+		<div class="page-description">
 			<?php echo $desc; ?>
-		</div><!-- .archive-description -->
+		</div><!-- .page-description -->
 
 	<?php endif; // End paged check. ?>
 
-</header><!-- .archive-header -->
+</header><!-- .page-header -->

@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html class="no-js" <?php language_attributes(); ?>>
-<head <?php hybrid_attr( 'head' ); ?>>
+<head>
 <?php wp_head(); ?>
 </head>
 
-<body <?php hybrid_attr( 'body' ); ?>>
+<body <?php body_class(); ?>>
 
 <?php hybrid_get_sidebar( 'off-canvas' ); // Loads the sidebar/off-canvas.php template. ?>
 
 <div id="page" class="site off-canvas-content" data-off-canvas-content>
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'croft' ); ?></a>
 
-	<header <?php hybrid_attr( 'header' ); ?>>
+	<header id="masthead" class="site-header" role="banner">
 		<div class="row">
 
-			<div <?php hybrid_attr( 'branding' ); ?>>
+			<div class="site-branding">
 				<button class="menu-toggle" data-toggle="sidebar-off-canvas"><?php croft_do_svg( 'menu-toggle', array( 'inline' => true ) ); ?> <?php esc_html_e( 'Menu', 'croft' );?></button>
 
 				<?php if ( has_custom_logo() ) : // If the site logo is set. ?>

@@ -2,14 +2,14 @@
 
 	<div class="wrap">
 		<div id="primary" class="content-area">
-			<main <?php hybrid_attr( 'content' ); ?>>
+			<main id="main" class="site-main" role="main">
 
 				<section class="entry error-404 not-found">
 					<header class="entry-header">
-						<h1 <?php hybrid_attr( 'entry-title' ); ?>><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'croft' ); ?></h1>
+						<h1 class="entry-title">><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'croft' ); ?></h1>
 					</header><!-- .entry-header -->
 
-					<div <?php hybrid_attr( 'entry-content' ); ?>>
+					<div class="entry-content">
 						<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try a search?', 'croft' ); ?></p>
 
 						<?php get_search_form(); ?>

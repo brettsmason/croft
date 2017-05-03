@@ -9,13 +9,13 @@
 
 ?>
 
-<article <?php hybrid_attr( 'post' ); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<h1 <?php hybrid_attr( 'entry-title' ); ?>><?php the_title(); ?></h1>
+		<h1 class="entry-title"><?php the_title(); ?></h1>
 		<?php get_template_part( 'template-parts/entry', 'byline' ); ?>
 	</header><!-- .entry-header -->
 
-	<div <?php hybrid_attr( 'entry-content' ); ?>>
+	<div class="entry-content">
 		<?php
 			the_content( sprintf(
 				/* translators: %s: Name of current post. */

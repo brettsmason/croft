@@ -9,10 +9,10 @@
 
 <section class="entry no-results not-found">
 	<header class="entry-header">
-		<h1 <?php hybrid_attr( 'entry-title' ); ?>><?php esc_html_e( 'Nothing Found', 'croft' ); ?></h1>
+		<h1 class="entry-title"><?php esc_html_e( 'Nothing Found', 'croft' ); ?></h1>
 	</header><!-- .entry-header -->
 
-	<div <?php hybrid_attr( 'entry-content' ); ?>>
+	<div class="entry-content">
 		<?php if ( is_search() ) : ?>
 
 			<p><?php esc_html_e( 'Sorry, nothing matched your search terms. Please try again with some different keywords.', 'croft' ); ?></p>

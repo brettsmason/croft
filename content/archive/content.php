@@ -9,13 +9,13 @@
 
 ?>
 
-<article <?php hybrid_attr( 'post' ); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<?php the_title( '<h2 ' . hybrid_get_attr( 'entry-title' ) . '><a href="' . get_permalink() . '" rel="bookmark" itemprop="url">', '</a></h2>' ); ?>
+		<?php the_title( '<h2 class="entry-title"><a href="' . get_permalink() . '" rel="bookmark">', '</a></h2>' ); ?>
 		<?php get_template_part( 'template-parts/entry', 'byline' ); ?>
 	</header><!-- .entry-header -->
 
-	<div <?php hybrid_attr( 'entry-summary' ); ?>>
+	<div class="entry-summary">
 		<?php get_the_image( array( 'size' => 'thumbnail', 'image_class' => 'alignleft', 'order' => array( 'featured', 'attachment' ) ) ); ?>
 		<?php the_excerpt(); ?>
 	</div><!-- .entry-summary -->

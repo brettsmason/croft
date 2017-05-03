@@ -1,6 +1,6 @@
 <?php if ( is_active_sidebar( 'subsidiary' ) ) : // If the sidebar has widgets. ?>
 
-	<aside <?php hybrid_attr( 'sidebar', 'subsidiary' ); ?>>
+	<section class="widget-area subsidiary" role="complementary">
 
 		<div class="row">
 
@@ -8,6 +8,6 @@
 
 		</div><!-- .row -->
 
-	</aside><!-- #sidebar-subsidiary -->
+	</aside><!-- .widget-area -->
 
 <?php endif; // End widgets check. ?>

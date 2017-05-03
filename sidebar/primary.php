@@ -1,6 +1,6 @@
 <?php if ( '1c' !== hybrid_get_theme_layout() ) : // If not a one-column layout. ?>
 
-	<aside <?php hybrid_attr( 'sidebar', 'primary' ); ?>>
+	<section class="widget-area primary" role="complementary">
 
 		<?php if ( is_active_sidebar( 'primary' ) ) : // If the sidebar has widgets. ?>
 
@@ -8,6 +8,6 @@
 
 		<?php endif; // End widgets check. ?>
 
-	</aside><!-- #sidebar-primary -->
+	</section><!-- #sidebar-primary -->
 
 <?php endif; // End layout check. ?>

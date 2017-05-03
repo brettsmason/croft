@@ -7,14 +7,14 @@
 
 ?>
 
-<article <?php hybrid_attr( 'post' ); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php if( croft_show_page_title() ) : ?>
 	<header class="entry-header">
-		<h1 <?php hybrid_attr( 'entry-title' ); ?>><?php the_title(); ?></h1>
+		<h1 class="entry-title"><?php the_title(); ?></h1>
 	</header><!-- .entry-header -->
 	<?php endif; ?>
 
-	<div <?php hybrid_attr( 'entry-content' ); ?>>
+	<div class="entry-content">
 		<?php
 			the_content();
 

@@ -2,7 +2,7 @@
 
 	<div class="wrap">
 		<div id="primary" class="content-area">
-			<main <?php hybrid_attr( 'content' ); ?>>
+			<main id="main" class="site-main" role="main">
 
 			<?php if ( have_posts() ) : ?>
 
