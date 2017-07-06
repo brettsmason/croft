@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 	<div id="primary" class="content-area">
-		<main <?php hybrid_attr( 'content' ); ?>>
+		<main id="main" <?php hybrid_attr( 'site-main' ); ?>>
 
 		<?php
 		/* Start the Loop */

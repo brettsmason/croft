@@ -12,7 +12,7 @@
 
 	<?php hybrid_get_sidebar( 'subsidiary' ); // Loads the sidebar/subsidiary.php template. ?>
 
-	<footer <?php hybrid_attr( 'footer' ); ?>>
+	<footer id="colophon" <?php hybrid_attr( 'site-footer' ); ?>>
 		<div class="row">
 
 			<?php hybrid_get_menu( 'subsidiary' ); // Loads the menu/subsidiary.php template. ?>

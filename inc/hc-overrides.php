@@ -4,52 +4,6 @@
  */
 
 /**
- * Sets the header ID.
- *
- * @param array $attr
- *
- * @return array
- */
-function croft_attr_header_replacement( $attr ) {
-
-	$attr['id'] = 'masthead';
-
-	return $attr;
-}
-add_filter( 'hybrid_attr_header', 'croft_attr_header_replacement' );
-
-/**
- * Sets the main container ID/class.
- *
- * @param $attr
- *
- * @return array
- */
-function croft_attr_content_replacement( $attr ) {
-
-	$attr['id'] = 'main';
-	$attr['class'] = 'site-main';
-
-	return $attr;
-}
-add_filter( 'hybrid_attr_content', 'croft_attr_content_replacement' );
-
-/**
- * Sets the footer ID.
- *
- * @param $attr
- *
- * @return array
- */
-function croft_attr_footer_replacement( $attr ) {
-
-	$attr['id'] = 'colophon';
-
-	return $attr;
-}
-add_filter( 'hybrid_attr_footer', 'croft_attr_footer_replacement' );
-
-/**
  * Search the template paths and replace them with singular and archive versions.
  *
  * @param string $templates

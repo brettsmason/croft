@@ -8,7 +8,7 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'croft' ); ?></a>
 
-	<header <?php hybrid_attr( 'header' ); ?>>
+	<header id="masthead" <?php hybrid_attr( 'site-header' ); ?>>
 		<div class="row">
 
 			<?php get_template_part( 'components/site-branding' ); // Loads the components/site-branding.php template. ?>
