@@ -126,9 +126,7 @@ gulp.task('translate', function() {
     .pipe($.sort())
     .pipe($.wpPot({
         domain: THEME.current.slug,
-        bugReport: pkg.bugReport,
-        lastTranslator: pkg.lastTranslator,
-        team: pkg.team
+        package: THEME.current.slug
     }))
     .pipe(gulp.dest('./languages'));
 });
