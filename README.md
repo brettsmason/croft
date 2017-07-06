@@ -19,7 +19,7 @@ However theme assets should compile just fine using other tools.
 
 ### Install node.js.
 - Using the command line, navigate to your theme directory
-- Run `npm install` to install Gulp plugins and Bower packages and copy Hybrid Core to `/inc/hybrid-core/`.
+- Run `npm install` to install Node packages and add a fresh copy of Hybrid Core to `/inc/hybrid-core/`.
 - Run `gulp` to confirm everything is working
 
 ### What Gulp tasks are included?
@@ -30,9 +30,6 @@ The default Gulp task. Runs the `build` task and watches files for changes.
 
 #### gulp clean
 Cleans and removes the contents of the `dist` directory.
-
-#### gulp copy
-Copies Hybrid Core files from `bower_components` to `inc/hybrid-core`.
 
 #### gulp Sass
 Compiles and minifies the `style.scss` stylesheet.
@@ -70,4 +67,4 @@ The following resources are included or used in part within the theme package.
 
 All other resources and theme elements are licensed under the [GNU GPL](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html), version 2 or later.
 
-2016 &copy; [Brett Mason](http://croftwp.com).
+2017 &copy; [Brett Mason](http://brettmason.co.uk).
