@@ -8,19 +8,16 @@
 // Get the template directory and make sure it has a trailing slash.
 $croft_dir = trailingslashit( get_template_directory() );
 
+// Defines custom Hybrid Core directory.
+define( 'HYBRID_DIR', trailingslashit( get_template_directory() ) . 'inc/hybrid-core/' );
+define( 'HYBRID_URI', trailingslashit( get_template_directory_uri() ) . 'inc/hybrid-core/' );
+
 // Load the Hybrid Core framework and theme files.
 require_once( $croft_dir . 'inc/hybrid-core/hybrid.php' );
 require_once( $croft_dir . 'inc/hc-overrides.php' );
 require_once( $croft_dir . 'inc/theme-setup.php' );
 require_once( $croft_dir . 'inc/utility.php' );
 require_once( $croft_dir . 'inc/customizer.php' );
-
-// Defines custom Hybrid Core directory.
-define( 'HYBRID_DIR', trailingslashit( get_template_directory() ) . 'inc/hybrid-core/' );
-define( 'HYBRID_URI', trailingslashit( get_template_directory_uri() ) . 'inc/hybrid-core/' );
-
-// Launch the Hybrid Core framework.
-new Hybrid();
 
 function croft_theme_setup() {
 
