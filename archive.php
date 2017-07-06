@@ -5,7 +5,7 @@
 
 		<?php if ( have_posts() ) : ?>
 
-			<?php get_template_part( 'partials/archive-header' ); ?>
+			<?php get_template_part( 'partials/page-header' ); ?>
 
 			<?php
 			/* Start the Loop */

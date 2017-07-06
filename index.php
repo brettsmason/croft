@@ -5,12 +5,7 @@
 
 		<?php if ( have_posts() ) : ?>
 
-			<?php if ( is_home() && ! is_front_page() ) : ?>
-				<header <?php hybrid_attr( 'archive-title' ); ?>>
-					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-				</header>
-
-			<?php endif; ?>
+			<?php get_template_part( 'partials/page-header' ); ?>
 
 			<?php
 			/* Start the Loop */

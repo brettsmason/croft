@@ -5,9 +5,7 @@
 
 		<?php if ( have_posts() ) : ?>
 
-			<header <?php hybrid_attr( 'archive-header' ); ?>>
-				<h1 <?php hybrid_attr( 'archive-title' ); ?>><?php printf( esc_html__( 'Search Results for: %s', 'croft' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
-			</header><!-- .archive-header -->
+			<?php get_template_part( 'partials/page-header' ); ?>
 
 			<?php
 			/* Start the Loop */
