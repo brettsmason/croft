@@ -1,7 +1,7 @@
 <?php
 /**
  * Template part for displaying post navigation.
- * previous_post_link/xt_post_link is used on a single post to navigate between posts.
+ * previous_post_link/next_post_link is used on a single post to navigate between posts.
  * the_posts_pagination is used on archives for numbered pagination.
  *
  * @link https://codex.wordpress.org/Function_Reference/previous_post_link
