@@ -171,7 +171,7 @@ gulp.task('dist', ['clean'], function () {
   .pipe(gulp.dest('dist/' + pkg.name + '/'));
 });
 
-gulp.task('zip', function () {
+gulp.task('zip', function() {
   return gulp.src('dist/' + pkg.name + '/**')
     .pipe($.zip(pkg.name + '-' + pkg.version + '.zip'))
     .pipe(gulp.dest('dist'));
