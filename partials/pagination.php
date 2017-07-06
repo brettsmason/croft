@@ -1,7 +1,7 @@
 <?php
 /**
  * Template part for displaying post navigation.
- * loop_nav is used on a single post to navigate between posts.
+ * previous_post_link/xt_post_link is used on a single post to navigate between posts.
  * the_posts_pagination is used on archives for numbered pagination.
  *
  * @link https://codex.wordpress.org/Function_Reference/previous_post_link
@@ -13,7 +13,7 @@
 
 <?php if ( is_singular( 'post' ) ) : // If viewing a single post page. ?>
 
-	<div class="loop-nav">
+	<div class="pager">
 		<?php previous_post_link( '<div class="prev">' . esc_html__( 'Previous: %link', 'croft' ) . '</div>', '%title' ); ?>
 		<?php next_post_link(     '<div class="next">' . esc_html__( 'Next: %link',     'croft' ) . '</div>', '%title' ); ?>
 	</div><!-- .loop-nav -->

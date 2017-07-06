@@ -11,7 +11,7 @@
 	<header id="masthead" <?php hybrid_attr( 'site-header' ); ?>>
 		<div <?php hybrid_attr( 'row', 'header' ); ?>>
 
-			<?php get_template_part( 'components/site-branding' ); // Loads the components/site-branding.php template. ?>
+			<?php get_template_part( 'partials/site-branding' ); // Loads the partials/site-branding.php template. ?>
 
 			<?php hybrid_get_menu( 'social' ); // Loads the menu/social.php template. ?>
 

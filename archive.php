@@ -5,7 +5,7 @@
 
 		<?php if ( have_posts() ) : ?>
 
-			<?php get_template_part( 'components/archive-header' ); ?>
+			<?php get_template_part( 'partials/archive-header' ); ?>
 
 			<?php
 			/* Start the Loop */
@@ -20,7 +20,7 @@
 
 			<?php endwhile; ?>
 
-			<?php get_template_part( 'components/loop-nav' ); ?>
+			<?php get_template_part( 'partials/pagination' ); ?>
 
 		<?php else : ?>
 

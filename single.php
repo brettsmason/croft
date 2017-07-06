@@ -14,7 +14,7 @@
 			 */
 			hybrid_get_content_template(); ?>
 
-			<?php get_template_part( 'components/loop-nav' ); ?>
+			<?php get_template_part( 'partials/pagination' ); ?>
 
 			<?php
 			// If comments are open or we have at least one comment, load up the comment template.

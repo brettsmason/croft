@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main <?php hybrid_attr( 'content' ); ?>>
+	<div id="primary" <?php hybrid_attr( 'content-area' ); ?>>
+		<main id="main" <?php hybrid_attr( 'site-main' ); ?>>
 
 			<section class="entry error-404 not-found">
 				<header class="entry-header">
