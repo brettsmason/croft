@@ -26,9 +26,6 @@ var THEME = {
 
 // File paths to various assets are defined here.
 var PATHS = {
-  hc: [
-    'node_modules/hybrid-core/**'
-  ],
   sass: [
     'node_modules/foundation-sites/scss',
     'node_modules/motion-ui/src'
@@ -74,12 +71,6 @@ var PATHS = {
 // This happens every time a build starts
 gulp.task('clean', function(done) {
   rimraf('dist', done);
-});
-
-// Copy Hybrid Core from the bower directory
-gulp.task('copy', function() {
-  gulp.src(PATHS.hc)
-    .pipe(gulp.dest('inc/hybrid-core'));
 });
 
 // Compile main stylesheet into CSS

@@ -48,6 +48,8 @@
     "run-sequence": "^1.1.5"
   },
   "scripts": {
-    "postinstall": "bower install && gulp copy"
+    "hybrid-core": "git clone https://github.com/justintadlock/hybrid-core.git -b 4.0 inc/hybrid-core",
+    "hybrid-core-clean": "rimraf ./inc/hybrid-core/.git",
+    "postinstall": "npm run hybrid-core && npm run hybrid-core-clean"
   }
 }
