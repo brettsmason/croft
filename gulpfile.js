@@ -27,40 +27,42 @@ var THEME = {
 // File paths to various assets are defined here.
 var PATHS = {
   hc: [
-    'bower_components/hybrid-core/**'
+    'node_modules/hybrid-core/**'
   ],
   sass: [
-    'bower_components/foundation-sites/scss',
-    'bower_components/motion-ui/src'
+    'node_modules/foundation-sites/scss',
+    'node_modules/motion-ui/src'
   ],
   javascript: [
     // What-input
-    'bower_components/what-input/what-input.js',
+    'node_modules/what-input/what-input.js',
 
     // Foundation Core and utils
-    'bower_components/foundation-sites/js/foundation.core.js',
-    'bower_components/foundation-sites/js/foundation.util.*.js',
+    'node_modules/foundation-sites/js/foundation.core.js',
+    'node_modules/foundation-sites/js/foundation.util.*.js',
 
     // Individual Foundation JS components
-    'bower_components/foundation-sites/js/foundation.abide.js',
-    'bower_components/foundation-sites/js/foundation.accordion.js',
-    'bower_components/foundation-sites/js/foundation.accordionMenu.js',
-    'bower_components/foundation-sites/js/foundation.drilldown.js',
-    'bower_components/foundation-sites/js/foundation.dropdown.js',
-    'bower_components/foundation-sites/js/foundation.dropdownMenu.js',
-    'bower_components/foundation-sites/js/foundation.equalizer.js',
-    'bower_components/foundation-sites/js/foundation.interchange.js',
-    'bower_components/foundation-sites/js/foundation.magellan.js',
-    'bower_components/foundation-sites/js/foundation.offcanvas.js',
-    'bower_components/foundation-sites/js/foundation.orbit.js',
-    'bower_components/foundation-sites/js/foundation.responsiveMenu.js',
-    'bower_components/foundation-sites/js/foundation.responsiveToggle.js',
-    'bower_components/foundation-sites/js/foundation.reveal.js',
-    'bower_components/foundation-sites/js/foundation.slider.js',
-    'bower_components/foundation-sites/js/foundation.sticky.js',
-    'bower_components/foundation-sites/js/foundation.tabs.js',
-    'bower_components/foundation-sites/js/foundation.toggler.js',
-    'bower_components/foundation-sites/js/foundation.tooltip.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.abide.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.accordion.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.accordionMenu.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.drilldown.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.dropdown.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.dropdownMenu.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.equalizer.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.interchange.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.magellan.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.offcanvas.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.orbit.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.responsiveAccordionTabs.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.responsiveMenu.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.responsiveToggle.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.reveal.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.slider.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.smoothScroll.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.sticky.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.tabs.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.toggler.js',
+    'node_modules/foundation-sites/dist/js/plugins/foundation.tooltip.js',
 
     // Custom JS files
     'assets/js/vendor/*.js',
@@ -147,7 +149,7 @@ gulp.task('build', function(done) {
 
 // Replaces all theme specific names with new ones
 gulp.task('renametheme', function() {
-  return gulp.src(['**/*', '!bower_components/**', '!node_modules/**'])
+  return gulp.src(['**/*', '!node_modules/**'])
     .pipe($.replace(THEME.current.name, THEME.new.name))
     .pipe($.replace(THEME.current.slug, THEME.new.slug))
     .pipe($.replace(THEME.current.prefix, THEME.new.prefix))
@@ -159,8 +161,6 @@ gulp.task('dist', ['clean'], function () {
     '**',
     '!node_modules/',
     '!node_modules/**',
-    '!bower_components/',
-    '!bower_components/**',
     '!assets/scss/',
     '!assets/scss/**',
     '!assets/js/theme/',
@@ -170,7 +170,6 @@ gulp.task('dist', ['clean'], function () {
     '!dist/',
     '!dist/**',
     '!.git/**',
-    '!bower.json',
     '!package.json',
     '!.gitignore',
     '!.gitmodules',

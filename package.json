@@ -9,9 +9,9 @@
     "url": "https://github.com/brettsmason/croft.git"
   },
   "pot": {
-    "bugReport": "Brett Mason <brett@croftwp.com>",
-    "lastTranslator": "Brett Mason <brett@croftwp.com>",
-    "team": "Brett Mason <brett@croftwp.com>"
+    "bugReport": "Brett Mason <brettsmason@gmail.com>",
+    "lastTranslator": "Brett Mason <brettsmason@gmail.com>",
+    "team": "Brett Mason <brettsmason@gmail.com>"
   },
   "devDependencies": {
     "babel-core": "^6.5.2",
@@ -27,6 +27,7 @@
     "babel-plugin-transform-es2015-spread": "^6.4.0",
     "babel-plugin-transform-es2015-template-literals": "^6.3.13",
     "babel-register": "^6.5.2",
+    "foundation-sites": "^6.4.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-babel": "^6.1.2",
