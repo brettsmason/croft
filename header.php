@@ -9,15 +9,15 @@
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'croft' ); ?></a>
 
 	<header id="masthead" <?php hybrid_attr( 'site-header' ); ?>>
-		<div class="row">
+		<div <?php hybrid_attr( 'row', 'header' ); ?>>
 
 			<?php get_template_part( 'components/site-branding' ); // Loads the components/site-branding.php template. ?>
 
 			<?php hybrid_get_menu( 'social' ); // Loads the menu/social.php template. ?>
 
-		</div><!-- .row -->
+		</div><!-- .row-header -->
 	</header><!-- #masthead -->
 
 	<?php hybrid_get_menu( 'primary' ); // Loads the menu/primary.php template. ?>
 
-	<div id="content" class="site-content">
+	<div id="content" <?php hybrid_attr( 'site-content' ); ?>>

@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-	<div id="primary" class="content-area">
+	<div id="primary" <?php hybrid_attr( 'content-area' ); ?>>
 		<main id="main" <?php hybrid_attr( 'site-main' ); ?>>
 
 		<?php if ( have_posts() ) : ?>
