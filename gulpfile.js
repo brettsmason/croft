@@ -105,7 +105,7 @@ gulp.task('sass:editor', function() {
       browsers: COMPATIBILITY
     }))
     .pipe($.rename({suffix: '.min'}))
-    .pipe($.cleanCss())
+    .pipe($.cleanCss({compatibility: 'ie9'}))
     .pipe(gulp.dest('assets/css'))
 });
 
