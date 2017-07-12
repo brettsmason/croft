@@ -53,7 +53,9 @@ function croft_register_sidebars() {
 		array(
 			'id'          => 'subsidiary',
 			'name'        => esc_html_x( 'Subsidiary', 'sidebar', 'croft' ),
-			'description' => esc_html__( 'The footer widget area.', 'croft' )
+			'description' => esc_html__( 'The footer widget area.', 'croft' ),
+			'before_widget' => '<div id="%1$s" class="widget medium-auto cell %2$s">',
+			'after_widget'  => '</div>',
 		)
 	);
 }

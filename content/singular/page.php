@@ -8,7 +8,7 @@
 ?>
 
 <article <?php hybrid_attr( 'post' ); ?>>
-	<header class="entry-header">
+	<header <?php hybrid_attr( 'entry-title' ); ?>>
 		<h1 <?php hybrid_attr( 'entry-title' ); ?>><?php the_title(); ?></h1>
 	</header><!-- .entry-header -->
 
@@ -23,7 +23,7 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
+	<footer <?php hybrid_attr( 'entry-footer' ); ?>>
 		<?php
 			edit_post_link(
 				sprintf(

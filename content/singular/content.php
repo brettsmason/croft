@@ -10,7 +10,7 @@
 ?>
 
 <article <?php hybrid_attr( 'post' ); ?>>
-	<header class="entry-header">
+	<header <?php hybrid_attr( 'entry-title' ); ?>>
 		<h1 <?php hybrid_attr( 'entry-title' ); ?>><?php the_title(); ?></h1>
 		<?php get_template_part( 'components/entry', 'byline' ); ?>
 	</header><!-- .entry-header -->
