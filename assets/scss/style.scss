@@ -29,7 +29,6 @@ Reset
 Base Styles
 --------------------------------------------------------------*/
 @include foundation-typography;
-@import "base/fonts";
 @import "base/typography";
 @import "base/accessibility";
 @import "base/alignments";
@@ -39,7 +38,7 @@ Components
 --------------------------------------------------------------*/
 @import "components/forms";
 @import "components/breadcrumbs";
-@import "components/loop-nav";
+@import "components/pagination";
 @import "components/captions";
 @import "components/comments";
 @import "components/galleries";
@@ -88,7 +87,7 @@ Foundation Components
 @include foundation-top-bar;
 @include foundation-visibility-classes;
 @include foundation-flex-classes;
-@include foundation-prototype-classes;
+// @include foundation-prototype-classes;
 
 /*--------------------------------------------------------------
 Motion UI

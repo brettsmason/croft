@@ -1,16 +1,5 @@
 .site-header {
-	@include clearfix;
 	padding: rem-calc(48 0);
-}
-
-.site-branding {
-	@include grid-col;
-	text-align: center;
-
-	@include breakpoint(medium) {
-		@include grid-col-size(6);
-		text-align: left;
-	}
 }
 
 .site-title {
@@ -25,12 +14,4 @@
 
 .site-description {
 	margin-bottom: 0;
-}
-
-.menu-social {
-	@include grid-col;
-
-	@include breakpoint(medium) {
-		@include grid-col-size(6);
-	}
 }
