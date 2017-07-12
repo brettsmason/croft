@@ -1,6 +1,6 @@
 <?php if ( has_nav_menu( 'subsidiary' ) ) : // Check if there's a menu assigned to the 'footer' location. ?>
 
-	<nav <?php hybrid_attr( 'menu', 'subsidiary' ); ?>>
+	<nav <?php hybrid_attr( 'menu-subsidiary' ); ?>>
 
 		<?php wp_nav_menu(
 			array(

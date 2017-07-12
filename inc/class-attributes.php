@@ -5,19 +5,19 @@
 function croft_class_defaults() {
 	$defaults = array(
 
-		// ROWS
-		'row-header'                => 'grid-x grid-margin-x',
-		'row-content'               => 'grid-x grid-margin-x',
-		'row-footer'                => '',
-
 		// CONTAINERS
 		'container-header'          => 'grid-container',
 		'container-content'         => 'grid-container',
 		'container-footer'          => 'grid-container',
 
+		// ROWS
+		'row-header'                => 'grid-x grid-margin-x',
+		'row-content'               => 'grid-x grid-margin-x',
+		'row-footer'                => '',
+
 		// SITE HEADER
 		'site-header'               => '',
-		'branding'                  => 'cell auto',
+		'branding'                  => 'cell shrink',
 		'site-title'                => '',
 		'site-description'          => '',
 

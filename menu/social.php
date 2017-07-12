@@ -1,6 +1,6 @@
 <?php if ( has_nav_menu( 'social' ) ) : // Check if there's a menu assigned to the 'social' location. ?>
 
-	<nav <?php hybrid_attr( 'menu', 'social' ); ?>>
+	<nav <?php hybrid_attr( 'menu-social' ); ?>>
 
 		<?php wp_nav_menu(
 			array(

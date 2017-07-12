@@ -1,6 +1,6 @@
 <?php if ( has_nav_menu( 'primary' ) ) : // Check if there's a menu assigned to the 'primary' location. ?>
 
-	<nav <?php hybrid_attr( 'menu', 'primary' ); ?>>
+	<nav <?php hybrid_attr( 'menu-primary' ); ?>>
 
 		<div class="menu-toggle" data-responsive-toggle="primary-menu" data-hide-for="medium">
 			<button data-toggle><span></span> <?php esc_html_e( 'Menu', 'croft' );?></button>
