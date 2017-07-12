@@ -67,7 +67,9 @@ function croft_filter_classes( $attr, $slug ) {
 }
 add_filter( 'hybrid_attr', 'croft_filter_classes', 10, 2 );
 
-// Sets content classes depending on layout
+/**
+ *  Sets content classes depending on layout
+ */
 function croft_content_classes() {
 	if( '1c' === hybrid_get_theme_layout() )
 		$class = 'cell';
@@ -81,7 +83,9 @@ function croft_content_classes() {
 	return $class;
 }
 
-// Sets primary sidebar classes depending on layout
+/**
+ * Sets primary sidebar classes depending on layout
+ */
 function croft_sidebar_classes() {
 	if( '2c-l' === hybrid_get_theme_layout() )
 		$class = 'medium-3 cell';
