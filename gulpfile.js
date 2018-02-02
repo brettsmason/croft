@@ -25,7 +25,6 @@ function clean(done) {
 function sass() {
   return gulp.src('assets/scss/style.scss')
     .pipe($.sourcemaps.init())
-    .pipe($.plumber())
     .pipe($.sass({
       includePaths: PATHS.sass,
       outputStyle: 'expanded',
@@ -37,7 +36,7 @@ function sass() {
       browsers: AUTOPREFIXER
     }))
     .pipe(gulp.dest('./'))
-    .pipe($.cssnano())
+    .pipe($.cleanCss({compatibility: 'ie10'}))
     .pipe($.rename({'suffix': '.min'}))
     .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest('./'));
@@ -46,7 +45,6 @@ function sass() {
 // Compile and minify WordPress editor stylesheet.
 function sassEditor() {
   return gulp.src('assets/scss/editor-style.scss')
-    .pipe($.plumber())
     .pipe($.sass({
       includePaths: PATHS.sass,
       outputStyle: 'compressed'
@@ -62,20 +60,17 @@ function sassEditor() {
 // Concatenate and minify JavaScript files.
 function javascript() {
   return gulp.src(PATHS.javascript)
-    .pipe($.plumber())
-    .pipe($.babel({ignore: ['what-input.js']}))
     .pipe($.concat('main.js'))
     .pipe(gulp.dest('assets/js'))
     .pipe($.rename({'suffix': '.min'}))
     .pipe($.uglify({'mangle': false}))
     .pipe(gulp.dest('assets/js'))
-    .pipe(gulp.dest(PATHS.dist + '/assets/js'));
+    .pipe(gulp.dest('assets/js'));
 }
 
 // Minify, concatenate, and clean SVG icons.
 function svg() {
   return gulp.src(PATHS.icons)
-  .pipe($.plumber())
   .pipe($.svgmin())
   .pipe($.rename({'prefix': 'icon-'}))
   .pipe($.svgstore({'inlineSvg': true}))
@@ -93,7 +88,6 @@ function svg() {
 // Scan the theme and create a POT file.
 function translate() {
   return gulp.src(PATHS.php)
-    .pipe($.plumber())
     .pipe($.sort())
     .pipe($.wpPot({
       domain: POT.domain,

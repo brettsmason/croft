@@ -1,4 +1,4 @@
-# Copyright (C) 2016 croft
+# Copyright (C) 2018 croft
 # This file is distributed under the same license as the croft package.
 msgid ""
 msgstr ""
@@ -6,193 +6,186 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "X-Poedit-Basepath: ..\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: 404.php:29
+#: 404.php:9, template-parts/archive-header.php:18
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
-#: 404.php:37
+#: 404.php:13, content/content-none.php:22
 msgid "It looks like nothing was found at this location. Maybe try a search?"
 msgstr ""
 
-#: comment\comment.php:35, comment\ping.php:25
-msgid "%s ago"
-msgstr ""
-
-#: comment\comment.php:37, comment\ping.php:27
-msgid "Permalink"
-msgstr ""
-
-#: comment\comment.php:47, comment\ping.php:37, content\singular\page.php:61, template-parts\entry-byline.php:53
-msgid "Edit %s"
-msgstr ""
-
-#: comment\comment.php:73
-msgid "Your comment is awaiting moderation."
-msgstr ""
-
-#: comments.php:93
+#: comments.php:38
 msgid "Comments are closed."
 msgstr ""
 
-#: content\content-none.php:37
-msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
-msgstr ""
-
-#: content\content-none.php:45
-msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
-msgstr ""
-
-#: content\content-none.php:57
-msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
-msgstr ""
-
-#: content\singular\content.php:43
-msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
-msgstr ""
-
-#: content\singular\content.php:53, content\singular\page.php:39
-msgid "Pages:"
-msgstr ""
-
-#: footer.php:41
-msgid "Copyright &#169; %1$s %2$s"
-msgstr ""
-
-#: footer.php:55
-msgid "Powered by %1$s and %2$s"
-msgstr ""
-
-#: header.php:33
-msgid "Skip to content"
-msgstr ""
-
-#: inc\customizer.php:33
-msgid "Display Tagline?"
-msgstr ""
-
-#: inc\site-logo.php:33, inc\site-logo.php:59
-msgid "Logo"
-msgstr ""
-
-#: inc\theme-setup.php:41
-msgctxt "nav menu location"
+#: functions.php:250
 msgid "Primary"
 msgstr ""
 
-#: inc\theme-setup.php:43
-msgctxt "nav menu location"
-msgid "Secondary"
+#: functions.php:251
+msgid "Social"
 msgstr ""
 
-#: inc\theme-setup.php:45
-msgctxt "nav menu location"
-msgid "social"
+#: functions.php:267
+msgctxt "sidebar"
+msgid "Off-Canvas"
 msgstr ""
 
-#: inc\theme-setup.php:63
-msgid "1 Column"
+#: functions.php:268
+msgid "The off-canvas sidebar. Displayed on smaller screens."
 msgstr ""
 
-#: inc\theme-setup.php:65
-msgid "Content / Sidebar"
-msgstr ""
-
-#: inc\theme-setup.php:67
-msgid "Sidebar / Content"
-msgstr ""
-
-#: inc\theme-setup.php:91
+#: functions.php:275
 msgctxt "sidebar"
 msgid "Primary"
 msgstr ""
 
-#: inc\theme-setup.php:93
+#: functions.php:276
 msgid "The main sidebar area."
 msgstr ""
 
-#: inc\theme-setup.php:107
+#: functions.php:283
 msgctxt "sidebar"
 msgid "Subsidiary"
 msgstr ""
 
-#: inc\theme-setup.php:109
+#: functions.php:284
 msgid "The footer widget area."
 msgstr ""
 
-#: inc\utility.php:59
-msgid "Continue reading %s"
+#: functions.php:317
+msgid "1 Column"
 msgstr ""
 
-#: inc\utility.php:89
-msgid "This content is password protected. To view it please enter your password below:"
+#: functions.php:325
+msgid "Content / Sidebar"
 msgstr ""
 
-#: inc\utility.php:95
-msgid "Submit"
+#: functions.php:333
+msgid "Sidebar / Content"
 msgstr ""
 
-#: menu\primary.php:29
+#: header.php:12
+msgid "Skip to content"
+msgstr ""
+
+#: header.php:18
 msgid "Menu"
 msgstr ""
 
-#: search.php:33
+#: comment/comment.php:18, comment/ping.php:13
+msgid "%s ago"
+msgstr ""
+
+#: comment/comment.php:19, comment/ping.php:14
+msgid "Permalink"
+msgstr ""
+
+#: comment/comment.php:24, comment/ping.php:19
+msgid "Edit %s"
+msgstr ""
+
+#: comment/comment.php:37
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: content/content-none.php:12
+msgid "Nothing Found"
+msgstr ""
+
+#: content/content-none.php:18
+msgid "Sorry, nothing matched your search terms. Please try again with some different keywords."
+msgstr ""
+
+#: inc/class-hide-page-title.php:24
+msgid "Page Title"
+msgstr ""
+
+#: inc/class-hide-page-title.php:48
+msgid "Hide Page Title"
+msgstr ""
+
+#: inc/functions-filters.php:51
+msgid "Continue reading %s"
+msgstr ""
+
+#: inc/functions-icons.php:46
+msgid "Please define an SVG icon filename."
+msgstr ""
+
+#: inc/functions-icons.php:51
+msgid "Please define optional parameters in the form of an array."
+msgstr ""
+
+#: inc/functions-template.php:39
+msgid "Copyright &#169; %1$s %2$s"
+msgstr ""
+
+#: inc/functions-template.php:63
+msgid "Theme: %1$s by %2$s"
+msgstr ""
+
+#: template-parts/archive-header.php:16
 msgid "Search Results for: %s"
 msgstr ""
 
-#: template-parts\author-box.php:35
-msgid "About "
-msgstr ""
-
-#: template-parts\entry-byline.php:29
+#: template-parts/entry-byline.php:15
 msgid "by %s"
 msgstr ""
 
-#: template-parts\entry-byline.php:37
+#: template-parts/entry-byline.php:19
 msgid "Leave a comment"
 msgstr ""
 
-#: template-parts\entry-byline.php:37
+#: template-parts/entry-byline.php:19
 msgid "1 Comment"
 msgstr ""
 
-#: template-parts\entry-byline.php:37
+#: template-parts/entry-byline.php:19
 msgid "% Comments"
 msgstr ""
 
-#: template-parts\entry-footer.php:21
+#: template-parts/entry-footer.php:11
 msgid "Filed Under: %s"
 msgstr ""
 
-#: template-parts\entry-footer.php:23
+#: template-parts/entry-footer.php:12
 msgid "Tagged With: %s"
 msgstr ""
 
-#: template-parts\loop-nav.php:33
+#: template-parts/pagination.php:17
 msgid "Previous: %link"
 msgstr ""
 
-#: template-parts\loop-nav.php:35
+#: template-parts/pagination.php:18
 msgid "Next: %link"
 msgstr ""
 
-#: template-parts\loop-nav.php:49
+#: template-parts/pagination.php:25
 msgctxt "posts navigation"
 msgid "Previous"
 msgstr ""
 
-#: template-parts\loop-nav.php:51
+#: template-parts/pagination.php:26
 msgctxt "posts navigation"
 msgid "Next"
 msgstr ""
 
-#: template-parts\loop-nav.php:53
+#: template-parts/pagination.php:27
 msgid "Page"
+msgstr ""
+
+#: content/singular/content.php:22
+msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: content/singular/content.php:27, content/singular/page.php:22
+msgid "Pages:"
 msgstr ""

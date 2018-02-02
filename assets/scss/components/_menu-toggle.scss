@@ -5,6 +5,10 @@
 .menu-toggle {
 	font-weight: bold;
 
+	@include breakpoint(medium) {
+		display: none;
+	}
+
 	&:hover,
 	&:focus {
 		color: $primary-color;

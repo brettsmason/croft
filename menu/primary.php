@@ -9,8 +9,7 @@
 				'menu_id'        => 'primary-menu',
 				'menu_class'     => 'menu-items menu horizontal dropdown',
 				'fallback_cb'    => '',
-				'items_wrap'     => '<ul id="%s" class="%s" data-dropdown-menu>%s</ul>',
-				'walker'         => new Foundation_Menu_Walker()
+				'items_wrap'     => '<ul id="%s" class="%s" data-dropdown-menu>%s</ul>'
 			)
 		); ?>
 

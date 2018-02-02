@@ -194,3 +194,15 @@ function croft_get_ratio( $width, $height ) {
 
     return $ratio;
 }
+
+/**
+ * Filter the submenu (<ul>) element to add Foundation specific classes.
+ *
+ * @return array
+ */
+function croft_nav_menu_submenu_css_class( $classes ) {
+	$classes[] = 'menu vertical';
+
+	return $classes;
+}
+add_filter( 'nav_menu_submenu_css_class', 'croft_nav_menu_submenu_css_class' );
