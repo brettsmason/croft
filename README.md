@@ -4,7 +4,7 @@
 Croft is built with search-engine optimization (SEO) in mind by utilizing the most current HTML5 conventions and [Schema.org](http://schema.org) microdata.
 Croft combines ZURB's Foundation, the most advanced responsive front-end framework in the world, and Hybrid Core, the developer friendly theme framework created by one of the best WordPress developers around, Justin Tadlock.
 
-Croft isn't mean't to be used as is, it's mean't to used to create your next masterpeice!
+Croft isn't mean't to be used as is, it's mean't to used to create your next masterpiece!
 
 Croft requires a minimum of WordPress 4.5.
 
